@@ -3,3 +3,4 @@ node_modules/ dist/ build/ .out/ .next/ coverage/
 *.config.js *.config.ts *.json
 *.log *.lock *.cache
 .env .env.* !.env.example *.md *.yaml *.yml
+.prettierrc
