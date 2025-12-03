@@ -6,11 +6,17 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "sb:start": "npx supabase start --local",
+    "sb:stop": "npx supabase stop --local",
+    "sb:reset": "npx supabase db reset --local",
+    "sb:push": "npx supabase db push --local",
+    "set-admin": "ts-node scripts/set-admin.ts"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^2.8.2",
     "@supabase/supabase-js": "^2.50.2",
+    "dotenv": "^17.2.3",
     "lucide-react": "^0.516.0",
     "next": "15.3.3",
     "react": "^19.0.0",
@@ -22,7 +28,7 @@
   "devDependencies": {
     "@eslint/eslintrc": "^3",
     "@tailwindcss/postcss": "^4",
-    "@types/node": "^20",
+    "@types/node": "^20.19.25",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",
@@ -30,6 +36,7 @@
     "prettier": "3.5.3",
     "prettier-plugin-tailwindcss": "^0.6.12",
     "tailwindcss": "^4",
-    "typescript": "^5"
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.3"
   }
 }

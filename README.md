@@ -1,36 +1,106 @@
+# Nature Ark Project
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
 
-First, run the development server:
+### 1. Install dependencies
+
+```bash
+npm install
+```
+
+### 2. Start the development server
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Using Supabase (Local Environment)
 
-## Learn More
+This project uses a local Supabase instance.
 
-To learn more about Next.js, take a look at the following resources:
+### Start Supabase locally
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+To use the commands below, install Supabase CLI globally:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```bash
+npm install -g supabase
+```
 
-## Deploy on Vercel
+Or use `npx supabase ...` as an alternative.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Available Supabase commands
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```bash
+npm run sb:start   # Start local Supabase
+npm run sb:stop    # Stop local Supabase
+npm run sb:reset   # Reset DB, run migrations & seed
+npm run sb:push    # Push migrations to local DB
+```
+
+### Local Supabase URLs and Keys
+
+When you start Supabase locally, you will see output similar to:
+
+```
+API URL: http://127.0.0.1:54321
+GraphQL URL: http://127.0.0.1:54321/graphql/v1
+S3 Storage URL: http://127.0.0.1:54321/storage/v1
+Database URL: postgresql://postgres:postgres@127.0.0.1:54322/postgres
+Studio URL: http://127.0.0.1:54323
+Publishable key: sb_publishable_...
+Secret key: sb_secret_...
+```
+
+### Meaning of the main values
+
+* **API URL** → Your Supabase REST API. Use this as `SUPABASE_URL`.
+* **Publishable key** → This is the *anon public key*. Use as `NEXT_PUBLIC_SUPABASE_ANON_KEY`.
+* **Secret key** → This is the *service role key*. Use as `SUPABASE_SERVICE_ROLE_KEY` (server only).
+
+### Required environment variables
+
+Create a `.env.local` file:
+
+```
+SUPABASE_URL=http://127.0.0.1:54321
+NEXT_PUBLIC_SUPABASE_ANON_KEY=sb_publishable_...
+SUPABASE_SERVICE_ROLE_KEY=sb_secret_...
+```
+
+---
+
+## Running Migrations
+
+To ensure you **always operate on the local database** and avoid accidental changes to production, use the `--local` flag.
+
+### Create a migration
+
+```bash
+supabase migration new init_test_migration --local
+```
+
+(You may also use `npx supabase ...` if the CLI is not installed globally.)
+
+### Apply migrations
+
+```bash
+supabase db reset --local
+```
+
+This will reset the local database, apply all migrations, and run seed data without touching production.
+
+### Push migrations to local database
+
+```bash
+supabase db push --local
+```
+
+This applies pending migrations to your local database without resetting data.
+
+---
