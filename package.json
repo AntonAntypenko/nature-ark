@@ -7,8 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "sb:start": "npx supabase start --local",
-    "sb:stop": "npx supabase stop --local",
+    "sb:start": "npx supabase start",
+    "sb:stop": "npx supabase stop",
     "sb:reset": "npx supabase db reset --local",
     "sb:push": "npx supabase db push --local",
     "set-admin": "ts-node scripts/set-admin.ts"

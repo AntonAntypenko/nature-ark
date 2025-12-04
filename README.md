@@ -82,7 +82,7 @@ To ensure you **always operate on the local database** and avoid accidental chan
 ### Create a migration
 
 ```bash
-supabase migration new init_test_migration --local
+supabase migration new init_test_migration
 ```
 
 (You may also use `npx supabase ...` if the CLI is not installed globally.)
