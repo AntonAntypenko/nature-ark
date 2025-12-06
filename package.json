@@ -14,6 +14,7 @@
     "set-admin": "ts-node scripts/set-admin.ts"
   },
   "dependencies": {
+    "@hookform/resolvers": "^5.2.2",
     "@reduxjs/toolkit": "^2.8.2",
     "@supabase/supabase-js": "^2.50.2",
     "dotenv": "^17.2.3",
