@@ -1,5 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import type { LoginRequestDTO, LoginResponseDTO } from "@/shared/auth";
+
+import { LoginRequestDTO, LoginResponseDTO } from "@/shared/schemas";
 
 export const authApi = createApi({
   reducerPath: "authApi",

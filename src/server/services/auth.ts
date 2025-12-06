@@ -1,6 +1,8 @@
 import { supabaseServer } from "@/lib/server";
-import { LoginRequestDTO } from "@/shared/auth";
-import { LoginServiceResponse } from "@/api/auth/types";
+
+import { LoginRequestDTO } from "@/shared/schemas";
+import { LoginServiceResponse } from "@/server/types";
+import { AuthenticationError, InternalServerError } from "@/server/errors";
 
 export async function loginService(
   body: LoginRequestDTO
@@ -11,11 +13,19 @@ export async function loginService(
   });
 
   if (error) {
-    throw new Error(error.message);
+    if (
+      error.status === 400 ||
+      error.message.includes("Invalid login credentials")
+    ) {
+      throw new AuthenticationError();
+    }
+    throw new InternalServerError(`Supabase Error: ${error.message}`);
   }
 
   if (!data.session || !data.user) {
-    throw new Error("Invalid Supabase response");
+    throw new InternalServerError(
+      "Invalid Supabase response: Missing session or user data."
+    );
   }
 
   return {

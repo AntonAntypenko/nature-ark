@@ -1,4 +1,4 @@
-import { LoginResponseDTO } from "@/shared/auth";
+import { LoginResponseDTO } from "@/shared/schemas";
 
 export type AuthSession = {
   access_token: string;

@@ -1,13 +1,15 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+
+import { Eye, EyeOff } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useRouter } from "next/navigation";
-import { useLoginMutation } from "@/store/auth/authApi";
-import { Eye, EyeOff } from "lucide-react";
 
-import { loginSchema, LoginForm } from "@/schemas/login.schema";
+import { useLoginMutation } from "@/store/auth";
+
+import { LoginRequestDTO, loginSchema } from "@/shared/schemas";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -18,7 +20,7 @@ export default function LoginPage() {
     handleSubmit,
     formState: { errors },
     setFocus,
-  } = useForm<LoginForm>({ resolver: zodResolver(loginSchema) });
+  } = useForm<LoginRequestDTO>({ resolver: zodResolver(loginSchema) });
 
   const [login, { isLoading, error }] = useLoginMutation();
 
@@ -26,7 +28,7 @@ export default function LoginPage() {
     setFocus("email");
   }, [setFocus]);
 
-  const onSubmit = async (data: LoginForm) => {
+  const onSubmit = async (data: LoginRequestDTO) => {
     try {
       await login(data).unwrap();
       router.push("/");

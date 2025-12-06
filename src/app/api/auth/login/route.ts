@@ -1,7 +1,10 @@
 import { NextResponse } from "next/server";
-import { loginService } from "@/api/auth/login";
-import { LoginRequestDTO } from "@/shared/auth";
-import { LoginServiceResponse } from "@/api/auth/types";
+
+import { loginService } from "@/server/services";
+
+import { LoginServiceResponse } from "@/server/types";
+import { LoginRequestDTO } from "@/shared/schemas";
+import { AuthenticationError, InternalServerError } from "@/server/errors";
 
 export async function POST(req: Request) {
   const body: LoginRequestDTO = await req.json();
@@ -25,8 +28,24 @@ export async function POST(req: Request) {
 
     return res;
   } catch (error) {
-    if (error instanceof Error) {
+    if (error instanceof AuthenticationError) {
       return NextResponse.json({ error: error.message }, { status: 401 });
+    }
+
+    if (error instanceof InternalServerError) {
+      console.error("Internal Server Error:", error.message, error.stack);
+      return NextResponse.json(
+        { error: "Внутрішня помилка сервера." },
+        { status: 500 }
+      );
+    }
+
+    if (error instanceof Error) {
+      console.error("Unknown Error:", error.message, error.stack);
+      return NextResponse.json(
+        { error: "Невідома помилка сервера." },
+        { status: 500 }
+      );
     }
 
     return NextResponse.json({ error: "Unknown error" }, { status: 500 });
