@@ -1,5 +1,9 @@
 "use client";
 
+import { useRouter } from "next/navigation";
+
+import { useLogoutMutation } from "@/store/auth";
+
 import {
   BadgeCheck,
   Bell,
@@ -35,7 +39,14 @@ export function NavUser({
     avatar: string;
   };
 }) {
+  const router = useRouter();
   const { isMobile } = useSidebar();
+  const [logout] = useLogoutMutation();
+
+  async function handleLogout() {
+    await logout().unwrap();
+    router.push("/login");
+  }
 
   return (
     <SidebarMenu>
@@ -47,7 +58,7 @@ export function NavUser({
               className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
             >
               <Avatar className="h-8 w-8 rounded-lg">
-                <AvatarImage src={user.avatar} alt={user.name} />
+                {/*<AvatarImage src={user.avatar} alt={user.name} />*/}
                 <AvatarFallback className="rounded-lg">CN</AvatarFallback>
               </Avatar>
               <div className="grid flex-1 text-left text-sm leading-tight">
@@ -98,7 +109,7 @@ export function NavUser({
               </DropdownMenuItem>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>
+            <DropdownMenuItem onClick={() => handleLogout()}>
               <LogOut />
               Log out
             </DropdownMenuItem>
