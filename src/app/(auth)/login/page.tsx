@@ -3,13 +3,25 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 
-import { Eye, EyeOff } from "lucide-react";
+import { Eye, EyeOff, GalleryVerticalEnd } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import { useLoginMutation } from "@/store/auth";
 
 import { LoginRequestDTO, loginSchema } from "@/shared/schemas";
+import {
+  Button,
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+  Field,
+  FieldDescription,
+  FieldGroup,
+  FieldLabel,
+  Input,
+} from "@/components/ui";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -38,73 +50,93 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-gray-100 p-4 text-black">
-      <div className="w-full max-w-sm rounded-xl border bg-white p-6 shadow-lg">
-        <h1 className="mb-4 text-center text-2xl font-semibold">Login</h1>
-
-        <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-          {/* Email */}
-          <div className="flex flex-col space-y-1">
-            <label htmlFor="email" className="font-medium">
-              Email
-            </label>
-            <input
-              id="email"
-              type="email"
-              className="w-full rounded-md border px-3 py-2 focus:ring focus:ring-blue-300 focus:outline-none"
-              placeholder="you@example.com"
-              {...register("email")}
-            />
-            {errors.email && (
-              <span className="text-sm text-red-600">
-                {errors.email.message}
-              </span>
-            )}
+    <div className="bg-muted flex min-h-svh flex-col items-center justify-center gap-6 p-6 md:p-10">
+      <div className="flex w-full max-w-sm flex-col gap-6">
+        <a href="#" className="flex items-center gap-2 self-center font-medium">
+          <div className="bg-primary text-primary-foreground flex size-6 items-center justify-center rounded-md">
+            <GalleryVerticalEnd className="size-4" />
           </div>
-
-          {/* Password */}
-          <div className="flex flex-col space-y-1">
-            <label htmlFor="password" className="font-medium">
-              Password
-            </label>
-            <div className="relative">
-              <input
-                id="password"
-                type={showPassword ? "text" : "password"}
-                className="w-full rounded-md border px-3 py-2 focus:ring focus:ring-blue-300 focus:outline-none"
-                placeholder="••••••••"
-                {...register("password")}
-              />
-              <button
-                type="button"
-                className="absolute top-2.5 right-3 text-gray-500"
-                onClick={() => setShowPassword(v => !v)}
-              >
-                {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
-              </button>
-            </div>
-            {errors.password && (
-              <span className="text-sm text-red-600">
-                {errors.password.message}
-              </span>
-            )}
-          </div>
-
-          {/* General error */}
-          {error && (
-            <div className="text-sm text-red-600">
-              Login failed. Check credentials.
-            </div>
-          )}
-
-          <button
-            type="submit"
-            className="w-full rounded-md bg-blue-600 py-2 text-white transition hover:bg-blue-700 disabled:bg-gray-400"
-            disabled={isLoading}
-          >
-            {isLoading ? "Loading..." : "Login"}
-          </button>
-        </form>
+          Nature Ark
+        </a>
+        <div className="flex flex-col gap-6">
+          <Card>
+            <CardHeader className="text-center">
+              <CardTitle className="text-xl">Ласкаво просимо</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <form onSubmit={handleSubmit(onSubmit)}>
+                <FieldGroup>
+                  <Field>
+                    <FieldLabel htmlFor="email">Електронна пошта</FieldLabel>
+                    <Input
+                      id="email"
+                      type="email"
+                      placeholder="m@example.com"
+                      {...register("email")}
+                      required
+                    />
+                    {errors.email && (
+                      <span className="text-sm text-red-600">
+                        {errors.email.message}
+                      </span>
+                    )}
+                  </Field>
+                  <Field>
+                    <div className="flex items-center">
+                      <FieldLabel htmlFor="password">Пароль</FieldLabel>
+                      <a
+                        href="#"
+                        className="ml-auto text-sm underline-offset-4 hover:underline"
+                      >
+                        Забули пароль?
+                      </a>
+                    </div>
+                    <div className="relative">
+                      <Input
+                        id="password"
+                        type={showPassword ? "text" : "password"}
+                        placeholder="••••••••"
+                        {...register("password")}
+                        required
+                      />
+                      <button
+                        type="button"
+                        className="absolute top-2.5 right-3 text-gray-500"
+                        onClick={() => setShowPassword(v => !v)}
+                      >
+                        {showPassword ? (
+                          <EyeOff size={18} />
+                        ) : (
+                          <Eye size={18} />
+                        )}
+                      </button>
+                    </div>
+                    {errors.password && (
+                      <span className="text-sm text-red-600">
+                        {errors.password.message}
+                      </span>
+                    )}
+                  </Field>
+                  <Field>
+                    {error && (
+                      <div className="text-sm text-red-600">
+                        Login failed. Check credentials.
+                      </div>
+                    )}
+                    <Button type="submit" disabled={isLoading}>
+                      {isLoading ? "Обробка..." : "Вхід"}
+                    </Button>
+                    <FieldDescription className="text-center">
+                      Немає облікового запису?
+                      <br />
+                      Зверніться до адміністратора
+                    </FieldDescription>
+                  </Field>
+                </FieldGroup>
+              </form>
+            </CardContent>
+          </Card>
+        </div>
       </div>
     </div>
   );
