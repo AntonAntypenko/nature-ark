@@ -1,13 +1,16 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { supabase } from "@/lib/сlient";
+
+import { useLogoutMutation } from "@/store/auth";
 
 export default function Home() {
   const router = useRouter();
 
+  const [logout, { isLoading, error }] = useLogoutMutation();
+
   async function handleLogout() {
-    await supabase.auth.signOut();
+    await logout().unwrap();
     router.push("/login");
   }
 
