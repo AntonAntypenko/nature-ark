@@ -1,203 +1,186 @@
 "use client";
 
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+  Button,
+  Card,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui";
+
 export default function Home() {
   return (
-    <main className="flex min-h-screen w-full flex-col items-center justify-start text-gray-900">
-      {/* HERO SECTION (Головний екран з цінністю продукту) */}
-      <section className="w-full max-w-5xl px-6 py-24 text-center">
-        <h1 className="mb-6 text-5xl font-bold">
-          NatureArk — система обліку та управління витратами для зоопарків
-        </h1>
-        <p className="mx-auto mb-8 max-w-2xl text-lg text-gray-600">
-          (Hero description) NatureArk допомагає автоматизувати процес обліку,
-          керування бюджетом, створенням документів та звітів для тварин.
-          Простий інтерфейс, прозорість витрат та повний контроль.
-        </p>
+    <div className="bg-background text-primary flex min-h-screen w-full flex-col items-center">
+      <section className="w-full px-6 py-24">
+        <div className="mx-auto max-w-6xl space-y-6 text-center">
+          <h1 className="text-4xl leading-tight font-bold md:text-6xl">
+            NatureArk — система обліку та
+            <br />
+            управління витратами для зоопарків
+          </h1>
 
-        <div className="flex items-center justify-center gap-4">
-          <button className="rounded-lg bg-black px-6 py-3 text-lg font-semibold text-white">
-            (CTA primary) Спробувати демо
-          </button>
-          <button className="rounded-lg border border-gray-300 px-6 py-3 text-lg font-medium">
-            (CTA secondary) Відкрити GitHub
-          </button>
-        </div>
-      </section>
+          <p className="text-muted-foreground mx-auto max-w-xl text-lg">
+            NatureArk допомагає автоматизувати процес обліку, керування
+            бюджетом, створенням документів та звітів для тварин. Простий
+            інтерфейс, прозорість витрат та повний контроль.
+          </p>
 
-      {/* PROBLEM → SOLUTION SECTION (Опис проблем та як NatureArk їх вирішує) */}
-      <section className="w-full max-w-5xl px-6 py-20">
-        <h2 className="mb-8 text-center text-3xl font-bold">
-          (Problem → Solution) Чому NatureArk?
-        </h2>
-
-        <div className="grid grid-cols-1 gap-10 md:grid-cols-2">
-          <div>
-            <h3 className="mb-4 text-2xl font-semibold">Проблеми</h3>
-            <ul className="ml-6 list-disc space-y-3 text-gray-700">
-              <li>Неточний або ручний облік витрат.</li>
-              <li>Труднощі у веденні карток тварин.</li>
-              <li>Повільна підготовка звітів та документів.</li>
-            </ul>
-          </div>
-
-          <div>
-            <h3 className="mb-4 text-2xl font-semibold">Рішення</h3>
-            <ul className="ml-6 list-disc space-y-3 text-gray-700">
-              <li>Автоматизований облік та контроль бюджету.</li>
-              <li>Зручні профілі для кожної тварини.</li>
-              <li>Швидка генерація документів та звітів.</li>
-            </ul>
+          <div className="mx-auto">
+            <Button size="lg">
+              <a href="/dashboard">Розпочати</a>
+            </Button>
           </div>
         </div>
       </section>
 
-      {/* FEATURES SECTION (Ключові можливості системи) */}
-      <section className="w-full max-w-5xl px-6 py-20">
-        <h2 className="mb-12 text-center text-3xl font-bold">
-          (Features) Основні можливості
-        </h2>
+      <section className="bg-muted w-full px-6 py-24">
+        <div className="mx-auto max-w-5xl space-y-12">
+          <h2 className="text-center text-4xl font-bold">Чому NatureArk?</h2>
 
-        <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-3">
-          <div className="rounded-xl border p-6 shadow-sm">
-            <h3 className="mb-3 text-xl font-semibold">Облік витрат</h3>
-            <p className="text-gray-700">
-              Зручне додавання та перегляд витрат, категоризація та аналітика.
-            </p>
-          </div>
+          <div className="grid grid-cols-1 gap-12 md:grid-cols-2">
+            <div>
+              <h3 className="mb-3 text-2xl font-semibold">Проблеми</h3>
+              <ul className="text-muted-foreground ml-6 list-disc space-y-3">
+                <li>Неточний або ручний облік витрат.</li>
+                <li>Труднощі у веденні карток тварин.</li>
+                <li>Повільна підготовка звітів та документів.</li>
+              </ul>
+            </div>
 
-          <div className="rounded-xl border p-6 shadow-sm">
-            <h3 className="mb-3 text-xl font-semibold">Профілі тварин</h3>
-            <p className="text-gray-700">
-              Повна інформація, фото, витрати, здоров'я — все в одному місці.
-            </p>
-          </div>
-
-          <div className="rounded-xl border p-6 shadow-sm">
-            <h3 className="mb-3 text-xl font-semibold">Генерація звітів</h3>
-            <p className="text-gray-700">
-              Автоматична підготовка pdf/Excel документів для звітності.
-            </p>
-          </div>
-
-          <div className="rounded-xl border p-6 shadow-sm">
-            <h3 className="mb-3 text-xl font-semibold">AI-документи</h3>
-            <p className="text-gray-700">
-              Створення пояснень, листів та описів за допомогою AI.
-            </p>
-          </div>
-
-          <div className="rounded-xl border p-6 shadow-sm">
-            <h3 className="mb-3 text-xl font-semibold">Ролі та доступи</h3>
-            <p className="text-gray-700">
-              Налаштування дозволів для співробітників.
-            </p>
-          </div>
-
-          <div className="rounded-xl border p-6 shadow-sm">
-            <h3 className="mb-3 text-xl font-semibold">Імпорт / Експорт</h3>
-            <p className="text-gray-700">
-              Швидке перенесення даних або інтеграція з іншими системами.
-            </p>
+            <div>
+              <h3 className="mb-3 text-2xl font-semibold">Рішення</h3>
+              <ul className="text-muted-foreground ml-6 list-disc space-y-3">
+                <li>Автоматизований облік та контроль бюджету.</li>
+                <li>Зручні профілі для кожної тварини.</li>
+                <li>Швидка генерація документів та звітів.</li>
+              </ul>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* SCREENSHOTS / DEMO SECTION (Макети інтерфейсу / превʼю) */}
-      <section className="w-full max-w-5xl px-6 py-20 text-center">
-        <h2 className="mb-8 text-3xl font-bold">
-          (Demo / Screenshots) Як виглядає NatureArk?
-        </h2>
-        <p className="mx-auto mb-12 max-w-2xl text-gray-700">
-          Тут можна побачити основні екрани системи: дашборд, профіль тварини та
-          облік витрат.
-        </p>
+      <section className="w-full px-6 py-24">
+        <div className="mx-auto max-w-6xl space-y-12 px-6">
+          <h2 className="text-center text-4xl font-bold">
+            Можливості платформи
+          </h2>
 
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
-          <div className="h-64 w-full rounded-lg bg-gray-200" />
-          <div className="h-64 w-full rounded-lg bg-gray-200" />
-          <div className="h-64 w-full rounded-lg bg-gray-200" />
-        </div>
+          <div className="grid gap-12 md:grid-cols-3">
+            <Card>
+              <CardHeader>
+                <CardTitle className="text-2xl">Облік витрат</CardTitle>
+                <CardDescription className="text-muted-foreground mt-3 text-lg">
+                  Створюйте та організовуйте природні зони, додавайте
+                  характеристики, опис та дані.
+                </CardDescription>
+              </CardHeader>
+            </Card>
 
-        <p className="mt-4 text-sm text-gray-500">
-          (Placeholder images для макетів)
-        </p>
-      </section>
+            <Card>
+              <CardHeader>
+                <CardTitle className="text-2xl">Профілі тварин</CardTitle>
+                <CardDescription className="text-muted-foreground mt-3 text-lg">
+                  Повна інформація, фото, витрати, здоров'я — все в одному
+                  місці.
+                </CardDescription>
+              </CardHeader>
+            </Card>
 
-      {/* STEPS SECTION (Як працює система) */}
-      <section className="w-full max-w-5xl px-6 py-20">
-        <h2 className="mb-12 text-center text-3xl font-bold">
-          (How it works) Як працює NatureArk?
-        </h2>
+            <Card>
+              <CardHeader>
+                <CardTitle className="text-2xl">Генерація звітів</CardTitle>
+                <CardDescription className="text-muted-foreground mt-3 text-lg">
+                  Автоматична підготовка pdf/Excel документів для звітності.
+                </CardDescription>
+              </CardHeader>
+            </Card>
 
-        <div className="grid grid-cols-1 gap-10 text-center md:grid-cols-3">
-          <div>
-            <h3 className="mb-3 text-2xl font-semibold">1. Додайте тварину</h3>
-            <p className="text-gray-700">
-              Створіть профіль, додайте фото, опис, стан здоров'я та базові
-              дані.
-            </p>
-          </div>
+            <Card>
+              <CardHeader>
+                <CardTitle className="text-2xl">AI-документи</CardTitle>
+                <CardDescription className="text-muted-foreground mt-3 text-lg">
+                  Створення пояснень, листів та описів за допомогою AI.
+                </CardDescription>
+              </CardHeader>
+            </Card>
 
-          <div>
-            <h3 className="mb-3 text-2xl font-semibold">2. Ведіть витрати</h3>
-            <p className="text-gray-700">
-              Додавайте всі важливі витрати — корм, ліки, інвентар, транспорт
-              тощо.
-            </p>
-          </div>
+            <Card>
+              <CardHeader>
+                <CardTitle className="text-2xl">Ролі та доступи</CardTitle>
+                <CardDescription className="text-muted-foreground mt-3 text-lg">
+                  Налаштування дозволів для співробітників.
+                </CardDescription>
+              </CardHeader>
+            </Card>
 
-          <div>
-            <h3 className="mb-3 text-2xl font-semibold">3. Генеруйте звіти</h3>
-            <p className="text-gray-700">
-              Отримуйте готові документи у два кліки — для керівництва або
-              бухгалтерії.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* FAQ SECTION (Питання та відповіді) */}
-      <section className="w-full max-w-5xl px-6 py-20">
-        <h2 className="mb-10 text-center text-3xl font-bold">
-          (FAQ) Часті питання
-        </h2>
-
-        <div className="space-y-6">
-          <div>
-            <h3 className="text-xl font-semibold">
-              Чи можна використовувати NatureArk безкоштовно?
-            </h3>
-            <p className="text-gray-700">
-              Так, проєкт відкритий. Ви можете запускати його локально або на
-              своєму сервері.
-            </p>
-          </div>
-
-          <div>
-            <h3 className="text-xl font-semibold">
-              Чи є інтеграція з іншими системами?
-            </h3>
-            <p className="text-gray-700">
-              Так, можна експортувати дані та використовувати API Supabase.
-            </p>
-          </div>
-
-          <div>
-            <h3 className="text-xl font-semibold">
-              Чи безпечно зберігати дані?
-            </h3>
-            <p className="text-gray-700">
-              Так, дані зберігаються з використанням Supabase та ролей доступу.
-            </p>
+            <Card>
+              <CardHeader>
+                <CardTitle className="text-2xl">Імпорт / Експорт</CardTitle>
+                <CardDescription className="text-muted-foreground mt-3 text-lg">
+                  Швидке перенесення даних або інтеграція з іншими системами.
+                </CardDescription>
+              </CardHeader>
+            </Card>
           </div>
         </div>
       </section>
 
-      {/* FOOTER (Підвал сайту) */}
-      <footer className="w-full border-t py-10 text-center text-gray-500">
-        <p>© 2025 NatureArk. Усі права захищені.</p>
-        <p className="mt-2 text-sm">(Footer) GitHub · Контакти · Мова</p>
+      <section className="bg-muted w-full px-6 py-24">
+        <div className="mx-auto max-w-5xl space-y-12">
+          <h2 className="text-center text-4xl font-bold">
+            Відповіді на питання
+          </h2>
+
+          <Accordion
+            type="single"
+            collapsible
+            className="mx-auto w-full max-w-4xl"
+            defaultValue="item-1"
+          >
+            <AccordionItem value="item-1">
+              <AccordionTrigger className="text-primary text-2xl font-semibold">
+                Чи можна використовувати NatureArk безкоштовно?
+              </AccordionTrigger>
+              <AccordionContent className="text-lg text-balance">
+                <p>
+                  Так, проєкт відкритий. Ви можете запускати його локально або
+                  на своєму сервері.
+                </p>
+              </AccordionContent>
+            </AccordionItem>
+            <AccordionItem value="item-2">
+              <AccordionTrigger className="text-primary text-2xl font-semibold">
+                Чи є інтеграція з іншими системами?
+              </AccordionTrigger>
+              <AccordionContent className="text-lg text-balance">
+                <p>
+                  Так, можна експортувати дані та використовувати API Supabase.
+                </p>
+              </AccordionContent>
+            </AccordionItem>
+            <AccordionItem value="item-3">
+              <AccordionTrigger className="text-primary text-2xl font-semibold">
+                Чи безпечно зберігати дані?
+              </AccordionTrigger>
+              <AccordionContent className="text-lg text-balance">
+                <p>
+                  Так, дані зберігаються з використанням Supabase та ролей
+                  доступу.
+                </p>
+              </AccordionContent>
+            </AccordionItem>
+          </Accordion>
+        </div>
+      </section>
+
+      <footer className="text-muted-foreground w-full py-12 text-center">
+        <p>© 2025 NatureArk. Усі права захищено.</p>
+        <p className="mt-3 text-sm">GitHub · Контакти · Мова</p>
       </footer>
-    </main>
+    </div>
   );
 }
