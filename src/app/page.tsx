@@ -29,10 +29,17 @@ export default function Home() {
             інтерфейс, прозорість витрат та повний контроль.
           </p>
 
-          <div className="mx-auto">
-            <Button size="lg">
-              <a href="/dashboard">Розпочати</a>
-            </Button>
+          <div className="mx-auto space-x-6">
+            <a href="/dashboard">
+              <Button size="lg" className="cursor-pointer">
+                Розпочати
+              </Button>
+            </a>
+            <a href="https://github.com/AntonAntypenko/nature-ark">
+              <Button size="lg" variant="outline" className="cursor-pointer">
+                Відкрити GitHub
+              </Button>
+            </a>
           </div>
         </div>
       </section>
