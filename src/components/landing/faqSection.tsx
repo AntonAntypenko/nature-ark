@@ -20,7 +20,7 @@ export const FAQSection: FC = () => {
           defaultValue="item-1"
         >
           <AccordionItem value="item-1">
-            <AccordionTrigger className="text-primary text-2xl font-semibold">
+            <AccordionTrigger className="text-primary cursor-pointer text-2xl font-semibold">
               Чи можна використовувати NatureArk безкоштовно?
             </AccordionTrigger>
             <AccordionContent className="text-lg text-balance">
@@ -31,7 +31,7 @@ export const FAQSection: FC = () => {
             </AccordionContent>
           </AccordionItem>
           <AccordionItem value="item-2">
-            <AccordionTrigger className="text-primary text-2xl font-semibold">
+            <AccordionTrigger className="text-primary cursor-pointer text-2xl font-semibold">
               Чи є інтеграція з іншими системами?
             </AccordionTrigger>
             <AccordionContent className="text-lg text-balance">
@@ -41,7 +41,7 @@ export const FAQSection: FC = () => {
             </AccordionContent>
           </AccordionItem>
           <AccordionItem value="item-3">
-            <AccordionTrigger className="text-primary text-2xl font-semibold">
+            <AccordionTrigger className="text-primary cursor-pointer text-2xl font-semibold">
               Чи безпечно зберігати дані?
             </AccordionTrigger>
             <AccordionContent className="text-lg text-balance">
