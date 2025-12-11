@@ -9,8 +9,8 @@ import {
   FeaturesSection,
   Footer,
   FinalCTASection,
+  Header,
 } from "@/components/landing";
-import { Header } from "@/components/landing/header";
 
 export default function Page() {
   return (

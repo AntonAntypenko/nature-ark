@@ -4,6 +4,7 @@ export * from "./featureCard";
 export * from "./featuresSection";
 export * from "./finalCTASection";
 export * from "./footer";
+export * from "./header";
 export * from "./heroSection";
 export * from "./problemSolutionSection";
 export * from "./techStackSection";
