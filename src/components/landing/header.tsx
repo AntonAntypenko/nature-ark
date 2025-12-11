@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { FC } from "react";
 
-import { MountainIcon } from "lucide-react";
+import { Squirrel } from "lucide-react";
 
 import {
   Button,
@@ -25,7 +25,7 @@ export const Header: FC = () => {
     <header className="bg-background/95 sticky top-0 z-50 w-full border-b shadow-sm backdrop-blur-sm">
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
         <Link href="/" className="flex items-center space-x-2">
-          <MountainIcon className="text-primary h-6 w-6" />
+          <Squirrel className="text-primary h-8 w-8" />
           <span className="text-xl font-bold tracking-tight">NatureArk</span>
         </Link>
 
