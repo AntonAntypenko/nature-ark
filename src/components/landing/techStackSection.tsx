@@ -1,4 +1,18 @@
+import Link from "next/link";
+
 import { FC } from "react";
+
+const TECH_STACK = [
+  { name: "Next.js 15", href: "https://nextjs.org/docs" },
+  { name: "React 19", href: "https://react.dev/learn" },
+  { name: "Tailwind CSS", href: "https://tailwindcss.com/docs" },
+  { name: "shadcn/ui", href: "https://ui.shadcn.com/docs" },
+  { name: "Supabase", href: "https://supabase.com/docs" },
+  {
+    name: "RTK Query",
+    href: "https://redux-toolkit.js.org/rtk-query/overview",
+  },
+];
 
 export const TechStackSection: FC = () => {
   return (
@@ -10,17 +24,18 @@ export const TechStackSection: FC = () => {
           забезпечує швидкість, безпеку та легкість розширення.
         </p>
 
-        <div className="text-secondary-foreground flex flex-wrap justify-center gap-6 text-xl font-medium">
-          <span className="bg-secondary rounded-full px-4 py-2">
-            Next.js 15
-          </span>
-          <span className="bg-secondary rounded-full px-4 py-2">React 19</span>
-          <span className="bg-secondary rounded-full px-4 py-2">
-            Tailwind CSS
-          </span>
-          <span className="bg-secondary rounded-full px-4 py-2">shadcn/ui</span>
-          <span className="bg-secondary rounded-full px-4 py-2">Supabase</span>
-          <span className="bg-secondary rounded-full px-4 py-2">RTK Query</span>
+        <div className="flex flex-wrap justify-center gap-4 text-xl font-medium">
+          {TECH_STACK.map(tech => (
+            <Link
+              key={tech.name}
+              href={tech.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-secondary hover:bg-primary hover:text-primary-foreground rounded-full px-4 py-2 transition-colors duration-1000"
+            >
+              {tech.name}
+            </Link>
+          ))}
         </div>
       </div>
     </section>
