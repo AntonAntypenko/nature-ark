@@ -7,3 +7,4 @@ export * from "./label";
 export * from "./input";
 export * from "./navigation-menu";
 export * from "./separator";
+export * from "./sheet";
