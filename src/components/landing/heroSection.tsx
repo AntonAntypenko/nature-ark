@@ -7,37 +7,45 @@ import { Button } from "@/components/ui";
 
 export const HeroSection: FC = () => {
   return (
-    <section className="flex min-h-screen w-full items-center justify-center px-6 py-24">
-      <div className="max-w-6xl space-y-12 text-center">
-        <h1 className="text-4xl leading-tight font-bold md:text-6xl">
-          NatureArk — система обліку та
-          <br />
-          управління витратами для зоопарків
-        </h1>
+    <section className="min-h-screen w-full">
+      <div className="flex min-h-[calc(100vh-200px)] items-center justify-between">
+        <div className="flex flex-col space-y-6 px-[10%] lg:w-[50%] lg:pr-0">
+          <h1 className="text-center text-4xl leading-tight font-bold md:text-left md:text-6xl">
+            NatureArk - Контроль бюджету та обліку тварин
+          </h1>
 
-        <p className="text-muted-foreground mx-auto max-w-xl text-lg">
-          Автоматизувати процес обліку, керування бюджетом, створенням
-          документів та звітів для тварин. Простий інтерфейс, прозорість витрат
-          та повний контроль.
-        </p>
+          <p className="text-muted-foreground max-w-xl text-center text-lg md:text-left">
+            Автоматизувати процес обліку, керування бюджетом, створенням
+            документів та звітів для тварин. Простий інтерфейс, прозорість
+            витрат та повний контроль.
+          </p>
 
-        <div className="mx-auto space-x-6">
-          <Button size="lg" className="cursor-pointer" asChild>
-            <Link href="/dashboard">Розпочати</Link>
-          </Button>
-          <Button size="lg" variant="outline" className="cursor-pointer">
-            <a
-              href="https://github.com/AntonAntypenko/nature-ark"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Відкрити GitHub
-            </a>
-          </Button>
+          <div className="mx-auto space-x-2 md:mx-0 md:space-x-6">
+            <Button size="lg" className="cursor-pointer" asChild>
+              <Link href="/dashboard">Розпочати</Link>
+            </Button>
+            <Button size="lg" variant="outline" className="cursor-pointer">
+              <a
+                href="https://github.com/AntonAntypenko/nature-ark"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Відкрити GitHub
+              </a>
+            </Button>
+          </div>
+        </div>
+        <div className="relative hidden h-[720px] w-[45%] overflow-hidden rounded-l-full bg-black lg:block">
+          <img
+            className="h-full w-full rounded-tl-xl object-cover"
+            src="/bison.jpg"
+            alt="Bison"
+          />
         </div>
       </div>
-      <div className="text-muted-foreground absolute bottom-10 animate-bounce">
-        <ChevronDown size="30" />
+
+      <div className="text-muted-foreground mt-10 flex animate-bounce justify-center lg:mt-20">
+        <ChevronDown size={30} />
       </div>
     </section>
   );
