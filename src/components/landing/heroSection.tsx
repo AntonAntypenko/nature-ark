@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { FC } from "react";
 
 import { ChevronDown } from "lucide-react";
@@ -21,16 +22,18 @@ export const HeroSection: FC = () => {
         </p>
 
         <div className="mx-auto space-x-6">
-          <a href="/dashboard">
-            <Button size="lg" className="cursor-pointer">
-              Розпочати
-            </Button>
-          </a>
-          <a href="https://github.com/AntonAntypenko/nature-ark">
-            <Button size="lg" variant="outline" className="cursor-pointer">
+          <Button size="lg" className="cursor-pointer" asChild>
+            <Link href="/dashboard">Розпочати</Link>
+          </Button>
+          <Button size="lg" variant="outline" className="cursor-pointer">
+            <a
+              href="https://github.com/AntonAntypenko/nature-ark"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               Відкрити GitHub
-            </Button>
-          </a>
+            </a>
+          </Button>
         </div>
       </div>
       <div className="text-muted-foreground absolute bottom-10 animate-bounce">

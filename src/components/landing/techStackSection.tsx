@@ -1,5 +1,3 @@
-import Link from "next/link";
-
 import { FC } from "react";
 
 const TECH_STACK = [
@@ -16,7 +14,7 @@ const TECH_STACK = [
 
 export const TechStackSection: FC = () => {
   return (
-    <section className="w-full px-6 py-24">
+    <section id="tech" className="w-full px-6 py-24">
       <div className="mx-auto max-w-6xl space-y-12 text-center">
         <h2 className="text-4xl font-bold">Створено на сучасних технологіях</h2>
         <p className="text-muted-foreground mx-auto max-w-2xl text-lg">
@@ -26,7 +24,7 @@ export const TechStackSection: FC = () => {
 
         <div className="flex flex-wrap justify-center gap-4 text-xl font-medium">
           {TECH_STACK.map(tech => (
-            <Link
+            <a
               key={tech.name}
               href={tech.href}
               target="_blank"
@@ -34,7 +32,7 @@ export const TechStackSection: FC = () => {
               className="bg-secondary hover:bg-primary hover:text-primary-foreground rounded-full px-4 py-2 transition-colors duration-1000"
             >
               {tech.name}
-            </Link>
+            </a>
           ))}
         </div>
       </div>

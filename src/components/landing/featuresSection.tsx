@@ -13,7 +13,7 @@ import { FeatureCard } from "@/components/landing";
 
 export const FeaturesSection: FC = () => {
   return (
-    <section className="w-full px-6 py-24">
+    <section id="features" className="w-full px-6 py-24">
       <div className="mx-auto max-w-6xl space-y-12">
         <h2 className="text-center text-4xl font-bold">
           Ключові Можливості Платформи

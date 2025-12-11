@@ -15,16 +15,18 @@ export const FinalCTASection: FC = () => {
           над витратами.
         </p>
         <div className="mx-auto mt-8 space-x-6">
-          <Link href="/dashboard" passHref>
-            <Button size="lg" className="cursor-pointer">
-              Розпочати
-            </Button>
-          </Link>
-          <Link href="https://github.com/AntonAntypenko/nature-ark" passHref>
-            <Button size="lg" variant="outline" className="cursor-pointer">
+          <Button size="lg" className="cursor-pointer" asChild>
+            <Link href="/dashboard">Розпочати</Link>
+          </Button>
+          <Button size="lg" variant="outline" className="cursor-pointer">
+            <a
+              href="https://github.com/AntonAntypenko/nature-ark"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               Відкрити GitHub
-            </Button>
-          </Link>
+            </a>
+          </Button>
         </div>
       </div>
     </section>

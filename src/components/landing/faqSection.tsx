@@ -9,7 +9,7 @@ import {
 
 export const FAQSection: FC = () => {
   return (
-    <section className="bg-muted w-full px-6 py-24">
+    <section id="faq" className="bg-muted w-full px-6 py-24">
       <div className="mx-auto max-w-5xl space-y-12">
         <h2 className="text-center text-4xl font-bold">Відповіді на питання</h2>
 
