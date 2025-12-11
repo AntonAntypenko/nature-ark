@@ -10,6 +10,7 @@ import {
   Footer,
   FinalCTASection,
   Header,
+  ContactUsSection,
 } from "@/components/landing";
 
 export default function Page() {
@@ -23,6 +24,7 @@ export default function Page() {
       <TechStackSection />
       <FAQSection />
       <FinalCTASection />
+      <ContactUsSection />
       <Footer />
     </div>
   );

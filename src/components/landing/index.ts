@@ -1,4 +1,5 @@
 export * from "./benefitsSection";
+export * from "./contactUsSection";
 export * from "./faqSection";
 export * from "./featureCard";
 export * from "./featuresSection";
