@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, ReactNode } from "react";
 
 import {
   Accordion,
@@ -7,51 +7,83 @@ import {
   AccordionTrigger,
 } from "@/components/ui";
 
+type FAQItemProps = {
+  value: string;
+  title: string;
+  content: string | ReactNode;
+};
+
+export const FAQ_DATA: FAQItemProps[] = [
+  {
+    value: "item-1",
+    title: "Чи можна використовувати NatureArk безкоштовно?",
+    content:
+      "Так, проєкт відкритий. Ви можете запускати його локально або на своєму сервері.",
+  },
+  {
+    value: "item-2",
+    title: "Чи є інтеграція з іншими системами?",
+    content: "Так, можна експортувати дані та використовувати API Supabase.",
+  },
+  {
+    value: "item-3",
+    title: "Чи безпечно зберігати дані?",
+    content:
+      "Так, дані зберігаються з використанням Supabase та ролей доступу.",
+  },
+  {
+    value: "item-4",
+    title: "Які мінімальні технічні вимоги?",
+    content:
+      "Для локального запуску вам знадобиться Node.js та Docker. Усі інструкції є на GitHub.",
+  },
+];
+
+const FAQItem: FC<FAQItemProps> = ({ value, title, content }) => {
+  return (
+    <AccordionItem value={value}>
+      <AccordionTrigger className="text-primary cursor-pointer text-xl font-semibold lg:text-2xl">
+        {title}
+      </AccordionTrigger>
+
+      <AccordionContent className="text-lg text-balance">
+        {typeof content === "string" ? <p>{content}</p> : content}
+      </AccordionContent>
+    </AccordionItem>
+  );
+};
+
 export const FAQSection: FC = () => {
   return (
     <section id="faq" className="bg-muted w-full px-6 py-24">
       <div className="mx-auto max-w-5xl space-y-12">
         <h2 className="text-center text-4xl font-bold">Відповіді на питання</h2>
+        <div className="grid grid-cols-1 items-start gap-12 lg:grid-cols-2 lg:gap-16">
+          <div className="hidden h-full lg:block">
+            <img
+              src="/panda.jpg "
+              alt="Ілюстрація питання та відповіді"
+              className="h-full w-full rounded-xl object-cover shadow-lg"
+              loading="lazy"
+            />
+          </div>
 
-        <Accordion
-          type="single"
-          collapsible
-          className="mx-auto w-full max-w-4xl"
-          defaultValue="item-1"
-        >
-          <AccordionItem value="item-1">
-            <AccordionTrigger className="text-primary cursor-pointer text-2xl font-semibold">
-              Чи можна використовувати NatureArk безкоштовно?
-            </AccordionTrigger>
-            <AccordionContent className="text-lg text-balance">
-              <p>
-                Так, проєкт відкритий. Ви можете запускати його локально або на
-                своєму сервері.
-              </p>
-            </AccordionContent>
-          </AccordionItem>
-          <AccordionItem value="item-2">
-            <AccordionTrigger className="text-primary cursor-pointer text-2xl font-semibold">
-              Чи є інтеграція з іншими системами?
-            </AccordionTrigger>
-            <AccordionContent className="text-lg text-balance">
-              <p>
-                Так, можна експортувати дані та використовувати API Supabase.
-              </p>
-            </AccordionContent>
-          </AccordionItem>
-          <AccordionItem value="item-3">
-            <AccordionTrigger className="text-primary cursor-pointer text-2xl font-semibold">
-              Чи безпечно зберігати дані?
-            </AccordionTrigger>
-            <AccordionContent className="text-lg text-balance">
-              <p>
-                Так, дані зберігаються з використанням Supabase та ролей
-                доступу.
-              </p>
-            </AccordionContent>
-          </AccordionItem>
-        </Accordion>
+          <Accordion
+            type="single"
+            collapsible
+            className="mx-auto w-full max-w-4xl"
+            defaultValue="item-1"
+          >
+            {FAQ_DATA.map(item => (
+              <FAQItem
+                key={item.value}
+                value={item.value}
+                title={item.title}
+                content={item.content}
+              />
+            ))}
+          </Accordion>
+        </div>
       </div>
     </section>
   );
