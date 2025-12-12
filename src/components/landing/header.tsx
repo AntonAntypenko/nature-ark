@@ -1,9 +1,9 @@
 "use client";
 
 import Link from "next/link";
-import { FC } from "react";
+import { FC, useState } from "react";
 
-import { Squirrel } from "lucide-react";
+import { Menu, Squirrel } from "lucide-react";
 
 import {
   Button,
@@ -11,23 +11,32 @@ import {
   NavigationMenuItem,
   NavigationMenuLink,
   NavigationMenuList,
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
   navigationMenuTriggerStyle,
 } from "@/components/ui";
+import { CtaButtonGroup } from "@/components/landing";
 
 const NAV_LINKS = [
   { title: "Можливості", href: "#features" },
   { title: "Технології", href: "#tech" },
   { title: "FAQ", href: "#faq" },
+  { title: "Контакти", href: "#contact" },
 ];
 
 export const Header: FC = () => {
+  const [isOpen, setIsOpen] = useState(false);
+
   return (
     <header className="bg-background/95 sticky top-0 z-50 w-full border-b shadow-sm backdrop-blur-sm">
-      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
-        <Link href="/" className="flex items-center space-x-2">
+      <div className="flex h-16 w-full items-center justify-between px-4 sm:px-6 lg:px-8">
+        <a href="#hero" className="flex items-center space-x-2">
           <Squirrel className="text-primary h-8 w-8" />
           <span className="text-xl font-bold tracking-tight">NatureArk</span>
-        </Link>
+        </a>
 
         <NavigationMenu className="hidden md:flex">
           <NavigationMenuList>
@@ -44,24 +53,51 @@ export const Header: FC = () => {
           </NavigationMenuList>
         </NavigationMenu>
 
-        <div className="flex items-center space-x-4">
-          <Button size="sm" className="cursor-pointer" asChild>
-            <Link href="/dashboard" passHref>
-              Розпочати
-            </Link>
-          </Button>
-          <Button size="sm" variant="outline" className="cursor-pointer">
-            <a
-              href="https://github.com/AntonAntypenko/nature-ark"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Відкрити GitHub
-            </a>
-          </Button>
-        </div>
+        <CtaButtonGroup
+          size="sm"
+          className="hidden items-end space-x-4 md:flex"
+        />
 
-        {/* TODO: Тут має бути реалізована Mobile Hamburger Menu (для мобільної версії) */}
+        <div className="block md:hidden">
+          <div className="flex items-center justify-between">
+            <Sheet open={isOpen} onOpenChange={setIsOpen}>
+              <SheetTrigger asChild>
+                <Button variant="outline" size="icon">
+                  <Menu className="size-4" />
+                </Button>
+              </SheetTrigger>
+              <SheetContent side="top" className="h-screen">
+                <SheetHeader>
+                  <SheetTitle>
+                    <a
+                      href="#hero"
+                      className="flex items-center space-x-2"
+                      onClick={() => setIsOpen(false)}
+                    >
+                      <Squirrel className="text-primary h-8 w-8" />
+                      <span className="text-xl font-bold tracking-tight">
+                        NatureArk
+                      </span>
+                    </a>
+                  </SheetTitle>
+                </SheetHeader>
+
+                <div className="flex flex-col gap-6 text-center">
+                  {NAV_LINKS.map(item => (
+                    <Link
+                      key={item.title}
+                      href={item.href}
+                      className="hover:bg-muted/50 rounded-md p-3 text-lg font-medium transition-colors"
+                      onClick={() => setIsOpen(false)}
+                    >
+                      {item.title}
+                    </Link>
+                  ))}
+                </div>
+              </SheetContent>
+            </Sheet>
+          </div>
+        </div>
       </div>
     </header>
   );
