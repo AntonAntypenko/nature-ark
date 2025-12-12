@@ -6,7 +6,7 @@ import { CtaButtonGroup } from "@/components/landing/ctaButtonGroup";
 
 export const HeroSection: FC = () => {
   return (
-    <section className="min-h-screen w-full">
+    <section id="hero" className="min-h-screen w-full">
       <div className="flex min-h-[calc(100vh-200px)] items-center justify-between">
         <div className="flex flex-col space-y-6 px-[10%] lg:w-[50%] lg:pr-0">
           <h1 className="text-center text-4xl leading-tight font-bold md:text-left md:text-6xl">
