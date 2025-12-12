@@ -1,9 +1,8 @@
-import Link from "next/link";
 import { FC } from "react";
 
 import { ChevronDown } from "lucide-react";
 
-import { Button } from "@/components/ui";
+import { CtaButtonGroup } from "@/components/landing/ctaButtonGroup";
 
 export const HeroSection: FC = () => {
   return (
@@ -20,20 +19,7 @@ export const HeroSection: FC = () => {
             витрат та повний контроль.
           </p>
 
-          <div className="mx-auto space-x-2 md:mx-0 md:space-x-6">
-            <Button size="lg" className="cursor-pointer" asChild>
-              <Link href="/dashboard">Розпочати</Link>
-            </Button>
-            <Button size="lg" variant="outline" className="cursor-pointer">
-              <a
-                href="https://github.com/AntonAntypenko/nature-ark"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Відкрити GitHub
-              </a>
-            </Button>
-          </div>
+          <CtaButtonGroup className="mx-auto space-x-2 md:mx-0 md:space-x-6" />
         </div>
         <div className="relative hidden h-[720px] w-[45%] overflow-hidden rounded-l-full bg-black lg:block">
           <img
