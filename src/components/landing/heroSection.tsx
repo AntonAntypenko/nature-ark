@@ -1,4 +1,5 @@
 import { FC } from "react";
+import Link from "next/link";
 
 import { ChevronDown } from "lucide-react";
 
@@ -31,7 +32,9 @@ export const HeroSection: FC = () => {
       </div>
 
       <div className="text-muted-foreground mt-10 flex animate-bounce justify-center lg:mt-20">
-        <ChevronDown size={30} />
+        <Link href="#benefits">
+          <ChevronDown size={30} />
+        </Link>
       </div>
     </section>
   );

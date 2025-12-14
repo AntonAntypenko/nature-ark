@@ -6,7 +6,7 @@ import { FeatureCard } from "@/components/landing";
 
 export const BenefitsSection: FC = () => {
   return (
-    <section className="w-full px-6 py-24">
+    <section id="benefits" className="w-full px-6 py-24">
       <div className="mx-auto max-w-6xl space-y-12">
         <h2 className="text-center text-4xl font-bold">
           Ваші переваги з NatureArk
