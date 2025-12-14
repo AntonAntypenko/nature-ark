@@ -1,5 +1,6 @@
 export * from "./benefitsSection";
 export * from "./contactUsSection";
+export * from "./ctaButtonGroup";
 export * from "./faqSection";
 export * from "./featureCard";
 export * from "./featuresSection";
@@ -7,5 +8,6 @@ export * from "./finalCTASection";
 export * from "./footer";
 export * from "./header";
 export * from "./heroSection";
+export * from "./howItWorksSection";
 export * from "./problemSolutionSection";
 export * from "./techStackSection";
