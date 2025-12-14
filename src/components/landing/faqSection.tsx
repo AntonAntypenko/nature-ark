@@ -6,6 +6,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui";
+import { LandingSection } from "@/components/landing";
 
 type FAQItemProps = {
   value: string;
@@ -55,36 +56,33 @@ const FAQItem: FC<FAQItemProps> = ({ value, title, content }) => {
 
 export const FAQSection: FC = () => {
   return (
-    <section id="faq" className="bg-muted w-full px-6 py-24">
-      <div className="mx-auto max-w-5xl space-y-12">
-        <h2 className="text-center text-4xl font-bold">Відповіді на питання</h2>
-        <div className="grid grid-cols-1 items-start gap-12 lg:grid-cols-2 lg:gap-16">
-          <div className="hidden h-full lg:block">
-            <img
-              src="/panda.jpg "
-              alt="Ілюстрація питання та відповіді"
-              className="h-full w-full rounded-xl object-cover shadow-lg"
-              loading="lazy"
-            />
-          </div>
-
-          <Accordion
-            type="single"
-            collapsible
-            className="mx-auto w-full max-w-4xl"
-            defaultValue="item-1"
-          >
-            {FAQ_DATA.map(item => (
-              <FAQItem
-                key={item.value}
-                value={item.value}
-                title={item.title}
-                content={item.content}
-              />
-            ))}
-          </Accordion>
+    <LandingSection id="faq" title="Відповіді на питання">
+      <div className="grid max-w-5xl grid-cols-1 items-start gap-12 lg:grid-cols-2 lg:gap-16">
+        <div className="hidden h-full lg:block">
+          <img
+            src="/panda.jpg "
+            alt="Ілюстрація питання та відповіді"
+            className="h-full w-full rounded-xl object-cover shadow-lg"
+            loading="lazy"
+          />
         </div>
+
+        <Accordion
+          type="single"
+          collapsible
+          className="mx-auto w-full max-w-4xl"
+          defaultValue="item-1"
+        >
+          {FAQ_DATA.map(item => (
+            <FAQItem
+              key={item.value}
+              value={item.value}
+              title={item.title}
+              content={item.content}
+            />
+          ))}
+        </Accordion>
       </div>
-    </section>
+    </LandingSection>
   );
 };

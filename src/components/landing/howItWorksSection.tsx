@@ -1,13 +1,8 @@
 import { FC } from "react";
 
-import {
-  UserPlus,
-  Settings,
-  PieChart,
-  PawPrint,
-  FilePlusIcon,
-} from "lucide-react";
-import { FeatureCard } from "@/components/landing/featureCard";
+import { UserPlus, Settings, PieChart, PawPrint } from "lucide-react";
+
+import { LandingSection, FeatureCard } from "@/components/landing";
 
 type Step = {
   icon: FC<{ className?: string }>;
@@ -46,46 +41,39 @@ const lineClasses = "w-[3px] shrink-0 h-20 bg-primary opacity-70";
 
 export const HowItWorksSection: FC = () => {
   return (
-    <section id="how-it-works" className="bg-background w-full px-6 py-24">
-      <div className="mx-auto max-w-4xl space-y-12">
-        <h2 className="text-center text-4xl font-bold">Як почати роботу</h2>
+    <LandingSection id="" title="Як почати роботу">
+      <div className="relative mx-auto max-w-4xl">
+        {STEPS.map((step, index) => {
+          const isFirst = index === 0;
+          const isLast = index === STEPS.length - 1;
 
-        <div className="relative">
-          {STEPS.map((step, index) => {
-            const isFirst = index === 0;
-            const isLast = index === STEPS.length - 1;
+          return (
+            <div key={index} className="relative flex items-center">
+              <div className="relative z-10 flex w-12 shrink-0 flex-col items-center md:w-40">
+                <div className="flex flex-col items-center justify-between">
+                  {isFirst ? (
+                    <span className="h-20" />
+                  ) : (
+                    <span className={lineClasses} />
+                  )}
 
-            return (
-              <div key={index} className="relative flex items-center">
-                <div className="relative z-10 flex w-12 shrink-0 flex-col items-center md:w-40">
-                  <div className="flex flex-col items-center justify-between">
-                    {isFirst ? (
-                      <span className="h-20" />
-                    ) : (
-                      <span className={lineClasses} />
-                    )}
+                  <span className="bg-primary text-primary-foreground border-background flex size-12 items-center justify-center rounded-full border-4 font-mono text-xl font-bold shadow-md">
+                    {index + 1}
+                  </span>
 
-                    <span className="bg-primary text-primary-foreground border-background flex size-12 items-center justify-center rounded-full border-4 font-mono text-xl font-bold shadow-md">
-                      {index + 1}
-                    </span>
-
-                    {isLast ? (
-                      <span className="h-20" />
-                    ) : (
-                      <span className={lineClasses} />
-                    )}
-                  </div>
+                  {isLast ? (
+                    <span className="h-20" />
+                  ) : (
+                    <span className={lineClasses} />
+                  )}
                 </div>
-
-                <FeatureCard
-                  title={step.title}
-                  description={step.description}
-                />
               </div>
-            );
-          })}
-        </div>
+
+              <FeatureCard title={step.title} description={step.description} />
+            </div>
+          );
+        })}
       </div>
-    </section>
+    </LandingSection>
   );
 };

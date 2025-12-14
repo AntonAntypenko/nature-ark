@@ -3,7 +3,7 @@ import Link from "next/link";
 
 import { ChevronDown } from "lucide-react";
 
-import { CtaButtonGroup } from "@/components/landing/ctaButtonGroup";
+import { CtaButtonGroup } from "@/components/landing";
 
 export const HeroSection: FC = () => {
   return (

@@ -1,5 +1,7 @@
 import { FC } from "react";
 
+import { LandingSection } from "@/components/landing";
+
 const TECH_STACK = [
   { name: "Next.js 15", href: "https://nextjs.org/docs" },
   { name: "React 19", href: "https://react.dev/learn" },
@@ -14,28 +16,27 @@ const TECH_STACK = [
 
 export const TechStackSection: FC = () => {
   return (
-    <section id="tech" className="w-full px-6 py-24">
-      <div className="mx-auto max-w-6xl space-y-12 text-center">
-        <h2 className="text-4xl font-bold">Створено на сучасних технологіях</h2>
-        <p className="text-muted-foreground mx-auto max-w-2xl text-lg">
-          NatureArk побудований на надійному, відкритому та сучасному стеку, що
-          забезпечує швидкість, безпеку та легкість розширення.
-        </p>
-
-        <div className="flex flex-wrap justify-center gap-4 text-xl font-medium">
-          {TECH_STACK.map(tech => (
-            <a
-              key={tech.name}
-              href={tech.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="bg-secondary hover:bg-primary hover:text-primary-foreground rounded-full px-4 py-2 transition-colors duration-1000"
-            >
-              {tech.name}
-            </a>
-          ))}
-        </div>
+    <LandingSection
+      id="tech"
+      title="Створено на сучасних технологіяху"
+      subtitle="
+      NatureArk побудований на надійному, відкритому та сучасному стеку,
+      що забезпечує швидкість, безпеку та легкість розширення."
+      className="bg-muted"
+    >
+      <div className="flex flex-wrap justify-center gap-4 text-xl font-medium">
+        {TECH_STACK.map(tech => (
+          <a
+            key={tech.name}
+            href={tech.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="bg-secondary hover:bg-primary hover:text-primary-foreground rounded-full px-4 py-2 transition-colors duration-1000"
+          >
+            {tech.name}
+          </a>
+        ))}
       </div>
-    </section>
+    </LandingSection>
   );
 };
