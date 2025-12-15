@@ -1,23 +1,23 @@
 import { FC } from "react";
 import Link from "next/link";
 
+import { useTranslations } from "next-intl";
 import { ChevronDown } from "lucide-react";
 
 import { CtaButtonGroup } from "@/components/landing";
 
 export const HeroSection: FC = () => {
+  const t = useTranslations("hero");
   return (
     <section id="hero" className="min-h-screen w-full">
       <div className="flex min-h-[calc(100vh-200px)] items-center justify-between">
         <div className="flex flex-col space-y-6 px-[10%] lg:w-[50%] lg:pr-0">
           <h1 className="text-center text-4xl leading-tight font-bold md:text-left md:text-6xl">
-            NatureArk - Контроль бюджету та обліку тварин
+            {t("title")}
           </h1>
 
           <p className="text-muted-foreground max-w-xl text-center text-lg md:text-left">
-            Автоматизувати процес обліку, керування бюджетом, створенням
-            документів та звітів для тварин. Простий інтерфейс, прозорість
-            витрат та повний контроль.
+            {t("subtitle")}
           </p>
 
           <CtaButtonGroup className="mx-auto space-x-2 md:mx-0 md:space-x-6" />
