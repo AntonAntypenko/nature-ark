@@ -84,6 +84,7 @@
     },
     "faq": {
       "title": "Answers to questions",
+      "alt": "Question and answer illustration",
       "item1": {
         "title": "Can NatureArk be used for free?",
         "content": "Yes, the project is open source. You can run it locally or on your own server."

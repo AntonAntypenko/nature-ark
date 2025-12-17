@@ -62,7 +62,7 @@ export const FAQSection: FC = () => {
         <div className="hidden h-full lg:block">
           <img
             src="/panda.jpg "
-            alt="Ілюстрація питання та відповіді"
+            alt={t("alt")}
             className="h-full w-full rounded-xl object-cover shadow-lg"
             loading="lazy"
           />
