@@ -1,59 +1,52 @@
 import { FC } from "react";
 
-import { Mail, MessageSquare } from "lucide-react";
+import { LucideIcon, Mail, MessageSquare } from "lucide-react";
 import { useTranslations } from "next-intl";
 
 import { FeatureCard, LandingSection } from "@/components/landing";
 
+type Channel = {
+  icon?: LucideIcon;
+  key: string;
+};
+
+const CONTACT_CHANNELS: Channel[] = [
+  {
+    icon: Mail,
+    key: "channels.email",
+  },
+  {
+    key: "channels.gitHub",
+  },
+  {
+    key: "channels.linkedIn",
+  },
+  {
+    key: "channels.telegram",
+    icon: MessageSquare,
+  },
+];
+
 export const ContactUsSection: FC = () => {
   const t = useTranslations("landingSections.contactUs");
-
-  const CONTACT_CHANNELS = [
-    {
-      icon: Mail,
-      label: t("channels.email.label"),
-      description: t("channels.email.description"),
-      link: "mailto:your.email@example.com",
-      linkText: t("channels.email.linkText"),
-    },
-    {
-      label: t("channels.gitHub.label"),
-      description: t("channels.gitHub.description"),
-      link: "https://github.com/AntonAntypenko/nature-ark/issues",
-      linkText: t("channels.gitHub.linkText"),
-    },
-    {
-      label: t("channels.linkedIn.label"),
-      description: t("channels.linkedIn.description"),
-      link: "https://www.linkedin.com/in/yourprofile/",
-      linkText: t("channels.linkedIn.linkText"),
-    },
-    {
-      icon: MessageSquare,
-      label: t("channels.telegram.label"),
-      description: t("channels.telegram.description"),
-      link: "https://t.me/your_telegram_username",
-      linkText: t("channels.telegram.linkText"),
-    },
-  ];
 
   return (
     <LandingSection id="contact" title={t("title")} subtitle={t("subtitle")}>
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
         {CONTACT_CHANNELS.map(channel => (
           <FeatureCard
-            key={channel.label}
+            key={t(`${channel.key}.label`)}
             icon={channel.icon}
-            title={channel.label}
-            description={channel.description}
+            title={t(`${channel.key}.label`)}
+            description={t(`${channel.key}.description`)}
           >
             <a
-              href={channel.link}
+              href={t(`${channel.key}.link`)}
               target="_blank"
               rel="noopener noreferrer"
               className="text-primary font-semibold transition-colors hover:underline"
             >
-              {channel.linkText}
+              {t(`${channel.key}.linkText`)}
             </a>
           </FeatureCard>
         ))}

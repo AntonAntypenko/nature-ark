@@ -114,22 +114,26 @@
         "email": {
           "label": "Email",
           "description": "Напишіть нам напряму, якщо маєте пропозиції щодо функціоналу.",
-          "linkText": "email@example.com"
+          "linkText": "email@example.com",
+          "link": "mailto:contact@natureark.com"
         },
         "gitHub": {
           "label": "GitHub",
           "description": "Повідомте про баги або запропонуйте нову фічу через Issues.",
-          "linkText": "Створити Issue"
+          "linkText": "Створити Issue",
+          "link": "https://github.com/AntonAntypenko/nature-ark/issues"
         },
         "linkedIn": {
           "label": "LinkedIn",
           "description": "Зв'яжіться з автором проєкту з професійних питань.",
-          "linkText": "Профіль автора"
+          "linkText": "Профіль автора",
+          "link": "https://www.linkedin.com/in/yourprofile/"
         },
         "telegram": {
           "label": "Телеграм",
           "description": "Найшвидший спосіб отримати відповідь на невеликі запитання.",
-          "linkText": "Написати в Telegram"
+          "linkText": "Написати в Telegram",
+          "link": "https://t.me/your_telegram_username"
         }
       }
     },

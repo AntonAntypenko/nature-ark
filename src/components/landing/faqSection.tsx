@@ -16,6 +16,30 @@ type FAQItemProps = {
   content: string | ReactNode;
 };
 
+type Data = {
+  value: string;
+  key: string;
+};
+
+const FAQ_DATA: Data[] = [
+  {
+    value: "item1",
+    key: "item1",
+  },
+  {
+    value: "item2",
+    key: "item2",
+  },
+  {
+    value: "item3",
+    key: "item3",
+  },
+  {
+    value: "item4",
+    key: "item4",
+  },
+];
+
 const FAQItem: FC<FAQItemProps> = ({ value, title, content }) => {
   return (
     <AccordionItem value={value}>
@@ -32,29 +56,6 @@ const FAQItem: FC<FAQItemProps> = ({ value, title, content }) => {
 
 export const FAQSection: FC = () => {
   const t = useTranslations("landingSections.faq");
-
-  const FAQ_DATA: FAQItemProps[] = [
-    {
-      value: "item1",
-      title: t("item1.title"),
-      content: t("item1.content"),
-    },
-    {
-      value: "item2",
-      title: t("item2.title"),
-      content: t("item2.content"),
-    },
-    {
-      value: "item3",
-      title: t("item3.title"),
-      content: t("item3.content"),
-    },
-    {
-      value: "item4",
-      title: t("item4.title"),
-      content: t("item4.content"),
-    },
-  ];
 
   return (
     <LandingSection id="faq" title={t("title")}>
@@ -78,8 +79,8 @@ export const FAQSection: FC = () => {
             <FAQItem
               key={item.value}
               value={item.value}
-              title={item.title}
-              content={item.content}
+              title={t(`${item.key}.title`)}
+              content={t(`${item.key}.content`)}
             />
           ))}
         </Accordion>

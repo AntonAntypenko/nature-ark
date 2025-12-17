@@ -1,46 +1,47 @@
 import { FC } from "react";
 
-import { UserPlus, Settings, PieChart, PawPrint } from "lucide-react";
+import {
+  LucideIcon,
+  UserPlus,
+  Settings,
+  PieChart,
+  PawPrint,
+} from "lucide-react";
 import { useTranslations } from "next-intl";
 
 import { LandingSection, FeatureCard } from "@/components/landing";
 
 type Step = {
-  icon: FC<{ className?: string }>;
-  title: string;
-  description: string;
+  icon: LucideIcon;
+  key: string;
 };
+
+const STEPS: Step[] = [
+  {
+    icon: UserPlus,
+    key: "step1",
+  },
+  {
+    icon: PawPrint,
+    key: "step2",
+  },
+  {
+    icon: Settings,
+    key: "step3",
+  },
+  {
+    icon: PieChart,
+    key: "step4",
+  },
+];
 
 const lineClasses = "w-[3px] shrink-0 h-20 bg-primary opacity-70";
 
 export const HowItWorksSection: FC = () => {
   const t = useTranslations("landingSections.howItWorks");
 
-  const STEPS: Step[] = [
-    {
-      icon: UserPlus,
-      title: t("step1.title"),
-      description: t("step1.description"),
-    },
-    {
-      icon: PawPrint,
-      title: t("step2.title"),
-      description: t("step2.description"),
-    },
-    {
-      icon: Settings,
-      title: t("step3.title"),
-      description: t("step3.description"),
-    },
-    {
-      icon: PieChart,
-      title: t("step4.title"),
-      description: t("step4.description"),
-    },
-  ];
-
   return (
-    <LandingSection id="" title={t("title")}>
+    <LandingSection id="howItWorks" title={t("title")}>
       <div className="relative mx-auto max-w-4xl">
         {STEPS.map((step, index) => {
           const isFirst = index === 0;
@@ -68,7 +69,10 @@ export const HowItWorksSection: FC = () => {
                 </div>
               </div>
 
-              <FeatureCard title={step.title} description={step.description} />
+              <FeatureCard
+                title={t(`${step.key}.title`)}
+                description={t(`${step.key}.description`)}
+              />
             </div>
           );
         })}

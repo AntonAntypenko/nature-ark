@@ -9,7 +9,7 @@ export const FinalCTASection: FC = () => {
 
   return (
     <LandingSection
-      id=""
+      id="finalCta"
       title={t("title")}
       subtitle={t("subtitle")}
       className="bg-muted"

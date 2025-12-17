@@ -4,7 +4,12 @@ import { useTranslations } from "next-intl";
 
 import { LandingSection } from "@/components/landing";
 
-const TECH_STACK = [
+type Tech = {
+  name: string;
+  href: string;
+};
+
+const TECH_STACK: Tech[] = [
   { name: "Next.js 15", href: "https://nextjs.org/docs" },
   { name: "React 19", href: "https://react.dev/learn" },
   { name: "Tailwind CSS", href: "https://tailwindcss.com/docs" },

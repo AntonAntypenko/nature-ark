@@ -1,6 +1,7 @@
 import { FC } from "react";
 
 import {
+  LucideIcon,
   Download,
   FilePlusIcon,
   PawPrint,
@@ -13,7 +14,7 @@ import { useTranslations } from "next-intl";
 import { FeatureCard, LandingSection } from "@/components/landing";
 
 type Feature = {
-  icon: FC<{ className?: string }>;
+  icon: LucideIcon;
   key: string;
 };
 

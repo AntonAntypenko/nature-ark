@@ -21,17 +21,22 @@ import {
 } from "@/components/ui";
 import { CtaButtonGroup } from "@/components/landing";
 
+type Link = {
+  key: string;
+  href: string;
+};
+
+const NAV_LINKS: Link[] = [
+  { key: "features", href: "#features" },
+  { key: "tech", href: "#tech" },
+  { key: "faq", href: "#faq" },
+  { key: "contact", href: "#contact" },
+];
+
 export const Header: FC = () => {
   const t = useTranslations("landingSections.header");
 
   const [isOpen, setIsOpen] = useState(false);
-
-  const NAV_LINKS = [
-    { title: t("features"), href: "#features" },
-    { title: t("tech"), href: "#tech" },
-    { title: t("faq"), href: "#faq" },
-    { title: t("contact"), href: "#contact" },
-  ];
 
   return (
     <header className="bg-background/95 sticky top-0 z-50 w-full border-b shadow-sm backdrop-blur-sm">
@@ -44,12 +49,12 @@ export const Header: FC = () => {
         <NavigationMenu className="hidden md:flex">
           <NavigationMenuList>
             {NAV_LINKS.map(item => (
-              <NavigationMenuItem key={item.title}>
+              <NavigationMenuItem key={t(`${item.key}`)}>
                 <NavigationMenuLink
                   href={item.href}
                   className={navigationMenuTriggerStyle()}
                 >
-                  {item.title}
+                  {t(`${item.key}`)}
                 </NavigationMenuLink>
               </NavigationMenuItem>
             ))}
@@ -88,12 +93,12 @@ export const Header: FC = () => {
                 <div className="flex flex-col gap-6 text-center">
                   {NAV_LINKS.map(item => (
                     <Link
-                      key={item.title}
+                      key={t(`${item.key}`)}
                       href={item.href}
                       className="hover:bg-muted/50 rounded-md p-3 text-lg font-medium transition-colors"
                       onClick={() => setIsOpen(false)}
                     >
-                      {item.title}
+                      {t(`${item.key}`)}
                     </Link>
                   ))}
                 </div>

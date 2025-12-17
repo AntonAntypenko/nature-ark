@@ -114,22 +114,26 @@
         "email": {
           "label": "Email",
           "description": "Email us directly if you have functional suggestions.",
-          "linkText": "email@example.com"
+          "linkText": "email@example.com",
+          "link": "mailto:contact@natureark.com"
         },
         "gitHub": {
           "label": "GitHub",
           "description": "Report bugs or suggest a new feature via Issues.",
-          "linkText": "Create Issue"
+          "linkText": "Create Issue",
+          "link": "https://github.com/AntonAntypenko/nature-ark/issues"
         },
         "linkedIn": {
           "label": "LinkedIn",
           "description": "Contact the project author for professional inquiries.",
-          "linkText": "Author's Profile"
+          "linkText": "Author's Profile",
+          "link": "https://www.linkedin.com/in/yourprofile/"
         },
         "telegram": {
           "label": "Telegram",
           "description": "The quickest way to get an answer to small questions.",
-          "linkText": "Message on Telegram"
+          "linkText": "Message on Telegram",
+          "link": "https://t.me/your_telegram_username"
         }
       }
     },

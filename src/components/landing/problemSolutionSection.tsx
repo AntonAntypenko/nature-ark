@@ -11,7 +11,7 @@ export const ProblemSolutionSection: FC = () => {
   const t = useTranslations("landingSections.problemSolution");
 
   return (
-    <LandingSection id="" title={t("title")}>
+    <LandingSection id="problemSolution" title={t("title")}>
       <div className="grid grid-cols-1 gap-12 md:grid-cols-2">
         <div>
           <h3 className="mb-3 text-2xl font-semibold">{t("problemsTitle")}</h3>
