@@ -1,21 +1,25 @@
 import Link from "next/link";
 import { FC } from "react";
 
+import { useTranslations } from "next-intl";
+
 import { Button } from "@/components/ui";
 
-interface CtaButtonGroupProps {
+type CtaButtonGroupProps = {
   size?: "sm" | "lg";
   className?: string;
-}
+};
 
 export const CtaButtonGroup: FC<CtaButtonGroupProps> = ({
   size = "lg",
   className,
 }) => {
+  const t = useTranslations("landingSections.ctaButton");
+
   return (
     <div className={`${className}`}>
       <Button size={size} className="cursor-pointer" asChild>
-        <Link href="/dashboard">Розпочати</Link>
+        <Link href="/dashboard">{t("primary")}</Link>
       </Button>
       <Button size={size} variant="outline" className="cursor-pointer" asChild>
         <a
@@ -23,7 +27,7 @@ export const CtaButtonGroup: FC<CtaButtonGroupProps> = ({
           target="_blank"
           rel="noopener noreferrer"
         >
-          GitHub
+          {t("github")}
         </a>
       </Button>
     </div>

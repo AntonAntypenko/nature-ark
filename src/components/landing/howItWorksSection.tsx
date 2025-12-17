@@ -1,6 +1,7 @@
 import { FC } from "react";
 
 import { UserPlus, Settings, PieChart, PawPrint } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 import { LandingSection, FeatureCard } from "@/components/landing";
 
@@ -10,38 +11,36 @@ type Step = {
   description: string;
 };
 
-const STEPS: Step[] = [
-  {
-    icon: UserPlus,
-    title: "Крок 1: Реєстрація",
-    description:
-      "Створіть свій безкоштовний обліковий запис і підтвердіть електронну пошту. Це займає менше хвилини.",
-  },
-  {
-    icon: PawPrint,
-    title: "Крок 2: Додайте Об'єкти",
-    description:
-      "Внесіть дані про ваших перших тварин та їхні базові раціони. Можливий масовий імпорт.",
-  },
-  {
-    icon: Settings,
-    title: "Крок 3: Налаштуйте Доступи",
-    description:
-      "Запросіть колег (ветеринарів, зоологів) та надайте їм відповідні ролі та права доступу.",
-  },
-  {
-    icon: PieChart,
-    title: "Крок 4: Почніть Аналіз",
-    description:
-      "Отримуйте оперативні звіти про стан здоров'я, споживання кормів та фінансові витрати.",
-  },
-];
-
 const lineClasses = "w-[3px] shrink-0 h-20 bg-primary opacity-70";
 
 export const HowItWorksSection: FC = () => {
+  const t = useTranslations("landingSections.howItWorks");
+
+  const STEPS: Step[] = [
+    {
+      icon: UserPlus,
+      title: t("step1.title"),
+      description: t("step1.description"),
+    },
+    {
+      icon: PawPrint,
+      title: t("step2.title"),
+      description: t("step2.description"),
+    },
+    {
+      icon: Settings,
+      title: t("step3.title"),
+      description: t("step3.description"),
+    },
+    {
+      icon: PieChart,
+      title: t("step4.title"),
+      description: t("step4.description"),
+    },
+  ];
+
   return (
-    <LandingSection id="" title="Як почати роботу">
+    <LandingSection id="" title={t("title")}>
       <div className="relative mx-auto max-w-4xl">
         {STEPS.map((step, index) => {
           const isFirst = index === 0;

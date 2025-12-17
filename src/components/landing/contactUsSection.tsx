@@ -1,47 +1,44 @@
 import { FC } from "react";
 
 import { Mail, MessageSquare } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 import { FeatureCard, LandingSection } from "@/components/landing";
 
-const CONTACT_CHANNELS = [
-  {
-    icon: Mail,
-    label: "Email",
-    description:
-      "Напишіть нам напряму, якщо маєте пропозиції щодо функціоналу.",
-    link: "mailto:your.email@example.com", // TODO: Замінити на реальний email
-    linkText: "email@example.com",
-  },
-  {
-    label: "GitHub",
-    description: "Повідомте про баги або запропонуйте нову фічу через Issues.",
-    link: "https://github.com/AntonAntypenko/nature-ark/issues",
-    linkText: "Створити Issue",
-  },
-  {
-    label: "LinkedIn",
-    description: "Зв'яжіться з автором проєкту з професійних питань.",
-    link: "https://www.linkedin.com/in/yourprofile/", // TODO: Замінити на реальний LinkedIn
-    linkText: "Профіль автора",
-  },
-  {
-    icon: MessageSquare,
-    label: "Телеграм",
-    description: "Найшвидший спосіб отримати відповідь на невеликі запитання.",
-    link: "https://t.me/your_telegram_username", // TODO: Замінити на реальний Telegram
-    linkText: "Написати в Telegram",
-  },
-];
-
 export const ContactUsSection: FC = () => {
+  const t = useTranslations("landingSections.contactUs");
+
+  const CONTACT_CHANNELS = [
+    {
+      icon: Mail,
+      label: t("channels.email.label"),
+      description: t("channels.email.description"),
+      link: "mailto:your.email@example.com",
+      linkText: t("channels.email.linkText"),
+    },
+    {
+      label: t("channels.gitHub.label"),
+      description: t("channels.gitHub.description"),
+      link: "https://github.com/AntonAntypenko/nature-ark/issues",
+      linkText: t("channels.gitHub.linkText"),
+    },
+    {
+      label: t("channels.linkedIn.label"),
+      description: t("channels.linkedIn.description"),
+      link: "https://www.linkedin.com/in/yourprofile/",
+      linkText: t("channels.linkedIn.linkText"),
+    },
+    {
+      icon: MessageSquare,
+      label: t("channels.telegram.label"),
+      description: t("channels.telegram.description"),
+      link: "https://t.me/your_telegram_username",
+      linkText: t("channels.telegram.linkText"),
+    },
+  ];
+
   return (
-    <LandingSection
-      id="contact"
-      title="Маєте запитання або пропозиції?"
-      subtitle="Ми відкриті до зворотного зв'язку, пропозицій щодо покращення та
-            співпраці."
-    >
+    <LandingSection id="contact" title={t("title")} subtitle={t("subtitle")}>
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
         {CONTACT_CHANNELS.map(channel => (
           <FeatureCard

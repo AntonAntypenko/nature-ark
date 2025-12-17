@@ -1,5 +1,7 @@
 import { FC } from "react";
 
+import { useTranslations } from "next-intl";
+
 import { LandingSection } from "@/components/landing";
 
 const TECH_STACK = [
@@ -15,13 +17,13 @@ const TECH_STACK = [
 ];
 
 export const TechStackSection: FC = () => {
+  const t = useTranslations("landingSections.techStack");
+
   return (
     <LandingSection
       id="tech"
-      title="Створено на сучасних технологіях"
-      subtitle="
-      NatureArk побудований на надійному, відкритому та сучасному стеку,
-      що забезпечує швидкість, безпеку та легкість розширення."
+      title={t("title")}
+      subtitle={t("subtitle")}
       className="bg-muted"
     >
       <div className="flex flex-wrap justify-center gap-4 text-xl font-medium">

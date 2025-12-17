@@ -7,7 +7,8 @@ import { ChevronDown } from "lucide-react";
 import { CtaButtonGroup } from "@/components/landing";
 
 export const HeroSection: FC = () => {
-  const t = useTranslations("hero");
+  const t = useTranslations("landingSections.hero");
+
   return (
     <section id="hero" className="min-h-screen w-full">
       <div className="flex min-h-[calc(100vh-200px)] items-center justify-between">

@@ -4,6 +4,7 @@ import Link from "next/link";
 import { FC, useState } from "react";
 
 import { Menu, Squirrel } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 import {
   Button,
@@ -20,15 +21,17 @@ import {
 } from "@/components/ui";
 import { CtaButtonGroup } from "@/components/landing";
 
-const NAV_LINKS = [
-  { title: "Можливості", href: "#features" },
-  { title: "Технології", href: "#tech" },
-  { title: "FAQ", href: "#faq" },
-  { title: "Контакти", href: "#contact" },
-];
-
 export const Header: FC = () => {
+  const t = useTranslations("landingSections.header");
+
   const [isOpen, setIsOpen] = useState(false);
+
+  const NAV_LINKS = [
+    { title: t("features"), href: "#features" },
+    { title: t("tech"), href: "#tech" },
+    { title: t("faq"), href: "#faq" },
+    { title: t("contact"), href: "#contact" },
+  ];
 
   return (
     <header className="bg-background/95 sticky top-0 z-50 w-full border-b shadow-sm backdrop-blur-sm">

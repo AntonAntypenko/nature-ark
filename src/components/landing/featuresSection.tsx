@@ -8,46 +8,45 @@ import {
   UserCheck,
   Wrench,
 } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 import { FeatureCard, LandingSection } from "@/components/landing";
 
 export const FeaturesSection: FC = () => {
+  const t = useTranslations("landingSections.features");
+
   return (
-    <LandingSection
-      id="features"
-      title="Ключові можливості платформи"
-      className="bg-muted"
-    >
+    <LandingSection id="features" title={t("title")} className="bg-muted">
       <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
         <FeatureCard
           icon={FilePlusIcon}
-          title="Облік витрат"
-          description="Повний контроль над фінансовими операціями, категоризація та бюджетування."
+          title={t("costAccountingTitle")}
+          description={t("costAccountingDescription")}
         />
         <FeatureCard
           icon={PawPrint}
-          title="Профілі тварин"
-          description="Повна інформація, фото, історія витрат, медичні записи — все в одному місці."
+          title={t("animalProfilesTitle")}
+          description={t("animalProfilesDescription")}
         />
         <FeatureCard
           icon={Rocket}
-          title="Генерація звітів"
-          description="Автоматична підготовка PDF/Excel документів для швидкої та точної звітності."
+          title={t("reportGenerationTitle")}
+          description={t("reportGenerationDescription")}
         />
         <FeatureCard
           icon={Wrench}
-          title="AI-документи"
-          description="Створення пояснень, листів та описів за допомогою інтелектуального помічника."
+          title={t("aiDocumentsTitle")}
+          description={t("aiDocumentsDescription")}
         />
         <FeatureCard
           icon={UserCheck}
-          title="Ролі та доступи"
-          description="Налаштування гнучких дозволів для різних груп співробітників."
+          title={t("rolesAndAccessTitle")}
+          description={t("rolesAndAccessDescription")}
         />
         <FeatureCard
           icon={Download}
-          title="Імпорт / Експорт"
-          description="Швидке перенесення даних або інтеграція з іншими внутрішніми системами."
+          title={t("importExportTitle")}
+          description={t("importExportDescription")}
         />
       </div>
     </LandingSection>

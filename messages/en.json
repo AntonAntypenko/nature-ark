@@ -1,6 +1,139 @@
 {
-  "hero": {
-    "subtitle": "Automate the process of accounting, budget management, document creation, and reporting for animals. Simple interface, transparency of expenses, and full control.",
-    "title": "NatureArk - Budget and Animal Accounting Control"
+  "landingSections": {
+    "header": {
+      "contact": "Contacts",
+      "faq": "FAQ",
+      "features": "Opportunities",
+      "tech": "Technologies"
+    },
+    "ctaButton": {
+      "github": "GitHub",
+      "primary": "Start"
+    },
+    "hero": {
+      "subtitle": "Automate the process of accounting, budget management, document creation, and reporting for animals. Simple interface, transparency of expenses, and full control.",
+      "title": "NatureArk - Budget and Animal Accounting Control"
+    },
+    "benefits": {
+      "costTransparency": {
+        "description": "Know exactly where the money goes. No hidden or unaccounted expenses.",
+        "title": "Transparency of Expenses"
+      },
+      "dataSecurity": {
+        "description": "Important information about animals and finances is securely protected.",
+        "title": "Data Security"
+      },
+      "staffConvenience": {
+        "description": "A simple and intuitive interface for every employee.",
+        "title": "Convenience for Staff"
+      },
+      "title": "Your benefits with NatureArk",
+      "workflowSpeed": {
+        "description": "Automate routine tasks and save hours of work time.",
+        "title": "Work Speed"
+      }
+    },
+    "problemSolution": {
+      "title": "Why NatureArk?",
+      "problemsTitle": "Problems",
+      "problem1": "Inaccurate or manual cost accounting.",
+      "problem2": "Difficulties in maintaining animal records.",
+      "problem3": "Slow preparation of reports and documents.",
+      "solutionTitle": "Solution",
+      "solution1": "Automated accounting and budget control.",
+      "solution2": "Convenient profiles for each animal.",
+      "solution3": "Fast generation of documents and reports."
+    },
+    "features": {
+      "title": "Key Platform Features",
+      "costAccountingTitle": "Cost Accounting",
+      "costAccountingDescription": "Full control over financial operations, categorization, and budgeting.",
+      "animalProfilesTitle": "Animal Profiles",
+      "animalProfilesDescription": "Full information, photos, expense history, medical records — all in one place.",
+      "reportGenerationTitle": "Report Generation",
+      "reportGenerationDescription": "Automatic preparation of PDF/Excel documents for fast and accurate reporting.",
+      "aiDocumentsTitle": "AI Documents",
+      "aiDocumentsDescription": "Creation of explanations, letters, and descriptions using an intelligent assistant.",
+      "rolesAndAccessTitle": "Roles and Access",
+      "rolesAndAccessDescription": "Configuration of flexible permissions for different employee groups.",
+      "importExportTitle": "Import / Export",
+      "importExportDescription": "Quick data transfer or integration with other internal systems."
+    },
+    "howItWorks": {
+      "title": "How to start work",
+      "step1": {
+        "title": "Step 1: Registration",
+        "description": "Create your free account and confirm your email. It takes less than a minute."
+      },
+      "step2": {
+        "title": "Step 2: Add Objects",
+        "description": "Enter data about your first animals and their basic diets. Bulk import is possible."
+      },
+      "step3": {
+        "title": "Step 3: Configure Access",
+        "description": "Invite colleagues (veterinarians, zoologists) and grant them appropriate roles and access rights."
+      },
+      "step4": {
+        "title": "Step 4: Start Analysis",
+        "description": "Receive operational reports on health status, feed consumption, and financial expenditures."
+      }
+    },
+    "techStack": {
+      "title": "Built on Modern Technologies",
+      "subtitle": "NatureArk is built on a reliable, open, and modern stack that ensures speed, security, and ease of expansion."
+    },
+    "faq": {
+      "title": "Answers to questions",
+      "item1": {
+        "title": "Can NatureArk be used for free?",
+        "content": "Yes, the project is open source. You can run it locally or on your own server."
+      },
+      "item2": {
+        "title": "Is there integration with other systems?",
+        "content": "Yes, you can export data and use the Supabase API."
+      },
+      "item3": {
+        "title": "Is it safe to store data?",
+        "content": "Yes, data is stored using Supabase and access roles."
+      },
+      "item4": {
+        "title": "What are the minimum technical requirements?",
+        "content": "For local installation, you will need Node.js and Docker. All instructions are available on GitHub."
+      }
+    },
+    "finalCta": {
+      "title": "Start Digital Accounting",
+      "subtitle": "Start using NatureArk today and gain full control over your expenses."
+    },
+    "contactUs": {
+      "title": "Do you have questions or suggestions?",
+      "subtitle": "We are open to feedback, suggestions for improvement, and collaboration.",
+      "channels": {
+        "email": {
+          "label": "Email",
+          "description": "Email us directly if you have functional suggestions.",
+          "linkText": "email@example.com"
+        },
+        "gitHub": {
+          "label": "GitHub",
+          "description": "Report bugs or suggest a new feature via Issues.",
+          "linkText": "Create Issue"
+        },
+        "linkedIn": {
+          "label": "LinkedIn",
+          "description": "Contact the project author for professional inquiries.",
+          "linkText": "Author's Profile"
+        },
+        "telegram": {
+          "label": "Telegram",
+          "description": "The quickest way to get an answer to small questions.",
+          "linkText": "Message on Telegram"
+        }
+      }
+    },
+    "footer": {
+      "copyright": "© 2025 NatureArk. All rights reserved.",
+      "links": "GitHub · Contact · Language"
+    }
   }
 }
