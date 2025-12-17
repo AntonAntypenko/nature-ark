@@ -1,4 +1,5 @@
 import { FC, ReactNode } from "react";
+import Image from "next/image";
 
 import { useTranslations } from "next-intl";
 
@@ -59,13 +60,14 @@ export const FAQSection: FC = () => {
 
   return (
     <LandingSection id="faq" title={t("title")}>
-      <div className="grid max-w-5xl grid-cols-1 items-start gap-12 lg:grid-cols-2 lg:gap-16">
-        <div className="hidden h-full lg:block">
-          <img
-            src="/panda.jpg "
+      <div className="grid max-w-5xl grid-cols-1 items-start gap-12 lg:min-h-[400px] lg:grid-cols-2 lg:gap-16">
+        <div className="hidden h-full lg:relative lg:block">
+          <Image
+            src="/panda.jpg"
             alt={t("alt")}
-            className="h-full w-full rounded-xl object-cover shadow-lg"
+            className="rounded-xl object-cover shadow-lg"
             loading="lazy"
+            fill={true}
           />
         </div>
 

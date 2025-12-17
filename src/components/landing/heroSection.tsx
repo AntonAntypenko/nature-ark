@@ -1,5 +1,6 @@
 import { FC } from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 import { useTranslations } from "next-intl";
 import { ChevronDown } from "lucide-react";
@@ -23,11 +24,13 @@ export const HeroSection: FC = () => {
 
           <CtaButtonGroup className="mx-auto space-x-2 md:mx-0 md:space-x-6" />
         </div>
-        <div className="relative hidden h-[720px] w-[45%] overflow-hidden rounded-l-full bg-black lg:block">
-          <img
-            className="h-full w-full rounded-tl-xl object-cover"
+        <div className="relative hidden h-[720px] w-[45%] overflow-hidden rounded-l-full lg:block">
+          <Image
             src="/bison.jpg"
             alt={t("alt")}
+            className="rounded-xl object-cover shadow-lg"
+            fill={true}
+            priority={true}
           />
         </div>
       </div>
