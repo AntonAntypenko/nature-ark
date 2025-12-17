@@ -12,7 +12,8 @@
     },
     "hero": {
       "subtitle": "Automate the process of accounting, budget management, document creation, and reporting for animals. Simple interface, transparency of expenses, and full control.",
-      "title": "NatureArk - Budget and Animal Accounting Control"
+      "title": "NatureArk - Budget and Animal Accounting Control",
+      "alt": "Bison"
     },
     "benefits": {
       "costTransparency": {

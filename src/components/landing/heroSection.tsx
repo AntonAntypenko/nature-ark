@@ -27,7 +27,7 @@ export const HeroSection: FC = () => {
           <img
             className="h-full w-full rounded-tl-xl object-cover"
             src="/bison.jpg"
-            alt="Bison"
+            alt={t("alt")}
           />
         </div>
       </div>
