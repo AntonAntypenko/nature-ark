@@ -19,7 +19,7 @@ import {
   SheetTrigger,
   navigationMenuTriggerStyle,
 } from "@/components/ui";
-import { CtaButtonGroup } from "@/components/landing";
+import { CtaButtonGroup, LanguageSwitcher } from "@/components/landing";
 
 type Link = {
   key: string;
@@ -61,10 +61,11 @@ export const Header: FC = () => {
           </NavigationMenuList>
         </NavigationMenu>
 
-        <CtaButtonGroup
-          size="sm"
-          className="hidden items-end space-x-4 md:flex"
-        />
+        <div className="hidden space-x-4 md:flex">
+          <CtaButtonGroup size="sm" className="flex items-end space-x-4" />
+
+          <LanguageSwitcher size="sm" />
+        </div>
 
         <div className="block md:hidden">
           <div className="flex items-center justify-between">
@@ -76,7 +77,7 @@ export const Header: FC = () => {
               </SheetTrigger>
               <SheetContent side="top" className="h-screen">
                 <SheetHeader>
-                  <SheetTitle>
+                  <SheetTitle className="flex space-x-4">
                     <a
                       href="#hero"
                       className="flex items-center space-x-2"
@@ -87,6 +88,8 @@ export const Header: FC = () => {
                         NatureArk
                       </span>
                     </a>
+
+                    <LanguageSwitcher />
                   </SheetTitle>
                 </SheetHeader>
 

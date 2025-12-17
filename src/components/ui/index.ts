@@ -6,5 +6,6 @@ export * from "./form";
 export * from "./label";
 export * from "./input";
 export * from "./navigation-menu";
+export * from "./select";
 export * from "./separator";
 export * from "./sheet";
