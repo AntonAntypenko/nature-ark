@@ -43,7 +43,7 @@ export default function LoginPage() {
   const onSubmit = async (data: LoginRequestDTO) => {
     try {
       await login(data).unwrap();
-      router.push("/");
+      router.push("/dashboard");
     } catch (e) {
       console.error("Error: ", e);
     }
