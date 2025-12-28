@@ -9,6 +9,7 @@ import {
 } from "lucide-react";
 import { useTranslations } from "next-intl";
 
+import { useIsMobile } from "@/hooks";
 import { LandingSection, FeatureCard } from "@/components/landing";
 
 type Step = {
@@ -38,6 +39,7 @@ const STEPS: Step[] = [
 const lineClasses = "w-[3px] shrink-0 h-20 bg-primary opacity-70";
 
 export const HowItWorksSection: FC = () => {
+  const { isMobile } = useIsMobile();
   const t = useTranslations("landingSections.howItWorks");
 
   return (
@@ -48,28 +50,34 @@ export const HowItWorksSection: FC = () => {
           const isLast = index === STEPS.length - 1;
 
           return (
-            <div key={index} className="relative flex items-center">
-              <div className="relative z-10 flex w-12 shrink-0 flex-col items-center md:w-40">
-                <div className="flex flex-col items-center justify-between">
-                  {isFirst ? (
-                    <span className="h-20" />
-                  ) : (
-                    <span className={lineClasses} />
-                  )}
+            <div
+              key={index}
+              className="relative mb-8 flex items-center md:mb-0"
+            >
+              {!isMobile && (
+                <div className="relative z-10 flex w-12 shrink-0 flex-col items-center md:w-40">
+                  <div className="flex flex-col items-center justify-between">
+                    {isFirst ? (
+                      <span className="h-20" />
+                    ) : (
+                      <span className={lineClasses} />
+                    )}
 
-                  <span className="bg-primary text-primary-foreground border-background flex size-12 items-center justify-center rounded-full border-4 font-mono text-xl font-bold shadow-md">
-                    {index + 1}
-                  </span>
+                    <span className="bg-primary text-primary-foreground border-background flex size-12 items-center justify-center rounded-full border-4 font-mono text-xl font-bold shadow-md">
+                      {index + 1}
+                    </span>
 
-                  {isLast ? (
-                    <span className="h-20" />
-                  ) : (
-                    <span className={lineClasses} />
-                  )}
+                    {isLast ? (
+                      <span className="h-20" />
+                    ) : (
+                      <span className={lineClasses} />
+                    )}
+                  </div>
                 </div>
-              </div>
+              )}
 
               <FeatureCard
+                icon={step.icon}
                 title={t(`${step.key}.title`)}
                 description={t(`${step.key}.description`)}
               />
