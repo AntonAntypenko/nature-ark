@@ -1,3 +1,4 @@
+/*
 import { createClient } from "@supabase/supabase-js";
 
 const url = process.env.NEXT_PUBLIC_SB_URL!;
@@ -12,3 +13,4 @@ if (!key) {
 }
 
 export const supabase = createClient(url, key);
+*/
