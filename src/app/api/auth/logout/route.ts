@@ -14,7 +14,7 @@ export async function POST() {
     res.cookies.delete("sb-refresh-token");
 
     return res;
-  } catch (error) {
+  } catch {
     return NextResponse.json({ error: "Logout failed" }, { status: 500 });
   }
 }
