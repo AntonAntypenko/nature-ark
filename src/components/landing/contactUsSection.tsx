@@ -32,7 +32,7 @@ export const ContactUsSection: FC = () => {
 
   return (
     <LandingSection id="contact" title={t("title")} subtitle={t("subtitle")}>
-      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+      <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
         {CONTACT_CHANNELS.map(channel => (
           <FeatureCard
             key={t(`${channel.key}.label`)}
