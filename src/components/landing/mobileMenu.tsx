@@ -55,14 +55,14 @@ export const MobileMenu: FC<{ navLinks: Link[] }> = ({ navLinks }) => {
 
             <div className="flex flex-col gap-6 text-center">
               {navLinks.map(item => (
-                <Link
+                <a
                   key={t(`${item.key}`)}
                   href={item.href}
                   className="hover:bg-muted/50 rounded-md p-3 text-lg font-medium transition-colors"
                   onClick={() => setIsOpen(false)}
                 >
                   {t(`${item.key}`)}
-                </Link>
+                </a>
               ))}
             </div>
           </SheetContent>
