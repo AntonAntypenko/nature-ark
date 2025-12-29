@@ -11,5 +11,6 @@ export * from "./heroSection";
 export * from "./howItWorksSection";
 export * from "./landingSection";
 export * from "./languageSwitcher";
+export * from "./mobileMenu";
 export * from "./problemSolutionSection";
 export * from "./techStackSection";
