@@ -1,10 +1,11 @@
 "use client";
 
-import { FC } from "react";
+import { FC, useEffect, useState } from "react";
 import { usePathname, useRouter } from "@/i18n/navigation";
 
 import { Globe } from "lucide-react";
 import { useLocale } from "next-intl";
+import { cn } from "@/lib/utils";
 
 import {
   Select,
@@ -12,6 +13,7 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
+  Skeleton,
 } from "@/components/ui";
 
 const LOCALES = [
@@ -19,10 +21,10 @@ const LOCALES = [
   { value: "en", label: "EN" },
 ];
 
-interface LanguageSwitcherProps {
+type LanguageSwitcherProps = {
   className?: string;
   size?: "sm" | "default";
-}
+};
 
 export const LanguageSwitcher: FC<LanguageSwitcherProps> = ({
   className,
@@ -41,9 +43,14 @@ export const LanguageSwitcher: FC<LanguageSwitcherProps> = ({
 
   const triggerClasses = size === "sm" ? "w-[100px] h-8" : "w-[120px]";
 
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
+
+  if (!mounted) return <Skeleton className={triggerClasses} />;
+
   return (
-    <div className={className}>
-      <Select defaultValue={locale} onValueChange={e => switchLocale(e)}>
+    <div className={cn("inline-flex items-center", className)}>
+      <Select value={locale} onValueChange={e => switchLocale(e)}>
         <SelectTrigger className={triggerClasses} size="sm">
           <Globe className="h-4 w-4" />
           <SelectValue />

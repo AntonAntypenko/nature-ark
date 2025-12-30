@@ -55,9 +55,7 @@ export const Header: FC = () => {
           </NavigationMenuList>
         </NavigationMenu>
 
-        <div className="hidden md:flex">
-          <LanguageSwitcher size="sm" />
-        </div>
+        <LanguageSwitcher size="sm" className="hidden md:flex" />
 
         <MobileMenu navLinks={NAV_LINKS} />
       </div>
