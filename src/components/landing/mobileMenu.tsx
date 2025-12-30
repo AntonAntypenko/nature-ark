@@ -49,7 +49,9 @@ export const MobileMenu: FC<{ navLinks: Link[] }> = ({ navLinks }) => {
                   </span>
                 </a>
 
-                <LanguageSwitcher />
+                <div className="mr-16 flex w-full justify-end">
+                  <LanguageSwitcher size="sm" />
+                </div>
               </SheetTitle>
             </SheetHeader>
 
