@@ -55,11 +55,7 @@ export const Header: FC = () => {
           </NavigationMenuList>
         </NavigationMenu>
 
-        <div className="hidden space-x-4 md:flex">
-          <CtaButtonGroup size="sm" className="flex items-end space-x-4" />
-
-          <LanguageSwitcher size="sm" />
-        </div>
+        <LanguageSwitcher size="sm" />
 
         <MobileMenu navLinks={NAV_LINKS} />
       </div>
