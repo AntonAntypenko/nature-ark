@@ -1,11 +1,10 @@
 import { FC } from "react";
-import Link from "next/link";
-import Image from "next/image";
 
 import { useTranslations } from "next-intl";
 import { ChevronDown } from "lucide-react";
 
 import { CtaButtonGroup } from "@/components/landing";
+import { SmartImage } from "@/components/blocks";
 
 export const HeroSection: FC = () => {
   const t = useTranslations("landingSections.hero");
@@ -25,12 +24,11 @@ export const HeroSection: FC = () => {
           <CtaButtonGroup className="mx-auto space-x-2 md:mx-0 md:space-x-6" />
         </div>
         <div className="relative hidden h-[720px] w-[45%] overflow-hidden rounded-l-full lg:block">
-          <Image
+          <SmartImage
             src="/bison.jpg"
             alt={t("alt")}
-            className="rounded-xl object-cover shadow-lg"
+            className="rounded-l-lg object-cover shadow-lg"
             fill={true}
-            priority={true}
           />
         </div>
       </div>

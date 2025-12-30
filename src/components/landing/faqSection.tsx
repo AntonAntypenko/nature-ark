@@ -10,6 +10,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui";
 import { LandingSection } from "@/components/landing";
+import { SmartImage } from "@/components/blocks";
 
 type FAQItemProps = {
   value: string;
@@ -62,7 +63,7 @@ export const FAQSection: FC = () => {
     <LandingSection id="faq" title={t("title")}>
       <div className="grid max-w-5xl grid-cols-1 items-start gap-12 lg:min-h-[400px] lg:grid-cols-2 lg:gap-16">
         <div className="hidden h-full lg:relative lg:block">
-          <Image
+          <SmartImage
             src="/panda.jpg"
             alt={t("alt")}
             className="rounded-xl object-cover shadow-lg"
