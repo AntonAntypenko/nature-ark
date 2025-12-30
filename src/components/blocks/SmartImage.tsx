@@ -5,30 +5,36 @@ import { useState } from "react";
 import Image, { ImageProps } from "next/image";
 
 import { cn } from "@/lib/utils";
+
 import { Skeleton } from "@/components/ui";
 
 export const SmartImage = ({
   src,
   alt,
-  className,
   fill,
+  className,
   ...props
 }: ImageProps) => {
   const [isLoading, setLoading] = useState(true);
 
   return (
-    <>
+    <div className={cn("relative overflow-hidden", fill && "h-full w-full")}>
       {isLoading && (
-        <Skeleton className={cn(className, fill && "h-full w-full")} />
+        <Skeleton className={cn("absolute inset-0 z-10", className)} />
       )}
+
       <Image
         {...props}
         src={src}
         alt={alt}
-        className={cn(className)}
-        fill={true}
+        fill={fill}
+        className={cn(
+          className,
+          "transition-opacity duration-500",
+          isLoading ? "opacity-0" : "opacity-100"
+        )}
         onLoadingComplete={() => setLoading(false)}
       />
-    </>
+    </div>
   );
 };
