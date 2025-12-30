@@ -1,3 +1,7 @@
+import { use } from "react";
+
+import { setRequestLocale } from "next-intl/server";
+
 import {
   BenefitsSection,
   HeroSection,
@@ -12,7 +16,14 @@ import {
   HowItWorksSection,
 } from "@/components/landing";
 
-export default function Page() {
+export default function Page({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = use(params);
+  setRequestLocale(locale);
+
   return (
     <div className="bg-background text-primary min-h-screen w-full">
       <Header />

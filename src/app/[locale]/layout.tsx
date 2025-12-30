@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
+import { ReactNode } from "react";
+
 import { StoreProvider } from "@/store/store-provider";
 
 import { NextIntlClientProvider, hasLocale } from "next-intl";
@@ -57,13 +59,12 @@ export function generateStaticParams() {
   return routing.locales.map(locale => ({ locale }));
 }
 
-export default async function RootLayout({
-  children,
-  params,
-}: Readonly<{
-  children: React.ReactNode;
+type Props = {
+  children: ReactNode;
   params: Promise<{ locale: string }>;
-}>) {
+};
+
+export default async function RootLayout({ children, params }: Props) {
   const { locale } = await params;
   if (!hasLocale(routing.locales, locale)) {
     notFound();
