@@ -41,7 +41,7 @@ const STEPS: Step[] = [
 const lineClasses = "w-[3px] shrink-0 h-20 bg-primary opacity-70";
 
 export const HowItWorksSection: FC = () => {
-  const { isMobile } = useIsMobile();
+  const isMobile = useIsMobile();
   const t = useTranslations("landingSections.howItWorks");
 
   return (
