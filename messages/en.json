@@ -17,21 +17,21 @@
     },
     "benefits": {
       "costTransparency": {
-        "description": "Know exactly where the money goes. No hidden or unaccounted expenses.",
-        "title": "Transparency of expenses"
+        "title": "Transparency of expenses",
+        "description": "Know exactly where the money goes. No hidden or unaccounted expenses."
       },
       "dataSecurity": {
-        "description": "Important information about animals and finances is securely protected.",
-        "title": "Data security"
+        "title": "Data security",
+        "description": "Important information about animals and finances is securely protected."
       },
       "staffConvenience": {
-        "description": "A simple and intuitive interface for every employee.",
-        "title": "Convenience for Staff"
+        "title": "Convenience for Staff",
+        "description": "A simple and intuitive interface for every employee."
       },
       "title": "Your benefits with NatureArk",
       "workflowSpeed": {
-        "description": "Automate routine tasks and save hours of work time.",
-        "title": "Work speed"
+        "title": "Work speed",
+        "description": "Automate routine tasks and save hours of work time."
       }
     },
     "problemSolution": {
@@ -47,18 +47,30 @@
     },
     "features": {
       "title": "Key Platform Features",
-      "costAccountingTitle": "Cost accounting",
-      "costAccountingDescription": "Full control over financial operations, categorization, and budgeting.",
-      "animalProfilesTitle": "Animal profiles",
-      "animalProfilesDescription": "Full information, photos, expense history, medical records — all in one place.",
-      "reportGenerationTitle": "Report generation",
-      "reportGenerationDescription": "Automatic preparation of PDF/Excel documents for fast and accurate reporting.",
-      "aiDocumentsTitle": "AI documents",
-      "aiDocumentsDescription": "Creation of explanations, letters, and descriptions using an intelligent assistant.",
-      "rolesAndAccessTitle": "Roles and access",
-      "rolesAndAccessDescription": "Configuration of flexible permissions for different employee groups.",
-      "importExportTitle": "Import / Export",
-      "importExportDescription": "Quick data transfer or integration with other internal systems."
+      "costAccounting": {
+        "title": "Cost accounting",
+        "description": "Full control over financial operations, categorization, and budgeting."
+      },
+      "animalProfiles": {
+        "title": "Animal profiles",
+        "description": "Full information, photos, expense history, medical records — all in one place."
+      },
+      "reportGeneration": {
+        "title": "Report generation",
+        "description": "Automatic preparation of PDF/Excel documents for fast and accurate reporting."
+      },
+      "aiDocuments": {
+        "title": "AI documents",
+        "description": "Creation of explanations, letters, and descriptions using an intelligent assistant."
+      },
+      "rolesAndAccess": {
+        "title": "Roles and access",
+        "description": "Configuration of flexible permissions for different employee groups."
+      },
+      "importExport": {
+        "title": "Import / Export",
+        "description": "Quick data transfer or integration with other internal systems."
+      }
     },
     "howItWorks": {
       "title": "How to start work",
@@ -88,19 +100,19 @@
       "alt": "Question and answer illustration",
       "item1": {
         "title": "Can NatureArk be used for free?",
-        "content": "Yes, the project is open source. You can run it locally or on your own server."
+        "description": "Yes, the project is open source. You can run it locally or on your own server."
       },
       "item2": {
         "title": "Is there integration with other systems?",
-        "content": "Yes, you can export data and use the Supabase API."
+        "description": "Yes, you can export data and use the Supabase API."
       },
       "item3": {
         "title": "Is it safe to store data?",
-        "content": "Yes, data is stored using Supabase and access roles."
+        "description": "Yes, data is stored using Supabase and access roles."
       },
       "item4": {
         "title": "What are the minimum technical requirements?",
-        "content": "For local installation, you will need Node.js and Docker. All instructions are available on GitHub."
+        "description": "For local installation, you will need Node.js and Docker. All instructions are available on GitHub."
       }
     },
     "finalCta": {
@@ -112,25 +124,25 @@
       "subtitle": "We are open to feedback, suggestions for improvement, and collaboration.",
       "channels": {
         "email": {
-          "label": "Email",
+          "title": "Email",
           "description": "Email us directly if you have functional suggestions.",
           "linkText": "email@example.com",
           "link": "mailto:contact@natureark.com"
         },
         "gitHub": {
-          "label": "GitHub",
+          "title": "GitHub",
           "description": "Report bugs or suggest a new feature via Issues.",
           "linkText": "Create Issue",
           "link": "https://github.com/AntonAntypenko/nature-ark/issues"
         },
         "linkedIn": {
-          "label": "LinkedIn",
+          "title": "LinkedIn",
           "description": "Contact the project author for professional inquiries.",
           "linkText": "Author's Profile",
           "link": "https://www.linkedin.com/in/yourprofile/"
         },
         "telegram": {
-          "label": "Telegram",
+          "title": "Telegram",
           "description": "The quickest way to get an answer to small questions.",
           "linkText": "Message on Telegram",
           "link": "https://t.me/your_telegram_username"

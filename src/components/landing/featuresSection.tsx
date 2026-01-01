@@ -37,8 +37,8 @@ export const FeaturesSection: FC = () => {
           <FeatureCard
             key={feature.key}
             icon={feature.icon}
-            title={t(`${feature.key}Title`)}
-            description={t(`${feature.key}Description`)}
+            title={t(`${feature.key}.title`)}
+            description={t(`${feature.key}.description`)}
           />
         ))}
       </div>

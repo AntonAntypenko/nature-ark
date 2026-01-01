@@ -35,9 +35,9 @@ export const ContactUsSection: FC = () => {
       <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
         {CONTACT_CHANNELS.map(channel => (
           <FeatureCard
-            key={t(`${channel.key}.label`)}
+            key={t(`${channel.key}.title`)}
             icon={channel.icon}
-            title={t(`${channel.key}.label`)}
+            title={t(`${channel.key}.title`)}
             description={t(`${channel.key}.description`)}
           >
             <a

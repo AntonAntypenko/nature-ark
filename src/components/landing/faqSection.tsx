@@ -15,7 +15,7 @@ import { SmartImage } from "@/components/blocks";
 type FAQItemProps = {
   value: string;
   title: string;
-  content: string | ReactNode;
+  description: string | ReactNode;
 };
 
 type Data = {
@@ -42,7 +42,7 @@ const FAQ_DATA: Data[] = [
   },
 ];
 
-const FAQItem: FC<FAQItemProps> = ({ value, title, content }) => {
+const FAQItem: FC<FAQItemProps> = ({ value, title, description }) => {
   return (
     <AccordionItem value={value}>
       <AccordionTrigger className="text-primary cursor-pointer text-xl font-semibold lg:text-2xl">
@@ -50,7 +50,7 @@ const FAQItem: FC<FAQItemProps> = ({ value, title, content }) => {
       </AccordionTrigger>
 
       <AccordionContent className="text-lg text-balance">
-        {typeof content === "string" ? <p>{content}</p> : content}
+        {typeof description === "string" ? <p>{description}</p> : description}
       </AccordionContent>
     </AccordionItem>
   );
@@ -83,7 +83,7 @@ export const FAQSection: FC = () => {
               key={item.value}
               value={item.value}
               title={t(`${item.key}.title`)}
-              content={t(`${item.key}.content`)}
+              description={t(`${item.key}.description`)}
             />
           ))}
         </Accordion>
