@@ -1,16 +1,12 @@
 import { FC } from "react";
 
-import { LucideIcon, Coins, Shield, UserCheck, Zap } from "lucide-react";
+import { Coins, Shield, UserCheck, Zap } from "lucide-react";
 import { useTranslations } from "next-intl";
 
-import { FeatureCard, LandingSection } from "@/components/landing";
+import { LandingSection } from "@/components/landing";
+import { SmartGrid } from "@/components/blocks";
 
-type Benefit = {
-  icon: LucideIcon;
-  key: string;
-};
-
-const BENEFITS: Benefit[] = [
+const BENEFITS = [
   { icon: Coins, key: "costTransparency" },
   { icon: Zap, key: "workflowSpeed" },
   { icon: UserCheck, key: "staffConvenience" },
@@ -22,16 +18,7 @@ export const BenefitsSection: FC = () => {
 
   return (
     <LandingSection id="benefits" title={t("title")} className="bg-muted">
-      <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
-        {BENEFITS.map(benefit => (
-          <FeatureCard
-            key={benefit.key}
-            icon={benefit.icon}
-            title={t(`${benefit.key}.title`)}
-            description={t(`${benefit.key}.description`)}
-          />
-        ))}
-      </div>
+      <SmartGrid items={BENEFITS} t={t} columns={4} />
     </LandingSection>
   );
 };

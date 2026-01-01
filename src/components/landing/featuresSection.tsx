@@ -1,7 +1,6 @@
 import { FC } from "react";
 
 import {
-  LucideIcon,
   Download,
   FilePlusIcon,
   PawPrint,
@@ -11,14 +10,10 @@ import {
 } from "lucide-react";
 import { useTranslations } from "next-intl";
 
-import { FeatureCard, LandingSection } from "@/components/landing";
+import { LandingSection } from "@/components/landing";
+import { SmartGrid } from "@/components/blocks";
 
-type Feature = {
-  icon: LucideIcon;
-  key: string;
-};
-
-const FEATURES: Feature[] = [
+const FEATURES = [
   { icon: FilePlusIcon, key: "costAccounting" },
   { icon: PawPrint, key: "animalProfiles" },
   { icon: Rocket, key: "reportGeneration" },
@@ -32,16 +27,7 @@ export const FeaturesSection: FC = () => {
 
   return (
     <LandingSection id="features" title={t("title")} className="bg-muted">
-      <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-        {FEATURES.map(feature => (
-          <FeatureCard
-            key={feature.key}
-            icon={feature.icon}
-            title={t(`${feature.key}.title`)}
-            description={t(`${feature.key}.description`)}
-          />
-        ))}
-      </div>
+      <SmartGrid items={FEATURES} t={t} columns={3} />
     </LandingSection>
   );
 };
