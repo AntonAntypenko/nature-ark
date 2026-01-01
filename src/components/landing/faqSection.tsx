@@ -49,7 +49,7 @@ const FAQItem: FC<FAQItemProps> = ({ value, title, description }) => {
         {title}
       </AccordionTrigger>
 
-      <AccordionContent className="text-lg text-balance">
+      <AccordionContent className="text-muted-foreground text-lg text-balance">
         {typeof description === "string" ? <p>{description}</p> : description}
       </AccordionContent>
     </AccordionItem>
