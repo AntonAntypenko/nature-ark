@@ -28,6 +28,10 @@ export const metadata: Metadata = {
   description:
     "Automate the process of accounting, budget management, document creation, and reporting for animals. Simple interface, transparency of expenses, and full control.",
 
+  verification: {
+    google: "_3vzueH3PrC1rx6a5AVqVJZgYHTDIKP8QMoOZMd9830",
+  },
+
   openGraph: {
     title: "NatureArk — Budget and Animal Accounting Control",
     description:
