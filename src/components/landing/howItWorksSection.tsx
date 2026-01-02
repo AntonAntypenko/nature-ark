@@ -2,35 +2,17 @@
 
 import type { FC } from "react";
 
-import type { LucideIcon } from "lucide-react";
 import { UserPlus, Settings, PieChart, PawPrint } from "lucide-react";
 import { useTranslations } from "next-intl";
 
 import { useIsMobile } from "@/hooks";
 import { LandingSection, FeatureCard } from "@/components/landing";
 
-type Step = {
-  icon: LucideIcon;
-  key: string;
-};
-
-const STEPS: Step[] = [
-  {
-    icon: UserPlus,
-    key: "step1",
-  },
-  {
-    icon: PawPrint,
-    key: "step2",
-  },
-  {
-    icon: Settings,
-    key: "step3",
-  },
-  {
-    icon: PieChart,
-    key: "step4",
-  },
+const STEPS = [
+  { icon: UserPlus, key: "step1" },
+  { icon: PawPrint, key: "step2" },
+  { icon: Settings, key: "step3" },
+  { icon: PieChart, key: "step4" },
 ];
 
 const lineClasses = "w-[3px] shrink-0 h-20 bg-primary opacity-70";

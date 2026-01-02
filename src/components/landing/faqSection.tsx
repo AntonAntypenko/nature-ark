@@ -17,28 +17,11 @@ type FAQItemProps = {
   description: string | ReactNode;
 };
 
-type Data = {
-  value: string;
-  key: string;
-};
-
-const FAQ_DATA: Data[] = [
-  {
-    value: "item1",
-    key: "item1",
-  },
-  {
-    value: "item2",
-    key: "item2",
-  },
-  {
-    value: "item3",
-    key: "item3",
-  },
-  {
-    value: "item4",
-    key: "item4",
-  },
+const FAQ_DATA = [
+  { value: "item1", key: "item1" },
+  { value: "item2", key: "item2" },
+  { value: "item3", key: "item3" },
+  { value: "item4", key: "item4" },
 ];
 
 const FAQItem: FC<FAQItemProps> = ({ value, title, description }) => {

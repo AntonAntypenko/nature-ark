@@ -2,7 +2,6 @@ import type { FC } from "react";
 
 import { Squirrel } from "lucide-react";
 import { useTranslations } from "next-intl";
-import Link from "next/link";
 
 import {
   NavigationMenu,
@@ -13,12 +12,7 @@ import {
 } from "@/components/ui";
 import { LanguageSwitcher, MobileMenu } from "@/components/landing";
 
-type Link = {
-  key: string;
-  href: string;
-};
-
-const NAV_LINKS: Link[] = [
+const NAV_LINKS = [
   { key: "features", href: "#features" },
   { key: "tech", href: "#tech" },
   { key: "faq", href: "#faq" },

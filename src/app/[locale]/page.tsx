@@ -25,7 +25,7 @@ export default function Page({
   setRequestLocale(locale);
 
   return (
-    <div className="bg-background text-primary min-h-screen w-full">
+    <div className="bg-background text-primary w-full">
       <Header />
       <HeroSection />
       <BenefitsSection />
