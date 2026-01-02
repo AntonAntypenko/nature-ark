@@ -1,9 +1,11 @@
-import { ElementType, FC, ReactNode } from "react";
+import type { FC, ReactNode } from "react";
+
+import type { LucideIcon } from "lucide-react";
 
 import { Card, CardDescription, CardTitle } from "@/components/ui";
 
 type FeatureCardProps = {
-  icon?: ElementType;
+  icon?: LucideIcon;
   title?: string;
   description?: string;
   children?: ReactNode;

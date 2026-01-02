@@ -1,4 +1,4 @@
-import { FC } from "react";
+import type { FC } from "react";
 
 import { Mail, MessageSquare } from "lucide-react";
 import { useTranslations } from "next-intl";

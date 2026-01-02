@@ -1,8 +1,9 @@
 "use client";
 
-import { FC, useEffect, useState } from "react";
-import { usePathname, useRouter } from "@/i18n/navigation";
+import type { FC } from "react";
+import { useEffect, useState } from "react";
 
+import { usePathname, useRouter } from "@/i18n/navigation";
 import { Globe } from "lucide-react";
 import { useLocale } from "next-intl";
 import { cn } from "@/lib/utils";

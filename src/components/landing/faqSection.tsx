@@ -1,5 +1,4 @@
-import { FC, ReactNode } from "react";
-import Image from "next/image";
+import type { FC, ReactNode } from "react";
 
 import { useTranslations } from "next-intl";
 

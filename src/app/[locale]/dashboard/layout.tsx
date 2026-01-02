@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import type { ReactNode } from "react";
 
 import { SidebarInset, SidebarProvider } from "@/components/ui";
 import { AppSidebar, SiteHeader } from "@/components/blocks";

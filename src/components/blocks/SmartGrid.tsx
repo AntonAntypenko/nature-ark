@@ -1,5 +1,7 @@
-import { FC, ReactNode } from "react";
-import { LucideIcon } from "lucide-react";
+import type { FC, ReactNode } from "react";
+
+import type { LucideIcon } from "lucide-react";
+
 import { FeatureCard } from "@/components/landing";
 
 type GridItem = {

@@ -1,8 +1,8 @@
-import Link from "next/link";
-import { FC } from "react";
+import type { FC } from "react";
 
 import { Squirrel } from "lucide-react";
 import { useTranslations } from "next-intl";
+import Link from "next/link";
 
 import {
   NavigationMenu,
@@ -11,11 +11,7 @@ import {
   NavigationMenuList,
   navigationMenuTriggerStyle,
 } from "@/components/ui";
-import {
-  CtaButtonGroup,
-  LanguageSwitcher,
-  MobileMenu,
-} from "@/components/landing";
+import { LanguageSwitcher, MobileMenu } from "@/components/landing";
 
 type Link = {
   key: string;

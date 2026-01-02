@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
-import { ReactNode } from "react";
+import type { ReactNode } from "react";
 
 import { StoreProvider } from "@/store/store-provider";
 

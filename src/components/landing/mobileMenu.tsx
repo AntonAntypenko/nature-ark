@@ -1,8 +1,9 @@
 "use client";
 
-import Link from "next/link";
-import { FC, useState } from "react";
+import type { FC } from "react";
+import { useState } from "react";
 
+import Link from "next/link";
 import { useTranslations } from "next-intl";
 
 import { LanguageSwitcher } from "@/components/landing";

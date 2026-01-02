@@ -1,6 +1,6 @@
-import Link from "next/link";
-import { FC } from "react";
+import type { FC } from "react";
 
+import Link from "next/link";
 import { useTranslations } from "next-intl";
 
 import { Button } from "@/components/ui";

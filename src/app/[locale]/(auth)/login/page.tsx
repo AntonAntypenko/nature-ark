@@ -9,7 +9,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 
 import { useLoginMutation } from "@/store/auth";
 
-import { LoginRequestDTO, loginSchema } from "@/shared/schemas";
+import type { LoginRequestDTO } from "@/shared/schemas";
+import { loginSchema } from "@/shared/schemas";
 import {
   Button,
   Card,

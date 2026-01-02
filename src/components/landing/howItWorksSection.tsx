@@ -1,14 +1,9 @@
 "use client";
 
-import { FC } from "react";
+import type { FC } from "react";
 
-import {
-  LucideIcon,
-  UserPlus,
-  Settings,
-  PieChart,
-  PawPrint,
-} from "lucide-react";
+import type { LucideIcon } from "lucide-react";
+import { UserPlus, Settings, PieChart, PawPrint } from "lucide-react";
 import { useTranslations } from "next-intl";
 
 import { useIsMobile } from "@/hooks";
