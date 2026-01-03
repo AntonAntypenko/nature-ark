@@ -24,7 +24,7 @@ import {
   Input,
 } from "@/components/ui";
 
-export default function LoginPage() {
+export default function Page() {
   const router = useRouter();
   const [showPassword, setShowPassword] = useState(false);
 
