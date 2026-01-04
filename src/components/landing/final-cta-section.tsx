@@ -4,7 +4,7 @@ import { useTranslations } from "next-intl";
 
 import { LandingSection, CtaButtonGroup } from "@/components/landing";
 
-export const FinalCTASection: FC = () => {
+export const FinalCtaSection: FC = () => {
   const t = useTranslations("landingSections.finalCta");
 
   return (

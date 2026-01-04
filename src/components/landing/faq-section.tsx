@@ -38,7 +38,7 @@ const FAQItem: FC<FAQItemProps> = ({ value, title, description }) => {
   );
 };
 
-export const FAQSection: FC = () => {
+export const FaqSection: FC = () => {
   const t = useTranslations("landingSections.faq");
 
   return (

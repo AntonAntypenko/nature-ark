@@ -7,10 +7,10 @@ import {
   HeroSection,
   ProblemSolutionSection,
   TechStackSection,
-  FAQSection,
+  FaqSection,
   FeaturesSection,
   Footer,
-  FinalCTASection,
+  FinalCtaSection,
   Header,
   ContactUsSection,
   HowItWorksSection,
@@ -33,8 +33,8 @@ export default function Page({
       <FeaturesSection />
       <HowItWorksSection />
       <TechStackSection />
-      <FAQSection />
-      <FinalCTASection />
+      <FaqSection />
+      <FinalCtaSection />
       <ContactUsSection />
       <Footer />
     </div>

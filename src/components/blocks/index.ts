@@ -1,3 +1,3 @@
 export * from "./sidebar";
-export * from "./SmartGrid";
-export * from "./SmartImage";
+export * from "./smart-grid";
+export * from "./smart-image";

@@ -1,2 +1,2 @@
-export * from "./loginService";
-export * from "./logoutService";
+export * from "./login-service";
+export * from "./logout-service";
