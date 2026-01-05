@@ -4,7 +4,7 @@ import { Coins, Shield, UserCheck, Zap } from "lucide-react";
 import { useTranslations } from "next-intl";
 
 import { FeatureCard, LandingSection } from "@/components/landing";
-import { SmartGrid } from "@/components/blocks";
+import { DataGrid } from "@/components/blocks";
 
 const BENEFITS = [
   { icon: Coins, key: "costTransparency" },
@@ -18,7 +18,7 @@ export const BenefitsSection: FC = () => {
 
   return (
     <LandingSection id="benefits" title={t("title")} className="bg-muted">
-      <SmartGrid
+      <DataGrid
         items={BENEFITS}
         columns={4}
         renderItem={channel => (

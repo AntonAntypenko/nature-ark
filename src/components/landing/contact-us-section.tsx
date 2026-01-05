@@ -4,7 +4,7 @@ import { Mail, MessageSquare } from "lucide-react";
 import { useTranslations } from "next-intl";
 
 import { FeatureCard, LandingSection } from "@/components/landing";
-import { SmartGrid } from "@/components/blocks";
+import { DataGrid } from "@/components/blocks";
 
 const CONTACT_CHANNELS = [
   { icon: Mail, key: "channels.email" },
@@ -18,7 +18,7 @@ export const ContactUsSection: FC = () => {
 
   return (
     <LandingSection id="contact" title={t("title")} subtitle={t("subtitle")}>
-      <SmartGrid
+      <DataGrid
         items={CONTACT_CHANNELS}
         columns={4}
         renderItem={channel => (

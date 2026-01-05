@@ -11,7 +11,7 @@ import {
 import { useTranslations } from "next-intl";
 
 import { FeatureCard, LandingSection } from "@/components/landing";
-import { SmartGrid } from "@/components/blocks";
+import { DataGrid } from "@/components/blocks";
 
 const FEATURES = [
   { icon: FilePlusIcon, key: "costAccounting" },
@@ -27,7 +27,7 @@ export const FeaturesSection: FC = () => {
 
   return (
     <LandingSection id="features" title={t("title")} className="bg-muted">
-      <SmartGrid
+      <DataGrid
         items={FEATURES}
         columns={3}
         renderItem={channel => (

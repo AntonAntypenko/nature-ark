@@ -1,4 +1,4 @@
 export * from "./empty-state";
 export * from "./sidebar";
-export * from "./smart-grid";
+export * from "./data-grid";
 export * from "./smart-image";

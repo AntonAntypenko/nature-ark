@@ -17,7 +17,7 @@ const gridVariants = {
   4: "md:grid-cols-2 lg:grid-cols-4",
 };
 
-export const SmartGrid = <T extends { key: string }>({
+export const DataGrid = <T extends { key: string }>({
   items,
   columns = 3,
   renderItem,
