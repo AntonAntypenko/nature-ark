@@ -10,7 +10,7 @@ import {
 } from "lucide-react";
 import { useTranslations } from "next-intl";
 
-import { LandingSection } from "@/components/landing";
+import { FeatureCard, LandingSection } from "@/components/landing";
 import { SmartGrid } from "@/components/blocks";
 
 const FEATURES = [
@@ -27,7 +27,18 @@ export const FeaturesSection: FC = () => {
 
   return (
     <LandingSection id="features" title={t("title")} className="bg-muted">
-      <SmartGrid items={FEATURES} t={t} columns={3} />
+      <SmartGrid
+        items={FEATURES}
+        columns={3}
+        renderItem={channel => (
+          <FeatureCard
+            key={channel.key}
+            icon={channel.icon}
+            title={t(`${channel.key}.title`)}
+            description={t(`${channel.key}.description`)}
+          />
+        )}
+      />
     </LandingSection>
   );
 };

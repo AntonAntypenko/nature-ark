@@ -3,7 +3,7 @@ import type { FC } from "react";
 import { Mail, MessageSquare } from "lucide-react";
 import { useTranslations } from "next-intl";
 
-import { LandingSection } from "@/components/landing";
+import { FeatureCard, LandingSection } from "@/components/landing";
 import { SmartGrid } from "@/components/blocks";
 
 const CONTACT_CHANNELS = [
@@ -20,17 +20,21 @@ export const ContactUsSection: FC = () => {
     <LandingSection id="contact" title={t("title")} subtitle={t("subtitle")}>
       <SmartGrid
         items={CONTACT_CHANNELS}
-        t={t}
         columns={4}
-        content={channel => (
-          <a
-            href={t(`${channel.key}.link`)}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-primary font-semibold transition-colors hover:underline"
+        renderItem={channel => (
+          <FeatureCard
+            key={channel.key}
+            icon={channel.icon}
+            title={t(`${channel.key}.title`)}
+            description={t(`${channel.key}.description`)}
           >
-            {t(`${channel.key}.linkText`)}
-          </a>
+            <a
+              href={t(`${channel.key}.link`)}
+              className="text-primary font-semibold"
+            >
+              {t(`${channel.key}.linkText`)}
+            </a>
+          </FeatureCard>
         )}
       />
     </LandingSection>

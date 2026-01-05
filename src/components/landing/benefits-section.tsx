@@ -3,7 +3,7 @@ import type { FC } from "react";
 import { Coins, Shield, UserCheck, Zap } from "lucide-react";
 import { useTranslations } from "next-intl";
 
-import { LandingSection } from "@/components/landing";
+import { FeatureCard, LandingSection } from "@/components/landing";
 import { SmartGrid } from "@/components/blocks";
 
 const BENEFITS = [
@@ -18,7 +18,18 @@ export const BenefitsSection: FC = () => {
 
   return (
     <LandingSection id="benefits" title={t("title")} className="bg-muted">
-      <SmartGrid items={BENEFITS} t={t} columns={4} />
+      <SmartGrid
+        items={BENEFITS}
+        columns={4}
+        renderItem={channel => (
+          <FeatureCard
+            key={channel.key}
+            icon={channel.icon}
+            title={t(`${channel.key}.title`)}
+            description={t(`${channel.key}.description`)}
+          />
+        )}
+      />
     </LandingSection>
   );
 };
