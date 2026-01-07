@@ -29,7 +29,7 @@ export const metadata: Metadata = {
     "Automate the process of accounting, budget management, document creation, and reporting for animals. Simple interface, transparency of expenses, and full control.",
 
   verification: {
-    google: "_3vzueH3PrC1rx6a5AVqVJZgYHTDIKP8QMoOZMd9830",
+    google: "pB5cDY-2SstUzOLdvx18Zw-Lt6vSvoylDw7CwaMy8uk",
   },
 
   openGraph: {
