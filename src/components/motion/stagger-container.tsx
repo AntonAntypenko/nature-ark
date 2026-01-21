@@ -11,7 +11,7 @@ type StaggerContainerProps = {
 };
 
 const variants: Variants = {
-  hidden: { opacity: 0 },
+  hidden: { opacity: 1 },
   visible: {
     opacity: 1,
     transition: {
