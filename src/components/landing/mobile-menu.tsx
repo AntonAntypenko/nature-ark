@@ -6,7 +6,9 @@ import { useState } from "react";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
 
-import { LanguageSwitcher } from "@/components/landing";
+import { Menu, Squirrel } from "lucide-react";
+
+import { LanguageSwitcher } from "./language-switcher";
 import {
   Button,
   Sheet,
@@ -15,7 +17,6 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui";
-import { Menu, Squirrel } from "lucide-react";
 
 type Link = {
   key: string;
