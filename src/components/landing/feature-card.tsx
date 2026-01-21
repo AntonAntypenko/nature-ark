@@ -18,7 +18,7 @@ export const FeatureCard: FC<FeatureCardProps> = ({
   children,
 }: FeatureCardProps) => {
   return (
-    <Card className="flex h-full w-full flex-col items-start p-6 text-left transition-shadow duration-300 hover:shadow-lg">
+    <Card className="hover:border-primary/20 flex h-full w-full flex-col items-start p-6 text-left transition-all duration-300 ease-in-out hover:-translate-y-1 hover:shadow-xl">
       <CardTitle className="flex gap-4 text-2xl font-semibold">
         {Icon && <Icon className="text-primary h-8 w-8 flex-shrink-0" />}
         {title}
