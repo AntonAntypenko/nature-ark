@@ -10,7 +10,9 @@ import {
   NavigationMenuList,
   navigationMenuTriggerStyle,
 } from "@/components/ui";
-import { LanguageSwitcher, MobileMenu } from "@/components/landing";
+
+import { LanguageSwitcher } from "@/components/landing/language-switcher";
+import { MobileMenu } from "@/components/landing/mobile-menu";
 
 const NAV_LINKS = [
   { key: "features", href: "#features" },
