@@ -5,6 +5,7 @@ import { useTranslations } from "next-intl";
 
 import { FeatureCard, LandingSection } from "@/components/landing";
 import { DataGrid } from "@/components/blocks";
+import { StaggerContainer, StaggerItem } from "@/components/motion";
 
 const BENEFITS = [
   { icon: Coins, key: "costTransparency" },
@@ -18,18 +19,21 @@ export const BenefitsSection: FC = () => {
 
   return (
     <LandingSection id="benefits" title={t("title")} className="bg-muted">
-      <DataGrid
-        items={BENEFITS}
-        columns={4}
-        renderItem={channel => (
-          <FeatureCard
-            key={channel.key}
-            icon={channel.icon}
-            title={t(`${channel.key}.title`)}
-            description={t(`${channel.key}.description`)}
-          />
-        )}
-      />
+      <StaggerContainer>
+        <DataGrid
+          items={BENEFITS}
+          columns={4}
+          renderItem={channel => (
+            <StaggerItem key={channel.key}>
+              <FeatureCard
+                icon={channel.icon}
+                title={t(`${channel.key}.title`)}
+                description={t(`${channel.key}.description`)}
+              />
+            </StaggerItem>
+          )}
+        />
+      </StaggerContainer>
     </LandingSection>
   );
 };
