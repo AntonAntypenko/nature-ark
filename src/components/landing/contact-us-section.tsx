@@ -5,6 +5,7 @@ import { useTranslations } from "next-intl";
 
 import { FeatureCard, LandingSection } from "@/components/landing";
 import { DataGrid } from "@/components/blocks";
+import { StaggerContainer, StaggerItem } from "@/components/motion";
 
 const CONTACT_CHANNELS = [
   { icon: Mail, key: "channels.email" },
@@ -18,25 +19,28 @@ export const ContactUsSection: FC = () => {
 
   return (
     <LandingSection id="contact" title={t("title")} subtitle={t("subtitle")}>
-      <DataGrid
-        items={CONTACT_CHANNELS}
-        columns={4}
-        renderItem={channel => (
-          <FeatureCard
-            key={channel.key}
-            icon={channel.icon}
-            title={t(`${channel.key}.title`)}
-            description={t(`${channel.key}.description`)}
-          >
-            <a
-              href={t(`${channel.key}.link`)}
-              className="text-primary font-semibold"
-            >
-              {t(`${channel.key}.linkText`)}
-            </a>
-          </FeatureCard>
-        )}
-      />
+      <StaggerContainer>
+        <DataGrid
+          items={CONTACT_CHANNELS}
+          columns={4}
+          renderItem={channel => (
+            <StaggerItem key={channel.key}>
+              <FeatureCard
+                icon={channel.icon}
+                title={t(`${channel.key}.title`)}
+                description={t(`${channel.key}.description`)}
+              >
+                <a
+                  href={t(`${channel.key}.link`)}
+                  className="text-primary font-semibold"
+                >
+                  {t(`${channel.key}.linkText`)}
+                </a>
+              </FeatureCard>
+            </StaggerItem>
+          )}
+        />
+      </StaggerContainer>
     </LandingSection>
   );
 };

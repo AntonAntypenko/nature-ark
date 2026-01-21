@@ -12,6 +12,7 @@ import { useTranslations } from "next-intl";
 
 import { FeatureCard, LandingSection } from "@/components/landing";
 import { DataGrid } from "@/components/blocks";
+import { StaggerContainer, StaggerItem } from "@/components/motion";
 
 const FEATURES = [
   { icon: FilePlusIcon, key: "costAccounting" },
@@ -27,18 +28,21 @@ export const FeaturesSection: FC = () => {
 
   return (
     <LandingSection id="features" title={t("title")} className="bg-muted">
-      <DataGrid
-        items={FEATURES}
-        columns={3}
-        renderItem={channel => (
-          <FeatureCard
-            key={channel.key}
-            icon={channel.icon}
-            title={t(`${channel.key}.title`)}
-            description={t(`${channel.key}.description`)}
-          />
-        )}
-      />
+      <StaggerContainer>
+        <DataGrid
+          items={FEATURES}
+          columns={3}
+          renderItem={channel => (
+            <StaggerItem key={channel.key}>
+              <FeatureCard
+                icon={channel.icon}
+                title={t(`${channel.key}.title`)}
+                description={t(`${channel.key}.description`)}
+              />
+            </StaggerItem>
+          )}
+        />
+      </StaggerContainer>
     </LandingSection>
   );
 };
