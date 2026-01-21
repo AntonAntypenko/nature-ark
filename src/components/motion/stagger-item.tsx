@@ -19,14 +19,10 @@ const itemVariants: Variants = {
   },
 };
 
-export const StaggerItem: FC<StaggerItemProps> = ({
-  children,
-  className,
-}: {
-  children: ReactNode;
-  className?: string;
-}) => (
-  <motion.div variants={itemVariants} className={className}>
-    {children}
-  </motion.div>
-);
+export const StaggerItem: FC<StaggerItemProps> = ({ children, className }) => {
+  return (
+    <motion.div variants={itemVariants} className={className}>
+      {children}
+    </motion.div>
+  );
+};
