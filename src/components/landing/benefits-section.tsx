@@ -1,11 +1,16 @@
+"use client";
+
 import type { FC } from "react";
 
 import { Coins, Shield, UserCheck, Zap } from "lucide-react";
 import { useTranslations } from "next-intl";
 
+import { useIsMobile } from "@/hooks";
+
 import { FeatureCard, LandingSection } from "@/components/landing";
 import { DataGrid } from "@/components/blocks";
-import { StaggerContainer, StaggerItem } from "@/components/motion";
+
+import { MotionAdaptive, StaggerContainer } from "@/components/motion";
 
 const BENEFITS = [
   { icon: Coins, key: "costTransparency" },
@@ -15,25 +20,28 @@ const BENEFITS = [
 ];
 
 export const BenefitsSection: FC = () => {
+  const isMobile = useIsMobile();
   const t = useTranslations("landingSections.benefits");
+
+  const content = (
+    <DataGrid
+      items={BENEFITS}
+      columns={4}
+      renderItem={item => (
+        <MotionAdaptive key={item.key} isMobile={isMobile}>
+          <FeatureCard
+            icon={item.icon}
+            title={t(`${item.key}.title`)}
+            description={t(`${item.key}.description`)}
+          />
+        </MotionAdaptive>
+      )}
+    />
+  );
 
   return (
     <LandingSection id="benefits" title={t("title")} className="bg-muted">
-      <StaggerContainer>
-        <DataGrid
-          items={BENEFITS}
-          columns={4}
-          renderItem={channel => (
-            <StaggerItem key={channel.key}>
-              <FeatureCard
-                icon={channel.icon}
-                title={t(`${channel.key}.title`)}
-                description={t(`${channel.key}.description`)}
-              />
-            </StaggerItem>
-          )}
-        />
-      </StaggerContainer>
+      {!isMobile ? <StaggerContainer>{content}</StaggerContainer> : content}
     </LandingSection>
   );
 };
