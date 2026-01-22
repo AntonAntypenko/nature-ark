@@ -47,7 +47,7 @@ export const LanguageSwitcher: FC<LanguageSwitcherProps> = ({
   const [mounted, setMounted] = useState(false);
   useEffect(() => setMounted(true), []);
 
-  if (!mounted) return <Skeleton className={triggerClasses} />;
+  if (!mounted) return <Skeleton className={cn(triggerClasses, className)} />;
 
   return (
     <div className={cn("inline-flex items-center", className)}>

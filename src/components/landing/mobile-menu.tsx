@@ -8,7 +8,6 @@ import { useTranslations } from "next-intl";
 
 import { Menu, Squirrel } from "lucide-react";
 
-import { LanguageSwitcher } from "./language-switcher";
 import {
   Button,
   Sheet,
@@ -50,11 +49,6 @@ export const MobileMenu: FC<{ navLinks: Link[] }> = ({ navLinks }) => {
                     NatureArk
                   </span>
                 </a>
-
-                <LanguageSwitcher
-                  size="sm"
-                  className="mr-16 flex w-full justify-end"
-                />
               </SheetTitle>
             </SheetHeader>
 
