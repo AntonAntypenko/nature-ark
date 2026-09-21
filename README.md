@@ -1,16 +1,49 @@
 # Nature Ark Project
 
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+A modern, production-grade Web Platform built with **Next.js 16 (App Router)**, **React 19**, **Supabase**, and **Redux Toolkit**.
 
-## Getting Started
+---
 
-### 1. Install dependencies
+## Tech Stack & Ecosystem
+
+- **Framework:** Next.js 16 (App Router) + React 19
+- **Database & Auth:** Supabase (`@supabase/supabase-js`)
+- **State Management:** Redux Toolkit (`@reduxjs/toolkit` + `react-redux`)
+- **Internationalization:** `next-intl` (Static SSG setup)
+- **Styling:** Tailwind CSS v4 + `clsx` + `tailwind-merge` + `cva`
+- **UI Components:** Radix UI Primitives + Lucide Icons
+- **Animations:** `motion` (Framer Motion v12) + `tw-animate-css`
+- **Forms & Validation:** `react-hook-form` + `@hookform/resolvers` + `zod` v3
+
+---
+
+## Quick Start
+
+### 1. Requirements & Installation
+Ensure you have Node.js (v20+) installed. Install project dependencies:
 
 ```bash
 npm install
 ```
 
-### 2. Start the development server
+---
+
+### 2. Environment Setup
+
+Create a .env.local file in the root directory:
+
+```
+# Supabase Local Configuration
+NEXT_PUBLIC_SUPABASE_URL=[http://127.0.0.1:54321](http://127.0.0.1:54321)
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your_local_anon_key
+SUPABASE_SERVICE_ROLE_KEY=your_local_service_role_key
+```
+
+---
+
+### 3. Start Development Server
+
+Run the Next.js development server with Turbopack:
 
 ```bash
 npm run dev
@@ -20,87 +53,8 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
 
 ---
 
-## Using Supabase (Local Environment)
+### 4. Project Architecture & Documentation
 
-This project uses a local Supabase instance.
-
-### Start Supabase locally
-
-To use the commands below, install Supabase CLI globally:
-
-```bash
-npm install -g supabase
-```
-
-Or use `npx supabase ...` as an alternative.
-
-### Available Supabase commands
-
-```bash
-npm run sb:start   # Start local Supabase
-npm run sb:stop    # Stop local Supabase
-npm run sb:reset   # Reset DB, run migrations & seed
-npm run sb:push    # Push migrations to local DB
-```
-
-### Local Supabase URLs and Keys
-
-When you start Supabase locally, you will see output similar to:
-
-```
-API URL: http://127.0.0.1:54321
-GraphQL URL: http://127.0.0.1:54321/graphql/v1
-S3 Storage URL: http://127.0.0.1:54321/storage/v1
-Database URL: postgresql://postgres:postgres@127.0.0.1:54322/postgres
-Studio URL: http://127.0.0.1:54323
-Publishable key: sb_publishable_...
-Secret key: sb_secret_...
-```
-
-### Meaning of the main values
-
-* **API URL** → Your Supabase REST API. Use this as `SUPABASE_URL`.
-* **Publishable key** → This is the *anon public key*. Use as `NEXT_PUBLIC_SUPABASE_ANON_KEY`.
-* **Secret key** → This is the *service role key*. Use as `SUPABASE_SERVICE_ROLE_KEY` (server only).
-
-### Required environment variables
-
-Create a `.env.local` file:
-
-```
-SUPABASE_URL=http://127.0.0.1:54321
-NEXT_PUBLIC_SUPABASE_ANON_KEY=sb_publishable_...
-SUPABASE_SERVICE_ROLE_KEY=sb_secret_...
-```
-
----
-
-## Running Migrations
-
-To ensure you **always operate on the local database** and avoid accidental changes to production, use the `--local` flag.
-
-### Create a migration
-
-```bash
-supabase migration new init_test_migration
-```
-
-(You may also use `npx supabase ...` if the CLI is not installed globally.)
-
-### Apply migrations
-
-```bash
-supabase db reset --local
-```
-
-This will reset the local database, apply all migrations, and run seed data without touching production.
-
-### Push migrations to local database
-
-```bash
-supabase db push --local
-```
-
-This applies pending migrations to your local database without resetting data.
-
----
+This repository strictly adheres to Architecture Decision Records (ADR) regarding state management, database interactions, and page rendering modes:
+- Read ARCHITECTURE.md to understand page paradigms, Tailwind cohesion, and Server/Client boundaries.
+- Read SUPABASE_SETUP.md for local database initialization and migration workflows.
