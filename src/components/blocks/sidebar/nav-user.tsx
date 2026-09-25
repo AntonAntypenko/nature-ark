@@ -2,7 +2,7 @@
 
 import { useRouter } from "next/navigation";
 
-import { useLogoutMutation } from "@/store/auth";
+// import { useLogoutMutation } from "@/store/auth";
 
 import {
   BadgeCheck,
@@ -41,10 +41,10 @@ export function NavUser({
 }) {
   const router = useRouter();
   const { isMobile } = useSidebar();
-  const [logout] = useLogoutMutation();
+  // const [logout] = useLogoutMutation();
 
   async function handleLogout() {
-    await logout().unwrap();
+    // await logout().unwrap();
     router.push("/login");
   }
 
