@@ -14,36 +14,31 @@ const intlMiddleware = createMiddleware(routing);
  * 3. Guard Clauses перевіряють доступ користувача з урахуванням локалі (/uk, /en).
  */
 export async function middleware(req: NextRequest) {
-  // 1. Отримуємо відповідь з локалізацією від next-intl
-  const intlResponse = intlMiddleware(req);
-
-  // 2. Оновлюємо сесію Supabase, передаючи відповідь від next-intl
-  const { response, user } = await updateSession(req, intlResponse);
-
   const pathname = req.nextUrl.pathname;
 
-  // Витягуємо мову з URL (наприклад: /uk/dashboard -> 'uk')
-  const localeMatch = pathname.match(/^\/(uk|en)(\/|$)/);
-  const currentLocale = localeMatch ? localeMatch[1] : routing.defaultLocale;
+  // 1. ІЗОЛЬОВАНА ЗОНА: Dashboard (жодної взаємодії з next-intl!)
+  if (pathname.startsWith("/dashboard")) {
+    const { response, user } = await updateSession(req, NextResponse.next());
 
-  // Визначаємо списки маршрутів
-  const isProtectedPath =
-      pathname.startsWith(`/${currentLocale}/dashboard`) ||
-      pathname.startsWith(`/${currentLocale}/admin`);
+    // Неавторизований -> викидаємо на локалізований логін
+    if (!user) {
+      const loginUrl = new URL(`/${routing.defaultLocale}/login`, req.url);
+      return NextResponse.redirect(loginUrl);
+    }
 
-  const isAuthPage =
-      pathname.startsWith(`/${currentLocale}/login`) ||
-      pathname.startsWith(`/${currentLocale}/register`);
-
-  // Сценарій 1: Неавторизований користувач іде в захищений розділ
-  if (!user && isProtectedPath) {
-    const loginUrl = new URL(`/${currentLocale}/login`, req.url);
-    return NextResponse.redirect(loginUrl);
+    return response;
   }
 
-  // Сценарій 2: Вже залогінений користувач намагається відкрити сторінку логіну/реєстрації
+  // 2. ПУБЛІЧНА ЗОНА: Обробка локалей через next-intl
+  const intlResponse = intlMiddleware(req);
+  const { response, user } = await updateSession(req, intlResponse);
+
+  const isAuthPage =
+    pathname.includes("/login") || pathname.includes("/register");
+
+  // Авторизований користувач відкрив сторінку логіну -> кидаємо в чистий /dashboard
   if (user && isAuthPage) {
-    const dashboardUrl = new URL(`/${currentLocale}/dashboard`, req.url);
+    const dashboardUrl = new URL("/dashboard", req.url);
     return NextResponse.redirect(dashboardUrl);
   }
 

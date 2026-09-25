@@ -31,18 +31,19 @@ In Next.js 15/16, route `params` are asynchronous Promises. Additionally, `next-
 
 ---
 
-## ADR 003: Mandatory Use of `@/i18n/navigation` over `next/link`
+## ADR 003: Navigation Boundaries & Route Isolation
 
 ### Context
-When navigating between pages, importing `Link` from standard `next/link` with relative paths like `href="/"` relies on `middleware.ts` catching the request to redirect to `/uk` or `/en`.
+Using `next/link` with relative paths inside localized segments creates latency due to 307 middleware redirects. Conversely, using `@/i18n/navigation` inside non-localized routes throws runtime errors because `NextIntlClientProvider` is absent outside `app/[locale]`.
 
 ### Decision
-We strictly enforce using `import { Link } from "@/i18n/navigation"` across all components.
-
-### Rationale & Impact
-1. **Zero Network Latency:** Bypasses `307 Temporary Redirect` middleware roundtrips by attaching the locale directly to `<a href="/uk">` during render.
-2. **Prefetching Integrity:** Preserves Next.js automatic route prefetching for localized bundles.
-3. **Type Safety:** Provides compile-time safety for typed route paths.
+We enforce a strict zone-based navigation policy:
+1. **Public Localized Zone (`app/[locale]/...`):**
+  - **Must** use `import { Link, useRouter, usePathname } from "@/i18n/navigation"`.
+  - Bypasses middleware 307 redirects and preserves SSG prefetching.
+2. **Private Dashboard Zone (`app/dashboard/...`):**
+  - **Must** use standard `import Link from "next/link"` and `import { useRouter } from "next/navigation"`.
+  - All internal links use direct, non-prefixed paths (e.g., `href="/dashboard/animals"`).
 
 ---
 
@@ -102,3 +103,14 @@ Mixing complex state logic, nested ternary operators, and overly long Tailwind c
 * **When to Extract:** Extract class strings into variables *before* the `return` block EXCLUSIVELY under two conditions:
     1. **Complex State Logic:** When dynamic classes depend on state, and the number of conditional variants exceeds two or involves complex ternary logic.
     2. **Class Bloat:** When a static class string exceeds reasonable length limits (more than 15–20 utilities including responsive prefixes like `sm:`, `md:`, `lg:`), preventing quick scanning of the semantic JSX structure.
+
+---
+
+## ADR 008: English-Only Codebase Documentation & Comments
+
+### Context
+Mixing languages (Ukrainian, English) across JSDoc blocks, inline comments, commit messages, and PR descriptions degrades professional code quality, hinders automated tooling/linters, and causes inconsistencies.
+
+### Decision
+1. **Source Code & Comments:** All inline comments, JSDoc annotations, types, documentation, and commit messages **must be written exclusively in English**.
+2. **Exceptions:** User-facing localization strings (`messages/uk.json`, `messages/en.json`).

@@ -2,7 +2,7 @@
 
 import { useRouter } from "next/navigation";
 
-// import { useLogoutMutation } from "@/store/auth";
+import { createClient } from "@/lib/supabase/client";
 
 import {
   BadgeCheck,
@@ -41,11 +41,17 @@ export function NavUser({
 }) {
   const router = useRouter();
   const { isMobile } = useSidebar();
-  // const [logout] = useLogoutMutation();
 
   async function handleLogout() {
-    // await logout().unwrap();
-    router.push("/login");
+    try {
+      const supabase = createClient();
+      await supabase.auth.signOut();
+
+      router.push("/en/login");
+      router.refresh();
+    } catch (error) {
+      console.error("Logout failed:", error);
+    }
   }
 
   return (
