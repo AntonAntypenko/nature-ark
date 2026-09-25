@@ -8,7 +8,6 @@ A modern, production-grade Web Platform built with **Next.js 16 (App Router)**, 
 
 - **Framework:** Next.js 16 (App Router) + React 19
 - **Database & Auth:** Supabase (`@supabase/supabase-js`)
-- **State Management:** Redux Toolkit (`@reduxjs/toolkit` + `react-redux`)
 - **Internationalization:** `next-intl` (Static SSG setup)
 - **Styling:** Tailwind CSS v4 + `clsx` + `tailwind-merge` + `cva`
 - **UI Components:** Radix UI Primitives + Lucide Icons

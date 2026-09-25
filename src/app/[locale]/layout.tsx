@@ -3,8 +3,6 @@ import { notFound } from "next/navigation";
 
 import type { ReactNode } from "react";
 
-import { StoreProvider } from "@/store/store-provider";
-
 import { NextIntlClientProvider, hasLocale } from "next-intl";
 import { setRequestLocale } from "next-intl/server";
 
@@ -81,9 +79,7 @@ export default async function RootLayout({ children, params }: Props) {
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <StoreProvider>
           <NextIntlClientProvider>{children}</NextIntlClientProvider>
-        </StoreProvider>
       </body>
     </html>
   );
