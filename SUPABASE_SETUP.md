@@ -52,16 +52,44 @@ npm run sb:reset
 
 ---
 
-## 3. Local Credentials & Dashboard
+## 3. Local Credentials & Service Mapping
 
-When you execute npm run sb:start, Supabase exposes the following local endpoints:
-- Studio Dashboard (GUI): http://127.0.0.1:54323
-- REST API URL: http://127.0.0.1:54321
-- In-Database PostgreSQL: postgresql://postgres:postgres@127.0.0.1:54322/postgres
+After executing `npm run sb:start`, the Supabase CLI provisions Docker containers and outputs connection details:
 
-Copy the keys output in your terminal into .env.local:
-- anon key $\rightarrow$ NEXT_PUBLIC_SUPABASE_ANON_KEY
-- service_role key $\rightarrow$ SUPABASE_SERVICE_ROLE_KEY (Server-side only, never expose to client!)
+### Services & Tools Reference
+
+| Category | Service / Endpoint | Status | Purpose & Usage in Nature Ark |
+| :--- | :--- | :--- | :--- |
+| **Dev Tools** | **Studio** (`http://127.0.0.1:54323`) | **ACTIVE** | Visual Web GUI to manage tables, run SQL queries, and inspect Auth users. |
+| **Dev Tools** | **Mailpit** (`http://127.0.0.1:54324`) | **ACTIVE** | Local inbox catching email confirmations and password reset links. |
+| **Dev Tools** | **MCP** (`http://127.0.0.1:54321/mcp`) | *UNUSED* | Model Context Protocol gateway for AI agent integrations (not needed for web core). |
+| **APIs** | **Project URL** (`http://127.0.0.1:54321`) | **ACTIVE** | Core Supabase gateway; assigned to `NEXT_PUBLIC_SUPABASE_URL`. |
+| **APIs** | **REST / GraphQL** endpoints | *INDIRECT* | Consumed automatically under the hood by `@supabase/ssr` SDK. |
+| **Database** | **PostgreSQL URL** (`:54322`) | *STANDBY* | Direct database access URL (used optionally via external tools like DBeaver/DataGrip). |
+| **Storage** | **S3 Protocol Details** | *UNUSED* | Direct S3 credentials; Nature Ark accesses storage via standard `supabase.storage` SDK. |
+
+---
+
+### Environment Variables Mapping (`.env.local`)
+
+Only these three values are required for the project to run:
+
+```env
+# Project URL (Found under APIs -> Project URL)
+NEXT_PUBLIC_SUPABASE_URL=[http://127.0.0.1:54321](http://127.0.0.1:54321)
+
+# Publishable Key (Found under Authentication Keys -> Publishable)
+NEXT_PUBLIC_SUPABASE_ANON_KEY=<your_local_anon_publishable_key>
+
+# Secret Key (Found under Authentication Keys -> Secret)
+SUPABASE_SERVICE_ROLE_KEY=<your_local_service_role_secret_key>
+```
+
+Security Scopes:
+
+    NEXT_PUBLIC_SUPABASE_ANON_KEY (Publishable): Safe for client-side inclusion. Bound strictly to Row Level Security (RLS) rules in PostgreSQL.
+
+    SUPABASE_SERVICE_ROLE_KEY (Secret): Super-admin token that completely bypasses RLS. Strictly restricted to server maintenance scripts (e.g., scripts/set-admin.ts) and must never leak into Next.js client bundles.
 
 ---
 
