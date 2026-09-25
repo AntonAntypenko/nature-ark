@@ -22,14 +22,6 @@ import {
   Input,
 } from "@/components/ui";
 
-/**
- * ARCHITECTURE DECISION: Client-side Login Presentation
- *
- * Клієнтська форма взаємодіє з Supabase Browser Client.
- * При успішному вході токени зберігаються в Cookie через @supabase/ssr,
- * після чого викликається router.push("/dashboard") та router.refresh()
- * для синхронізації стану в Server Components.
- */
 export function LoginForm() {
   const router = useRouter();
   const [showPassword, setShowPassword] = useState(false);

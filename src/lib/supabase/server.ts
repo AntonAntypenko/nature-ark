@@ -2,16 +2,20 @@ import { createServerClient } from "@supabase/ssr";
 import { cookies } from "next/headers";
 
 /**
- * ARCHITECTURE DECISION: Server-side Context-Aware Client
+ * ARCHITECTURE DECISION: Server-side Context-Aware Client Factory
  *
  * @description
- * Ініціалізує клієнт Supabase для серверних операцій (Server Components, Server Actions).
- * Клієнт отримує доступ до куків поточного HTTP-запиту через асинхронний метод cookies() Next.js 16.
+ * Initializes a Supabase client for server environments (Server Components,
+ * Server Actions, and Route Handlers).
+ * Reads the current HTTP request cookies via the asynchronous `cookies()` API in Next.js 16.
  *
- * Безпека:
- * Запити завжди підписуються anon key і сесійним JWT користувача.
- * Це гарантує, що база даних PostgreSQL застосовує правила Row Level Security (RLS)
- * для поточного auth.uid().
+ * Security:
+ * Requests are authenticated using the public anon key alongside the user's session JWT.
+ * This guarantees that PostgreSQL executes queries under the caller's context,
+ * strictly enforcing Row Level Security (RLS) policies based on `auth.uid()`.
+ *
+ * @throws {Error} If public Supabase environment variables are missing.
+ * @returns {Promise<ReturnType<typeof createServerClient>>} A scoped server Supabase client.
  */
 export async function createClient() {
   const cookieStore = await cookies();
@@ -21,7 +25,7 @@ export async function createClient() {
 
   if (!supabaseUrl || !supabaseAnonKey) {
     throw new Error(
-        "Missing NEXT_PUBLIC_SUPABASE_URL or NEXT_PUBLIC_SUPABASE_ANON_KEY environment variables."
+      "Missing NEXT_PUBLIC_SUPABASE_URL or NEXT_PUBLIC_SUPABASE_ANON_KEY environment variables."
     );
   }
 
@@ -33,11 +37,11 @@ export async function createClient() {
       setAll(cookiesToSet) {
         try {
           cookiesToSet.forEach(({ name, value, options }) =>
-              cookieStore.set(name, value, options)
+            cookieStore.set(name, value, options)
           );
         } catch {
-          // У Server Components Next.js забороняє мутувати куки.
-          // Оновлення застарілих токенів делегується на middleware.
+          // Mutating cookies inside Server Components throws an error in Next.js.
+          // Session refreshing and cookie updates are delegated to middleware.ts.
         }
       },
     },
