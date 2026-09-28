@@ -5,6 +5,14 @@ import {
   ParsedReceipt,
 } from "@/shared/schemas/ai-receipt";
 
+// Список моделей за пріоритетом для автоматичного перемикання
+const CANDIDATE_MODELS = [
+  "gemini-3.8-flash", // 1. Максимальна точність (основна)
+  "gemini-3.5-flash", // 2. Резервна повноцінна версія
+  "gemini-3.5-flash-lite", // 3. Полегшена надшвидка версія (найменше черг)
+  "gemini-2.0-flash", // 4. Фінальний надійний бекап
+];
+
 export async function parseReceiptWithGemini(input: {
   imageBase64?: string;
   mimeType?: string;
@@ -48,15 +56,29 @@ export async function parseReceiptWithGemini(input: {
     throw new Error("Missing receipt payload: provide image or text.");
   }
 
-  // Використовуємо актуальний API замість застарілого generateObject
-  const { output } = await generateText({
-    model: google("gemini-3.8-flash"),
-    system: systemPrompt,
-    messages,
-    output: Output.object({
-      schema: parsedReceiptSchema,
-    }),
-  });
+  let lastError: unknown = null;
 
-  return output;
+  // Пробуємо моделі по черзі, якщо виникає перевантаження (high demand / rate limit)
+  for (const modelId of CANDIDATE_MODELS) {
+    try {
+      const { output } = await generateText({
+        model: google(modelId),
+        system: systemPrompt,
+        messages,
+        output: Output.object({
+          schema: parsedReceiptSchema,
+        }),
+        maxRetries: 1, // Зменшуємо повторні спроби для прискорення перемикання на запасну модель
+      });
+
+      return output;
+    } catch (err) {
+      console.warn(`Model ${modelId} failed, trying next candidate...`, err);
+      lastError = err;
+    }
+  }
+
+  throw (
+    lastError || new Error("Всі доступні моделі Gemini зараз перевантажені.")
+  );
 }
