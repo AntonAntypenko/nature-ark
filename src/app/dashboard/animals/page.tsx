@@ -1,121 +1,59 @@
 import { getAnimals } from "@/server/services/animals";
-import { createAnimalAction } from "@/server/actions/animals";
+import { getEnclosures } from "@/server/services/enclosures";
+import { deleteAnimalAction } from "@/server/actions/animals";
+import { AnimalForm } from "./animal-form";
 import { AnimalEditDialog } from "./animal-edit-dialog";
-import { AnimalDeleteButton } from "./animal-delete-button";
 
 export default async function Page() {
-  const animals = await getAnimals();
+  const [animals, enclosures] = await Promise.all([
+    getAnimals(),
+    getEnclosures(),
+  ]);
 
   return (
-    <div style={{ padding: "24px", fontFamily: "sans-serif" }}>
-      <h1>Керування каталогом тварин</h1>
+    <div className="p-6 font-sans">
+      <h1 className="mb-6 text-2xl font-bold">Animals Catalog</h1>
 
-      {/* Проста форма швидкого додавання */}
-      <details
-        style={{ margin: "16px 0", padding: "12px", border: "1px solid #ddd" }}
-      >
-        <summary style={{ cursor: "pointer", fontWeight: "bold" }}>
-          + Додати нову тварину
-        </summary>
-        <form
-          action={async formData => {
-            "use server";
-            await createAnimalAction(formData);
-          }}
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(3, 1fr)",
-            gap: "10px",
-            marginTop: "12px",
-          }}
-        >
-          <input name="name" placeholder="Кличка (Сімба)" required />
-          <input name="species" placeholder="Вид (Лев)" required />
-          <input name="inventory_number" placeholder="Інвентарний №" required />
-          <input name="enclosure_zone" placeholder="Локація/Сектор" required />
-          <select name="status">
-            <option value="healthy">healthy</option>
-            <option value="sick">sick</option>
-            <option value="quarantine">quarantine</option>
-            <option value="recovery">recovery</option>
-          </select>
-          <select name="diet_type">
-            <option value="carnivore">carnivore</option>
-            <option value="herbivore">herbivore</option>
-            <option value="omnivore">omnivore</option>
-            <option value="piscivore">piscivore</option>
-          </select>
-          <input
-            name="weight_kg"
-            type="number"
-            step="0.1"
-            placeholder="Вага (кг)"
-            required
-          />
-          <input
-            name="daily_food_norm_kg"
-            type="number"
-            step="0.1"
-            placeholder="Норма корму (кг)"
-            required
-          />
-          <input
-            name="estimated_daily_cost"
-            type="number"
-            step="0.01"
-            placeholder="Вартість/день (грн)"
-            required
-          />
-          <label
-            style={{
-              display: "flex",
-              gap: "6px",
-              alignItems: "center",
-              gridColumn: "span 2",
-            }}
-          >
-            <input name="is_winter_heating_required" type="checkbox" />
-            Потребує обігріву взимку
-          </label>
-          <button type="submit" style={{ padding: "6px" }}>
-            Створити запис
-          </button>
-        </form>
-      </details>
+      <AnimalForm enclosures={enclosures} />
 
-      {/* Таблиця з діями */}
-      <table
-        border={1}
-        cellPadding={8}
-        style={{ borderCollapse: "collapse", width: "100%" }}
-      >
+      <table className="w-full border-collapse border text-left">
         <thead>
-          <tr>
-            <th>Інвентарний №</th>
-            <th>Кличка</th>
-            <th>Вид</th>
-            <th>Статус</th>
-            <th>Дієта</th>
-            <th>Вага (кг)</th>
-            <th>Витрати (грн/день)</th>
-            <th>Дії</th>
+          <tr className="bg-gray-50">
+            <th className="border p-3">Inv No.</th>
+            <th className="border p-3">Name</th>
+            <th className="border p-3">Species</th>
+            <th className="border p-3">Enclosure</th>
+            <th className="border p-3">Status</th>
+            <th className="border p-3">Diet</th>
+            <th className="border p-3">Actions</th>
           </tr>
         </thead>
         <tbody>
           {animals.map(animal => (
             <tr key={animal.id}>
-              <td>{animal.inventory_number}</td>
-              <td>
-                <strong>{animal.name}</strong>
-              </td>
-              <td>{animal.species}</td>
-              <td>{animal.status}</td>
-              <td>{animal.diet_type}</td>
-              <td>{animal.weight_kg}</td>
-              <td>{animal.estimated_daily_cost}</td>
-              <td>
-                <AnimalEditDialog animal={animal} />
-                <AnimalDeleteButton id={animal.id} name={animal.name} />
+              <td className="border p-3">{animal.inventory_number}</td>
+              <td className="border p-3 font-medium">{animal.name}</td>
+              <td className="border p-3">{animal.species}</td>
+              <td className="border p-3">{animal.enclosures?.name || "—"}</td>
+              <td className="border p-3">{animal.status}</td>
+              <td className="border p-3">{animal.diet_type}</td>
+              <td className="border p-3">
+                <div className="flex items-center gap-4">
+                  <AnimalEditDialog animal={animal} enclosures={enclosures} />
+                  <form
+                    action={async () => {
+                      "use server";
+                      await deleteAnimalAction(animal.id);
+                    }}
+                  >
+                    <button
+                      type="submit"
+                      className="text-red-600 hover:underline"
+                    >
+                      Delete
+                    </button>
+                  </form>
+                </div>
               </td>
             </tr>
           ))}
