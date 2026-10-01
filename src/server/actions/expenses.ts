@@ -47,3 +47,52 @@ export async function deleteExpenseAction(id: string) {
 
   revalidatePath("/dashboard/expenses");
 }
+
+export async function updateExpenseAction(id: string, data: ExpenseFormValues) {
+  const supabase = await createClient();
+  const parsed = expenseFormSchema.parse(data);
+
+  const { items, ...expenseData } = parsed;
+
+  const { error: expenseError } = await supabase
+    .from("expenses")
+    .update(expenseData)
+    .eq("id", id);
+
+  if (expenseError) {
+    throw new Error(expenseError.message);
+  }
+
+  const { data: existingItems } = await supabase
+    .from("expense_items")
+    .select("id")
+    .eq("expense_id", id);
+
+  const existingItemIds = existingItems?.map(i => i.id) || [];
+  const payloadItemIds = items.map(i => i.id).filter(Boolean) as string[];
+  const itemsToDelete = existingItemIds.filter(
+    itemId => !payloadItemIds.includes(itemId)
+  );
+
+  if (itemsToDelete.length > 0) {
+    await supabase.from("expense_items").delete().in("id", itemsToDelete);
+  }
+
+  const itemsToUpsert = items.map(item => {
+    const { id: itemId, ...rest } = item;
+    return itemId
+      ? { id: itemId, expense_id: id, ...rest }
+      : { expense_id: id, ...rest };
+  });
+
+  const { error: itemsError } = await supabase
+    .from("expense_items")
+    .upsert(itemsToUpsert);
+
+  if (itemsError) {
+    throw new Error(itemsError.message);
+  }
+
+  revalidatePath("/dashboard/expenses");
+  revalidatePath(`/dashboard/expenses/${id}`);
+}

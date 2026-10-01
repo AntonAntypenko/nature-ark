@@ -38,7 +38,13 @@ export default async function Page() {
               <td className="border p-3">{expense.category}</td>
               <td className="border p-3">{expense.total_amount}</td>
               <td className="border p-3">{expense.status}</td>
-              <td className="border p-3">
+              <td className="flex gap-4 border p-3">
+                <Link
+                  href={`/dashboard/expenses/${expense.id}`}
+                  className="text-blue-600 hover:underline"
+                >
+                  Edit
+                </Link>
                 <form
                   action={async () => {
                     "use server";
