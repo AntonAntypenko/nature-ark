@@ -23,9 +23,9 @@ export function AnimalForm({ enclosures }: Props) {
       enclosure_id: null,
       status: "healthy",
       diet_type: "carnivore",
-      weight_kg: 0,
-      daily_food_norm_kg: 0,
-      estimated_daily_cost: 0,
+      weight_kg: undefined,
+      daily_food_norm_kg: undefined,
+      estimated_daily_cost: undefined,
       is_winter_heating_required: false,
     },
   });
@@ -84,7 +84,6 @@ export function AnimalForm({ enclosures }: Props) {
       <input
         {...register("weight_kg")}
         type="number"
-        value=""
         step="0.1"
         className="rounded border p-2"
         placeholder="Weight (kg)"
@@ -92,7 +91,6 @@ export function AnimalForm({ enclosures }: Props) {
       <input
         {...register("daily_food_norm_kg")}
         type="number"
-        value=""
         step="0.1"
         className="rounded border p-2"
         placeholder="Daily Norm (kg)"
@@ -100,7 +98,6 @@ export function AnimalForm({ enclosures }: Props) {
       <input
         {...register("estimated_daily_cost")}
         type="number"
-        value=""
         step="0.01"
         className="rounded border p-2"
         placeholder="Cost/day"
