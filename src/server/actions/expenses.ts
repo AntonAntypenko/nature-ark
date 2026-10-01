@@ -2,79 +2,38 @@
 
 import { revalidatePath } from "next/cache";
 import { createClient } from "@/lib/supabase/server";
-import { expenseSchema } from "@/shared/schemas/expense";
+import { expenseFormSchema, ExpenseFormValues } from "@/shared/schemas/expense";
 
-/**
- * ARCHITECTURE DECISION: Server Actions for Expenses CRUD
- */
-
-export async function createExpenseAction(formData: FormData) {
+export async function createExpenseAction(data: ExpenseFormValues) {
   const supabase = await createClient();
+  const parsed = expenseFormSchema.parse(data);
 
-  const rawAnimalId = formData.get("animal_id") as string;
+  const { items, ...expenseData } = parsed;
 
-  const rawData = {
-    title: formData.get("title"),
-    amount: Number(formData.get("amount")),
-    category: formData.get("category"),
-    spent_at: formData.get("spent_at"),
-    vendor: formData.get("vendor") || null,
-    animal_id: rawAnimalId && rawAnimalId !== "none" ? rawAnimalId : null,
-    notes: formData.get("notes") || null,
-  };
-
-  const parsed = expenseSchema
-    .omit({ id: true, created_at: true, updated_at: true, receipt_url: true })
-    .safeParse(rawData);
-
-  if (!parsed.success) {
-    return { success: false, error: parsed.error.issues[0].message };
-  }
-
-  const { error } = await supabase.from("expenses").insert(parsed.data);
-
-  if (error) {
-    return { success: false, error: error.message };
-  }
-
-  revalidatePath("/dashboard/expenses");
-  return { success: true };
-}
-
-export async function updateExpenseAction(id: string, formData: FormData) {
-  const supabase = await createClient();
-
-  const rawAnimalId = formData.get("animal_id") as string;
-
-  const rawData = {
-    title: formData.get("title"),
-    amount: Number(formData.get("amount")),
-    category: formData.get("category"),
-    spent_at: formData.get("spent_at"),
-    vendor: formData.get("vendor") || null,
-    animal_id: rawAnimalId && rawAnimalId !== "none" ? rawAnimalId : null,
-    notes: formData.get("notes") || null,
-  };
-
-  const parsed = expenseSchema
-    .omit({ id: true, created_at: true, updated_at: true, receipt_url: true })
-    .safeParse(rawData);
-
-  if (!parsed.success) {
-    return { success: false, error: parsed.error.issues[0].message };
-  }
-
-  const { error } = await supabase
+  const { data: insertedExpense, error: expenseError } = await supabase
     .from("expenses")
-    .update(parsed.data)
-    .eq("id", id);
+    .insert(expenseData)
+    .select("id")
+    .single();
 
-  if (error) {
-    return { success: false, error: error.message };
+  if (expenseError || !insertedExpense) {
+    throw new Error(expenseError?.message || "Failed to create expense");
+  }
+
+  const itemsToInsert = items.map(item => ({
+    ...item,
+    expense_id: insertedExpense.id,
+  }));
+
+  const { error: itemsError } = await supabase
+    .from("expense_items")
+    .insert(itemsToInsert);
+
+  if (itemsError) {
+    throw new Error(itemsError.message);
   }
 
   revalidatePath("/dashboard/expenses");
-  return { success: true };
 }
 
 export async function deleteExpenseAction(id: string) {
@@ -83,9 +42,8 @@ export async function deleteExpenseAction(id: string) {
   const { error } = await supabase.from("expenses").delete().eq("id", id);
 
   if (error) {
-    return { success: false, error: error.message };
+    throw new Error(error.message);
   }
 
   revalidatePath("/dashboard/expenses");
-  return { success: true };
 }

@@ -1,71 +1,62 @@
+import Link from "next/link";
 import { getExpenses } from "@/server/services/expenses";
-import { getAnimals } from "@/server/services/animals";
-import { ExpenseEditDialog } from "./expense-edit-dialog";
-import { ExpenseDeleteButton } from "./expense-delete-button";
-import { ExpenseCreateForm } from "./expense-create-form";
+import { deleteExpenseAction } from "@/server/actions/expenses";
 
 export default async function Page() {
-  const [expenses, animals] = await Promise.all([getExpenses(), getAnimals()]);
-
-  const totalSum = expenses.reduce((acc, curr) => acc + Number(curr.amount), 0);
+  const expenses = await getExpenses();
 
   return (
-    <div style={{ padding: "24px", fontFamily: "sans-serif" }}>
-      <h1>Журнал фінансових витрат</h1>
-      <p>
-        Всього проведено витрат на суму:{" "}
-        <strong>{totalSum.toLocaleString()} грн</strong>
-      </p>
-
-      {/* Форма з інтегрованим Gemini сканером */}
-      <ExpenseCreateForm animals={animals} />
-
-      {/* Таблиця витрат */}
-      {expenses.length === 0 ? (
-        <p>Немає зареєстрованих витрат.</p>
-      ) : (
-        <table
-          border={1}
-          cellPadding={8}
-          style={{ borderCollapse: "collapse", width: "100%" }}
+    <div className="p-6 font-sans">
+      <div className="mb-6 flex items-center justify-between">
+        <h1 className="text-2xl font-bold">Expenses</h1>
+        <Link
+          href="/dashboard/expenses/new"
+          className="rounded bg-black px-4 py-2 text-white"
         >
-          <thead>
-            <tr>
-              <th>Дата</th>
-              <th>Призначення</th>
-              <th>Категорія</th>
-              <th>Сума (грн)</th>
-              <th>Постачальник</th>
-              <th>Тварина</th>
-              <th>Примітки</th>
-              <th>Дії</th>
+          + Add New Expense
+        </Link>
+      </div>
+
+      <table className="w-full border-collapse border text-left">
+        <thead>
+          <tr className="bg-gray-50">
+            <th className="border p-3">Date</th>
+            <th className="border p-3">Vendor</th>
+            <th className="border p-3">Invoice No.</th>
+            <th className="border p-3">Category</th>
+            <th className="border p-3">Total Amount</th>
+            <th className="border p-3">Status</th>
+            <th className="border p-3">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {expenses.map(expense => (
+            <tr key={expense.id}>
+              <td className="border p-3">{expense.spent_at}</td>
+              <td className="border p-3 font-medium">{expense.vendor}</td>
+              <td className="border p-3">{expense.invoice_number || "—"}</td>
+              <td className="border p-3">{expense.category}</td>
+              <td className="border p-3">{expense.total_amount}</td>
+              <td className="border p-3">{expense.status}</td>
+              <td className="border p-3">
+                <form
+                  action={async () => {
+                    "use server";
+                    await deleteExpenseAction(expense.id);
+                  }}
+                >
+                  <button
+                    type="submit"
+                    className="text-red-600 hover:underline"
+                  >
+                    Delete
+                  </button>
+                </form>
+              </td>
             </tr>
-          </thead>
-          <tbody>
-            {expenses.map(expense => (
-              <tr key={expense.id}>
-                <td>{expense.spent_at}</td>
-                <td>
-                  <strong>{expense.title}</strong>
-                </td>
-                <td>{expense.category}</td>
-                <td>{Number(expense.amount).toFixed(2)}</td>
-                <td>{expense.vendor || "—"}</td>
-                <td>
-                  {expense.animals
-                    ? `${expense.animals.name} (${expense.animals.species})`
-                    : "Загальне"}
-                </td>
-                <td>{expense.notes || "—"}</td>
-                <td>
-                  <ExpenseEditDialog expense={expense} animals={animals} />
-                  <ExpenseDeleteButton id={expense.id} title={expense.title} />
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      )}
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 }
