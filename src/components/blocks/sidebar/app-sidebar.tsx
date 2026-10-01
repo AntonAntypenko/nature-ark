@@ -3,14 +3,12 @@
 import { ComponentProps } from "react";
 
 import {
-  BookOpen,
-  Bot,
   Command,
-  Frame,
-  Map,
-  PieChart,
+  LayoutDashboard,
+  Package,
+  PawPrint,
+  ReceiptText,
   Settings2,
-  SquareTerminal,
 } from "lucide-react";
 
 import { NavMain, NavUser } from "./";
@@ -27,112 +25,76 @@ import {
 
 const data = {
   user: {
-    name: "shadcn",
-    email: "m@example.com",
-    avatar: "/avatars/shadcn.jpg",
+    name: "System Admin",
+    email: "admin@natureark.zoo",
+    avatar: "",
   },
   navMain: [
     {
-      title: "Playground",
-      url: "#",
-      icon: SquareTerminal,
+      title: "Overview",
+      url: "/dashboard",
+      icon: LayoutDashboard,
       isActive: true,
+    },
+    {
+      title: "Zoo Management",
+      url: "/dashboard/animals",
+      icon: PawPrint,
       items: [
         {
-          title: "History",
-          url: "#",
+          title: "Animals Catalog",
+          url: "/dashboard/animals",
         },
         {
-          title: "Starred",
-          url: "#",
+          title: "Enclosures & Sectors",
+          url: "/dashboard/enclosures",
         },
         {
-          title: "Settings",
-          url: "#",
+          title: "Diet Norms",
+          url: "/dashboard/diets",
         },
       ],
     },
     {
-      title: "Models",
-      url: "#",
-      icon: Bot,
+      title: "Finance & AI",
+      url: "/dashboard/expenses",
+      icon: ReceiptText,
       items: [
         {
-          title: "Genesis",
-          url: "#",
+          title: "Expenses & AI OCR",
+          url: "/dashboard/expenses",
         },
         {
-          title: "Explorer",
-          url: "#",
-        },
-        {
-          title: "Quantum",
-          url: "#",
+          title: "AI Budget Forecast",
+          url: "/dashboard/analytics",
         },
       ],
     },
     {
-      title: "Documentation",
-      url: "#",
-      icon: BookOpen,
+      title: "Warehouse",
+      url: "/dashboard/inventory",
+      icon: Package,
       items: [
         {
-          title: "Introduction",
-          url: "#",
-        },
-        {
-          title: "Get Started",
-          url: "#",
-        },
-        {
-          title: "Tutorials",
-          url: "#",
-        },
-        {
-          title: "Changelog",
-          url: "#",
+          title: "Inventory",
+          url: "/dashboard/inventory",
         },
       ],
     },
     {
-      title: "Settings",
-      url: "#",
+      title: "System",
+      url: "/dashboard/settings",
       icon: Settings2,
       items: [
         {
-          title: "General",
-          url: "#",
+          title: "Users & Roles",
+          url: "/dashboard/users",
         },
         {
-          title: "Team",
-          url: "#",
-        },
-        {
-          title: "Billing",
-          url: "#",
-        },
-        {
-          title: "Limits",
-          url: "#",
+          title: "Settings",
+          url: "/dashboard/settings",
         },
       ],
-    },
-  ],
-  projects: [
-    {
-      name: "Design Engineering",
-      url: "#",
-      icon: Frame,
-    },
-    {
-      name: "Sales & Marketing",
-      url: "#",
-      icon: PieChart,
-    },
-    {
-      name: "Travel",
-      url: "#",
-      icon: Map,
     },
   ],
 };
