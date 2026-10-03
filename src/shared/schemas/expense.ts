@@ -1,6 +1,11 @@
 import { z } from "zod";
 
-export const expenseStatusSchema = z.enum(["draft", "ai_parsed", "verified"]);
+export const expenseStatusSchema = z.enum([
+  "draft",
+  "ai_parsed",
+  "verified",
+  "stocked",
+]);
 export const expenseCategorySchema = z.enum([
   "feed",
   "veterinary",

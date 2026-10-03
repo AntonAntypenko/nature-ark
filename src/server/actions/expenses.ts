@@ -96,3 +96,65 @@ export async function updateExpenseAction(id: string, data: ExpenseFormValues) {
   revalidatePath("/dashboard/expenses");
   revalidatePath(`/dashboard/expenses/${id}`);
 }
+
+export async function stockExpenseAction(
+  expenseId: string
+): Promise<{ success: boolean; error?: string }> {
+  const supabase = await createClient();
+
+  const { data: expense, error: fetchError } = await supabase
+    .from("expenses")
+    .select("status, expense_items(*)")
+    .eq("id", expenseId)
+    .single();
+
+  if (fetchError || !expense)
+    return { success: false, error: "Invoice not found." };
+  if (expense.status === "stocked")
+    return { success: false, error: "Already stocked to inventory." };
+  if (expense.status !== "verified")
+    return { success: false, error: "Invoice must be in 'Verified' status." };
+
+  const physicalCategories = ["feed", "veterinary", "maintenance"];
+  const invalidItems = expense.expense_items.filter(
+    (item: any) =>
+      physicalCategories.includes(item.category) && !item.inventory_item_id
+  );
+
+  if (invalidItems.length > 0) {
+    return {
+      success: false,
+      error:
+        "Not all physical items are linked to inventory. Please select an inventory item for all physical goods and save changes before stocking.",
+    };
+  }
+
+  for (const item of expense.expense_items) {
+    if (item.inventory_item_id) {
+      const { data: invItem } = await supabase
+        .from("inventory_items")
+        .select("current_stock")
+        .eq("id", item.inventory_item_id)
+        .single();
+
+      if (invItem) {
+        const newStock = Number(invItem.current_stock) + Number(item.quantity);
+        await supabase
+          .from("inventory_items")
+          .update({ current_stock: newStock })
+          .eq("id", item.inventory_item_id);
+      }
+    }
+  }
+
+  await supabase
+    .from("expenses")
+    .update({ status: "stocked" })
+    .eq("id", expenseId);
+
+  revalidatePath("/dashboard/expenses");
+  revalidatePath(`/dashboard/expenses/${expenseId}`);
+  revalidatePath("/dashboard/inventory");
+
+  return { success: true };
+}

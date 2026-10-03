@@ -1,4 +1,4 @@
-CREATE TYPE expense_status AS ENUM ('draft', 'ai_parsed', 'verified');
+CREATE TYPE expense_status AS ENUM ('draft', 'ai_parsed', 'verified', 'stocked');
 CREATE TYPE expense_category AS ENUM ('feed', 'veterinary', 'utilities', 'logistics', 'maintenance');
 
 CREATE TABLE IF NOT EXISTS public.expenses (
