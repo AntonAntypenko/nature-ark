@@ -5,12 +5,11 @@ import {
   ParsedReceipt,
 } from "@/shared/schemas/ai-receipt";
 
-// Список моделей за пріоритетом для автоматичного перемикання
 const CANDIDATE_MODELS = [
-  "gemini-3.8-flash", // 1. Максимальна точність (основна)
-  "gemini-3.5-flash", // 2. Резервна повноцінна версія
-  "gemini-3.5-flash-lite", // 3. Полегшена надшвидка версія (найменше черг)
-  "gemini-2.0-flash", // 4. Фінальний надійний бекап
+  "gemini-3.8-flash",
+  "gemini-3.5-flash",
+  "gemini-3.5-flash-lite",
+  "gemini-2.0-flash",
 ];
 
 export async function parseReceiptWithGemini(input: {
@@ -23,11 +22,14 @@ export async function parseReceiptWithGemini(input: {
 Твоє завдання — проаналізувати наданий чек, накладну чи текст замовлення та витягнути з нього точні облікові дані.
 
 Правила класифікації категорій:
-- "feed" — будь-яке харчування, корми, сіно, м'ясо, риба, вітамінні добавки до їжі.
-- "veterinary" — вакцини, медикаменти, послуги ветлікаря, перев'язувальні матеріали.
-- "utilities" — витрати на електроенергію, газ, опалення вольєрів, водопостачання.
-- "logistics" — доставка тварин, вантажні перевезення кормів.
-- "maintenance" — ремонт огорож, кліток, фільтрів для басейнів тощо.
+- "feed" — будь-яке харчування, корми, сіно, м'ясо, риба, вітамінні добавки.
+- "veterinary" — вакцини, медикаменти, послуги ветлікаря.
+- "utilities" — витрати на електроенергію, газ, опалення, водопостачання.
+- "logistics" — доставка тварин, вантажні перевезення.
+- "maintenance" — ремонт огорож, кліток, інвентар.
+
+Обов'язково повертай дати у форматі YYYY-MM-DD. 
+Якщо номер чека відсутній, залиш поле порожнім або не вказуй.
 `;
 
   const messages: any[] = [];
@@ -38,7 +40,7 @@ export async function parseReceiptWithGemini(input: {
       content: [
         {
           type: "text",
-          text: "Витягни дані з цього чека / накладної зоопарку.",
+          text: "Витягни дані з цього чека / накладної.",
         },
         {
           type: "image",
@@ -50,15 +52,14 @@ export async function parseReceiptWithGemini(input: {
   } else if (input.text) {
     messages.push({
       role: "user",
-      content: `Витягни структуровані дані з наступного опису/накладної:\n\n${input.text}`,
+      content: `Витягни структуровані дані з наступного тексту:\n\n${input.text}`,
     });
   } else {
-    throw new Error("Missing receipt payload: provide image or text.");
+    throw new Error("Missing payload");
   }
 
   let lastError: unknown = null;
 
-  // Пробуємо моделі по черзі, якщо виникає перевантаження (high demand / rate limit)
   for (const modelId of CANDIDATE_MODELS) {
     try {
       const { output } = await generateText({
@@ -68,17 +69,14 @@ export async function parseReceiptWithGemini(input: {
         output: Output.object({
           schema: parsedReceiptSchema,
         }),
-        maxRetries: 1, // Зменшуємо повторні спроби для прискорення перемикання на запасну модель
+        maxRetries: 1,
       });
 
       return output;
     } catch (err) {
-      console.warn(`Model ${modelId} failed, trying next candidate...`, err);
       lastError = err;
     }
   }
 
-  throw (
-    lastError || new Error("Всі доступні моделі Gemini зараз перевантажені.")
-  );
+  throw lastError || new Error("Всі доступні моделі Gemini перевантажені.");
 }

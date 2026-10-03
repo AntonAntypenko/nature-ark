@@ -32,13 +32,12 @@ export async function parseReceiptAction(
 
     return {
       success: false,
-      error: "Будь ласка, завантажте файл або введіть текст накладної.",
+      error: "Будь ласка, завантажте файл або введіть текст.",
     };
   } catch (err: any) {
-    console.error("AI Receipt Parsing error:", err);
     return {
       success: false,
-      error: err?.message || "Помилка обробки через Gemini.",
+      error: err?.message || "Помилка обробки ШІ.",
     };
   }
 }
