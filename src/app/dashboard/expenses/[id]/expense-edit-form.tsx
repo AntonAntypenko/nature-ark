@@ -10,23 +10,14 @@ import {
   Expense,
 } from "@/shared/schemas/expense";
 import { updateExpenseAction } from "@/server/actions/expenses";
-import { Animal } from "@/shared/schemas/animal";
-import { Enclosure } from "@/shared/schemas/enclosure";
 import { InventoryItem } from "@/shared/schemas/inventory";
 
 interface Props {
   expense: Expense;
-  animals: Animal[];
-  enclosures: Enclosure[];
   inventory: InventoryItem[];
 }
 
-export function ExpenseEditForm({
-  expense,
-  animals,
-  enclosures,
-  inventory,
-}: Props) {
+export function ExpenseEditForm({ expense, inventory }: Props) {
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
 
@@ -103,10 +94,17 @@ export function ExpenseEditForm({
           <option value="maintenance">Maintenance</option>
         </select>
 
-        <select {...register("status")} className="rounded border p-2">
+        <select
+          {...register("status")}
+          className="rounded border p-2 font-semibold"
+        >
           <option value="draft">Draft</option>
-          <option value="ai_parsed">AI Parsed</option>
-          <option value="verified">Verified</option>
+          <option value="ai_parsed" className="text-blue-600">
+            AI Parsed
+          </option>
+          <option value="verified" className="text-green-600">
+            Verified
+          </option>
         </select>
       </div>
 
@@ -137,7 +135,7 @@ export function ExpenseEditForm({
           {fields.map((field, index) => (
             <div
               key={field.id}
-              className="grid grid-cols-9 items-center gap-3 rounded border bg-white p-4"
+              className="grid grid-cols-7 items-center gap-3 rounded border bg-white p-4"
             >
               <input
                 type="hidden"
@@ -173,9 +171,9 @@ export function ExpenseEditForm({
 
               <select
                 {...register(`items.${index}.inventory_item_id` as const)}
-                className="col-span-1 rounded border p-2"
+                className="col-span-1 rounded border p-2 text-sm"
               >
-                <option value="">Inventory...</option>
+                <option value="">Select Inventory...</option>
                 {inventory.map(i => (
                   <option key={i.id} value={i.id}>
                     {i.name}
@@ -183,34 +181,10 @@ export function ExpenseEditForm({
                 ))}
               </select>
 
-              <select
-                {...register(`items.${index}.animal_id` as const)}
-                className="col-span-1 rounded border p-2"
-              >
-                <option value="">Animal...</option>
-                {animals.map(a => (
-                  <option key={a.id} value={a.id}>
-                    {a.name}
-                  </option>
-                ))}
-              </select>
-
-              <select
-                {...register(`items.${index}.enclosure_id` as const)}
-                className="col-span-1 rounded border p-2"
-              >
-                <option value="">Enclosure...</option>
-                {enclosures.map(e => (
-                  <option key={e.id} value={e.id}>
-                    {e.name}
-                  </option>
-                ))}
-              </select>
-
               <button
                 type="button"
                 onClick={() => remove(index)}
-                className="text-sm font-medium text-red-600 hover:underline"
+                className="text-center text-sm font-medium text-red-600 hover:underline"
               >
                 Remove
               </button>

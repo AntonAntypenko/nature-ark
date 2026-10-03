@@ -7,17 +7,13 @@ import { useRouter } from "next/navigation";
 import { expenseFormSchema, ExpenseFormValues } from "@/shared/schemas/expense";
 import { createExpenseAction } from "@/server/actions/expenses";
 import { parseReceiptAction } from "@/server/actions/ai-receipt";
-import { Animal } from "@/shared/schemas/animal";
-import { Enclosure } from "@/shared/schemas/enclosure";
 import { InventoryItem } from "@/shared/schemas/inventory";
 
 interface Props {
-  animals: Animal[];
-  enclosures: Enclosure[];
   inventory: InventoryItem[];
 }
 
-export function ExpenseForm({ animals, enclosures, inventory }: Props) {
+export function ExpenseForm({ inventory }: Props) {
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
   const [isParsing, setIsParsing] = useState(false);
@@ -209,7 +205,7 @@ export function ExpenseForm({ animals, enclosures, inventory }: Props) {
             {fields.map((field, index) => (
               <div
                 key={field.id}
-                className="grid grid-cols-9 items-center gap-3 rounded border bg-white p-4"
+                className="grid grid-cols-7 items-center gap-3 rounded border bg-white p-4"
               >
                 <input
                   {...register(`items.${index}.raw_item_name` as const)}
@@ -242,34 +238,10 @@ export function ExpenseForm({ animals, enclosures, inventory }: Props) {
                   {...register(`items.${index}.inventory_item_id` as const)}
                   className="col-span-1 rounded border p-2 text-sm"
                 >
-                  <option value="">Inventory...</option>
+                  <option value="">Select Inventory...</option>
                   {inventory.map(i => (
                     <option key={i.id} value={i.id}>
                       {i.name}
-                    </option>
-                  ))}
-                </select>
-
-                <select
-                  {...register(`items.${index}.animal_id` as const)}
-                  className="col-span-1 rounded border p-2 text-sm"
-                >
-                  <option value="">Animal...</option>
-                  {animals.map(a => (
-                    <option key={a.id} value={a.id}>
-                      {a.name}
-                    </option>
-                  ))}
-                </select>
-
-                <select
-                  {...register(`items.${index}.enclosure_id` as const)}
-                  className="col-span-1 rounded border p-2 text-sm"
-                >
-                  <option value="">Enclosure...</option>
-                  {enclosures.map(e => (
-                    <option key={e.id} value={e.id}>
-                      {e.name}
                     </option>
                   ))}
                 </select>

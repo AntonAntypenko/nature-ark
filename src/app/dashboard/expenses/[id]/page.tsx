@@ -12,10 +12,8 @@ interface Props {
 export default async function Page({ params }: Props) {
   const { id } = await params;
 
-  const [expense, animals, enclosures, inventory] = await Promise.all([
+  const [expense, inventory] = await Promise.all([
     getExpenseById(id),
-    getAnimals(),
-    getEnclosures(),
     getInventoryItems(),
   ]);
 
@@ -26,12 +24,7 @@ export default async function Page({ params }: Props) {
   return (
     <div className="p-6 font-sans">
       <h1 className="mb-6 text-2xl font-bold">Edit Expense Document</h1>
-      <ExpenseEditForm
-        expense={expense}
-        animals={animals}
-        enclosures={enclosures}
-        inventory={inventory}
-      />
+      <ExpenseEditForm expense={expense} inventory={inventory} />
     </div>
   );
 }
