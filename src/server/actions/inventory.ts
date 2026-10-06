@@ -11,13 +11,19 @@ export async function createInventoryAction(data: InventoryFormValues) {
   const supabase = await createClient();
   const parsed = inventoryFormSchema.parse(data);
 
-  const { error } = await supabase.from("inventory_items").insert(parsed);
+  const { data: newItem, error } = await supabase
+    .from("inventory_items")
+    .insert(parsed)
+    .select()
+    .single();
 
   if (error) {
     throw new Error(error.message);
   }
 
   revalidatePath("/dashboard/inventory");
+
+  return newItem;
 }
 
 export async function updateInventoryAction(

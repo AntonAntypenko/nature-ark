@@ -1,7 +1,7 @@
 import { getInventoryItems } from "@/server/services/inventory";
 import { deleteInventoryAction } from "@/server/actions/inventory";
-import { InventoryForm } from "./inventory-form";
 import { InventoryEditDialog } from "./inventory-edit-dialog";
+import { CreateInventoryModal } from "@/components/modals/create-inventory-modal";
 
 export default async function Page() {
   const items = await getInventoryItems();
@@ -9,8 +9,12 @@ export default async function Page() {
   return (
     <div className="p-6 font-sans">
       <h1 className="mb-6 text-2xl font-bold">Inventory Management</h1>
-
-      <InventoryForm />
+      <CreateInventoryModal
+        buttonIcon={
+          <span className="text-lg leading-none">+ Add new item</span>
+        }
+        buttonClassName="flex items-center justify-center rounded bg-gray-800 px-3 py-2 my-4 text-white hover:bg-black transition-colors"
+      />
 
       <table className="w-full border-collapse border text-left">
         <thead>

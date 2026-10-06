@@ -14,6 +14,7 @@ import {
   stockExpenseAction,
 } from "@/server/actions/expenses";
 import { InventoryItem } from "@/shared/schemas/inventory";
+import { CreateInventoryModal } from "@/components/modals/create-inventory-modal";
 
 interface Props {
   expense: Expense;
@@ -23,37 +24,40 @@ interface Props {
 export function ExpenseEditForm({ expense, inventory }: Props) {
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
-
   const [isStocking, setIsStocking] = useState(false);
   const [stockError, setStockError] = useState<string | null>(null);
 
+  const [localInventory, setLocalInventory] =
+    useState<InventoryItem[]>(inventory);
+
   const isReadOnly = expense.status === "stocked";
 
-  const { register, control, handleSubmit } = useForm<ExpenseFormValues>({
-    resolver: zodResolver(expenseFormSchema),
-    defaultValues: {
-      vendor: expense.vendor,
-      invoice_number: expense.invoice_number || "",
-      total_amount: expense.total_amount,
-      category: expense.category,
-      spent_at: expense.spent_at,
-      status: expense.status,
-      items:
-        expense.expense_items?.map(item => ({
-          id: item.id,
-          raw_item_name: item.raw_item_name,
-          quantity: item.quantity,
-          unit_price: item.unit_price,
-          total_price: item.total_price,
-          category: item.category,
-          inventory_item_id: item.inventory_item_id || null,
-          animal_id: item.animal_id || null,
-          enclosure_id: item.enclosure_id || null,
-        })) || [],
-    },
-  });
+  const { register, control, handleSubmit, setValue, getValues } =
+    useForm<ExpenseFormValues>({
+      resolver: zodResolver(expenseFormSchema),
+      defaultValues: {
+        vendor: expense.vendor,
+        invoice_number: expense.invoice_number || "",
+        total_amount: expense.total_amount,
+        category: expense.category,
+        spent_at: expense.spent_at,
+        status: expense.status,
+        items:
+          expense.expense_items?.map(item => ({
+            id: item.id,
+            raw_item_name: item.raw_item_name,
+            quantity: item.quantity,
+            unit_price: item.unit_price,
+            total_price: item.total_price,
+            category: item.category,
+            inventory_item_id: item.inventory_item_id || null,
+            animal_id: item.animal_id || null,
+            enclosure_id: item.enclosure_id || null,
+          })) || [],
+      },
+    });
 
-  const { fields, append, remove } = useFieldArray({
+  const { fields, append, remove, update } = useFieldArray({
     control,
     name: "items",
   });
@@ -80,17 +84,26 @@ export function ExpenseEditForm({ expense, inventory }: Props) {
     setIsStocking(false);
   };
 
+  const handleInventorySuccess = (newItem: InventoryItem, index: number) => {
+    setLocalInventory(prev => [...prev, newItem]);
+    const currentItem = getValues(`items.${index}`);
+    update(index, {
+      ...currentItem,
+      inventory_item_id: newItem.id,
+    });
+  };
+
   return (
     <div className="flex max-w-7xl flex-col gap-6">
       {stockError && (
         <div className="rounded border border-red-200 bg-red-50 p-4 text-red-700">
-          <strong>Warning:</strong> {stockError}
+          <strong>Error:</strong> {stockError}
         </div>
       )}
 
       {isReadOnly && (
         <div className="rounded border border-blue-200 bg-blue-50 p-4 text-blue-800">
-          This document has already been stocked. Editing is locked.
+          This document is stocked. Editing is locked.
         </div>
       )}
 
@@ -184,7 +197,7 @@ export function ExpenseEditForm({ expense, inventory }: Props) {
             {fields.map((field, index) => (
               <div
                 key={field.id}
-                className={`grid grid-cols-7 items-center gap-3 rounded border p-4 ${isReadOnly ? "bg-gray-50" : "bg-white"}`}
+                className={`grid grid-cols-8 items-center gap-3 rounded border p-4 ${isReadOnly ? "bg-gray-50" : "bg-white"}`}
               >
                 <input
                   type="hidden"
@@ -222,18 +235,31 @@ export function ExpenseEditForm({ expense, inventory }: Props) {
                   disabled={isReadOnly}
                 />
 
-                <select
-                  {...register(`items.${index}.inventory_item_id` as const)}
-                  className="col-span-1 rounded border p-2 text-sm"
-                  disabled={isReadOnly}
-                >
-                  <option value="">Select Inventory...</option>
-                  {inventory.map(i => (
-                    <option key={i.id} value={i.id}>
-                      {i.name}
-                    </option>
-                  ))}
-                </select>
+                <div className="col-span-2 flex gap-2">
+                  <select
+                    {...register(`items.${index}.inventory_item_id` as const)}
+                    className="w-full rounded border p-2 text-sm"
+                    disabled={isReadOnly}
+                  >
+                    <option value="">Select Inventory...</option>
+                    {localInventory.map(i => (
+                      <option key={i.id} value={i.id}>
+                        {i.name}
+                      </option>
+                    ))}
+                  </select>
+                  {!isReadOnly && (
+                    <CreateInventoryModal
+                      onSuccess={newItem =>
+                        handleInventorySuccess(newItem, index)
+                      }
+                      buttonIcon={
+                        <span className="text-lg leading-none">+</span>
+                      }
+                      buttonClassName="flex items-center justify-center rounded bg-gray-800 px-3 py-2 text-white hover:bg-black transition-colors"
+                    />
+                  )}
+                </div>
 
                 {!isReadOnly && (
                   <button
@@ -258,7 +284,7 @@ export function ExpenseEditForm({ expense, inventory }: Props) {
                 disabled={isPending || isStocking}
                 className="rounded bg-green-600 px-6 py-2 font-medium text-white transition-colors hover:bg-green-700 disabled:opacity-50"
               >
-                {isStocking ? "Stocking..." : "📦 Add to Stock"}
+                {isStocking ? "Stocking..." : "Add to Stock"}
               </button>
             )}
           </div>
