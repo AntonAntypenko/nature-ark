@@ -16,6 +16,7 @@ export async function parseReceiptWithGemini(input: {
   imageBase64?: string;
   mimeType?: string;
   text?: string;
+  inventoryCatalog?: string;
 }): Promise<ParsedReceipt> {
   const systemPrompt = `
 Ти — фінансовий помічник та аналітик зоопарку "NatureArk".
@@ -30,6 +31,18 @@ export async function parseReceiptWithGemini(input: {
 
 Обов'язково повертай дати у форматі YYYY-MM-DD. 
 Якщо номер чека відсутній, залиш поле порожнім або не вказуй.
+${
+  input.inventoryCatalog
+    ? `
+Ось наш поточний каталог товарів на складі у форматі JSON:
+${input.inventoryCatalog}
+
+Твоє завдання для поля inventory_item_id: для кожної позиції в чеку спробуй знайти найкращий семантичний збіг у каталозі вище. 
+Звертай увагу на синоніми (наприклад, "Яловичина 1 кат" і "Beef"). 
+Якщо знайшов збіг — встав відповідний 'id' у поле 'inventory_item_id'.
+Якщо хороших збігів немає або це нова послуга (наприклад, доставка) — обов'язково повертай null для 'inventory_item_id'.`
+    : ""
+}
 `;
 
   const messages: any[] = [];

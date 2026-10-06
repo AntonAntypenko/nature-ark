@@ -7,6 +7,12 @@ export const parsedReceiptItemSchema = z.object({
   unit_price: z.number().nonnegative().describe("Ціна за одну одиницю"),
   total_price: z.number().nonnegative().describe("Загальна сума за цей рядок"),
   category: expenseCategorySchema.describe("Категорія конкретного товару"),
+  inventory_item_id: z
+    .string()
+    .nullable()
+    .describe(
+      "ID відповідного товару з переданого каталогу інвентарю. Якщо впевненого збігу немає, поверни null."
+    ),
 });
 
 export const parsedReceiptSchema = z.object({

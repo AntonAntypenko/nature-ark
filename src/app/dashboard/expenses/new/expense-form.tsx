@@ -77,7 +77,7 @@ export function ExpenseForm({ inventory }: Props) {
         unit_price: item.unit_price,
         total_price: item.total_price,
         category: item.category,
-        inventory_item_id: null,
+        inventory_item_id: item.inventory_item_id || null,
         animal_id: null,
         enclosure_id: null,
       }));
