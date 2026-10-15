@@ -2,37 +2,37 @@ import { z } from "zod";
 import { expenseCategorySchema } from "./expense";
 
 export const parsedReceiptItemSchema = z.object({
-  raw_item_name: z.string().describe("Оригінальна назва товару з чека"),
-  quantity: z.number().positive().describe("Кількість, вага або об'єм"),
-  unit_price: z.number().nonnegative().describe("Ціна за одну одиницю"),
-  total_price: z.number().nonnegative().describe("Загальна сума за цей рядок"),
-  category: expenseCategorySchema.describe("Категорія конкретного товару"),
+  raw_item_name: z.string().describe("Original item name from the receipt"),
+  quantity: z.number().positive().describe("Quantity, weight, or volume"),
+  unit_price: z.number().nonnegative().describe("Price per single unit"),
+  total_price: z.number().nonnegative().describe("Total amount for this row"),
+  category: expenseCategorySchema.describe("Category of the specific item"),
   inventory_item_id: z
     .string()
     .nullable()
     .describe(
-      "ID відповідного товару з переданого каталогу інвентарю. Якщо впевненого збігу немає, поверни null."
+      "ID of the corresponding item from the passed inventory catalog. If there is no confident match, return null."
     ),
 });
 
 export const parsedReceiptSchema = z.object({
-  vendor: z.string().describe("Назва магазину, компанії або постачальника"),
+  vendor: z.string().describe("Name of the store, company, or supplier"),
   invoice_number: z
     .string()
     .optional()
-    .describe("Номер чека або накладної, якщо є"),
-  spent_at: z.string().describe("Дата покупки у форматі YYYY-MM-DD"),
+    .describe("Receipt or invoice number, if available"),
+  spent_at: z.string().describe("Purchase date in YYYY-MM-DD format"),
   total_amount: z
     .number()
     .nonnegative()
-    .describe("Загальна підсумкова сума всього чека"),
+    .describe("Total overall amount of the entire receipt"),
   category: expenseCategorySchema.describe(
-    "Головна категорія всього документа"
+    "Main category of the entire document"
   ),
   items: z
     .array(parsedReceiptItemSchema)
     .min(1)
-    .describe("Список куплених товарів"),
+    .describe("List of purchased items"),
 });
 
 export type ParsedReceipt = z.infer<typeof parsedReceiptSchema>;

@@ -45,12 +45,12 @@ export async function parseReceiptAction(
 
     return {
       success: false,
-      error: "Будь ласка, завантажте файл або введіть текст.",
+      error: "Please upload a file or enter text.",
     };
   } catch (err: any) {
     return {
       success: false,
-      error: err?.message || "Помилка обробки ШІ.",
+      error: err?.message || "AI processing error.",
     };
   }
 }

@@ -19,28 +19,33 @@ export async function parseReceiptWithGemini(input: {
   inventoryCatalog?: string;
 }): Promise<ParsedReceipt> {
   const systemPrompt = `
-Ти — фінансовий помічник та аналітик зоопарку "NatureArk".
-Твоє завдання — проаналізувати наданий чек, накладну чи текст замовлення та витягнути з нього точні облікові дані.
+You are a financial assistant and analyst for the "NatureArk" zoo.
+Your task is to analyze the provided receipt, invoice, or order text and extract accurate accounting data from it.
 
-Правила класифікації категорій:
-- "feed" — будь-яке харчування, корми, сіно, м'ясо, риба, вітамінні добавки.
-- "veterinary" — вакцини, медикаменти, послуги ветлікаря.
-- "utilities" — витрати на електроенергію, газ, опалення, водопостачання.
-- "logistics" — доставка тварин, вантажні перевезення.
-- "maintenance" — ремонт огорож, кліток, інвентар.
+Category classification rules:
+- "feed" - any nutrition, feed, hay, meat, fish, vitamin supplements.
 
-Обов'язково повертай дати у форматі YYYY-MM-DD. 
-Якщо номер чека відсутній, залиш поле порожнім або не вказуй.
+- "veterinary" - vaccines, medications, veterinary services.
+
+- "utilities" - electricity, gas, heating, water supply expenses.
+
+- "logistics" - animal delivery, freight transportation.
+
+- "maintenance" - repair of fences, cages, inventory.
+
+
+Be sure to return dates in the YYYY-MM-DD format. 
+If the receipt number is missing, leave the field empty or omit it.
 ${
   input.inventoryCatalog
     ? `
-Ось наш поточний каталог товарів на складі у форматі JSON:
+Here is our current inventory catalog in JSON format:
 ${input.inventoryCatalog}
 
-Твоє завдання для поля inventory_item_id: для кожної позиції в чеку спробуй знайти найкращий семантичний збіг у каталозі вище. 
-Звертай увагу на синоніми (наприклад, "Яловичина 1 кат" і "Beef"). 
-Якщо знайшов збіг — встав відповідний 'id' у поле 'inventory_item_id'.
-Якщо хороших збігів немає або це нова послуга (наприклад, доставка) — обов'язково повертай null для 'inventory_item_id'.`
+Your task for the inventory_item_id field: for each item in the receipt, try to find the best semantic match in the catalog above. 
+Pay attention to synonyms (for example, "Beef grade 1" and "Beef"). 
+If a match is found, insert the corresponding 'id' into the 'inventory_item_id' field.
+If there are no good matches or it is a new service (for example, delivery), be sure to return null for 'inventory_item_id'.`
     : ""
 }
 `;
@@ -53,7 +58,7 @@ ${input.inventoryCatalog}
       content: [
         {
           type: "text",
-          text: "Витягни дані з цього чека / накладної.",
+          text: "Extract data from this receipt / invoice.",
         },
         {
           type: "image",
@@ -65,7 +70,7 @@ ${input.inventoryCatalog}
   } else if (input.text) {
     messages.push({
       role: "user",
-      content: `Витягни структуровані дані з наступного тексту:\n\n${input.text}`,
+      content: `Extract structured data from the following text:\n\n${input.text}`,
     });
   } else {
     throw new Error("Missing payload");
@@ -91,5 +96,5 @@ ${input.inventoryCatalog}
     }
   }
 
-  throw lastError || new Error("Всі доступні моделі Gemini перевантажені.");
+  throw lastError || new Error("All available Gemini models are overloaded.");
 }
